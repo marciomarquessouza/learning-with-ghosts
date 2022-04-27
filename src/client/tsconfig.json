@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "moduleResolution": "node",
+        "allowJs": true,
+        "strict": true
+    },
+    "include": ["**/*.ts", "scenes/utils/animation-folderts"]
+}
