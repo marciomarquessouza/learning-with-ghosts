@@ -6,4 +6,5 @@ export enum PARAMS {
     BULB_SPEED = 10,
     CONTROL_MAX_DISTANCE = 80,
     CONTROL_MIN_DISTANCE = 20,
+    COLLISION_LIMIT = -2.5,
 }

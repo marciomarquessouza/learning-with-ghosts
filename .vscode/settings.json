@@ -1,5 +1,5 @@
 {
-    "cSpell.words": ["gltf"],
+    "cSpell.words": ["gltf", "Raycaster"],
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "[javascript]": {

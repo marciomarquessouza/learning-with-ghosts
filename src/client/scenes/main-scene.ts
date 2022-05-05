@@ -3,7 +3,13 @@ import * as THREE from 'three'
 import { createPerspectiveCamera, createRenderer } from './cameras-and-renderer'
 import { loadScene } from './loaders'
 import { createStats, createControls, createAnimationFolders } from './utils'
-import { createGhostModel, createLighthouse, createTrainModel } from '../models'
+import {
+    createGhostModel,
+    createLighthouse,
+    createScenario,
+    createTrainModel,
+    SceneModels,
+} from '../models'
 import { createEndAnimationsTrigger } from './animations/trigger-end-animations'
 import { ACTION_STATUS, PARAMS } from '../const'
 
@@ -19,7 +25,9 @@ const controls = createControls(camera, renderer)
 
 const train = createTrainModel()
 const lighthouse = createLighthouse()
-const ghost = createGhostModel(camera, controls)
+const scenario = createScenario()
+const scenarioColliders = scenario.colliders
+const ghost = createGhostModel(camera, controls, scenarioColliders)
 
 function render() {
     renderer.render(scene, camera)
@@ -66,11 +74,12 @@ function animateScene() {
 
 export async function createMainScene() {
     ghost.reset()
-    const animationMixer = await loadScene(scene, { ghost, train, lighthouse })
+    const models: SceneModels = { ghost, train, lighthouse, scenario }
+    const animationMixer = await loadScene(scene, models)
     if (animationMixer) {
         mixer = animationMixer
         createAnimationFolders(train)
-        mixer.addEventListener('finished', createEndAnimationsTrigger({ train, ghost, lighthouse }))
+        mixer.addEventListener('finished', createEndAnimationsTrigger(models))
         window.addEventListener('keydown', handleKeyDown, false)
         window.addEventListener('keyup', handleKeyUp, false)
         window.addEventListener('resize', onWindowResize, false)

@@ -3,7 +3,6 @@ import { ACTION_STATUS, PARAMS } from '../../const'
 
 export class Train {
     private _currentStatus = ACTION_STATUS.INITIAL
-    private _trainMesh: THREE.Mesh | undefined
     private _arrivalAction: THREE.AnimationAction | undefined
     private _departureAction: THREE.AnimationAction | undefined
 
@@ -15,24 +14,12 @@ export class Train {
         return this._currentStatus
     }
 
-    set trainMesh(mesh: THREE.Mesh) {
-        this._trainMesh = mesh
-    }
-
     set arrivalAction(animationAction: THREE.AnimationAction) {
         this._arrivalAction = animationAction
     }
 
     set departureAction(animationAction: THREE.AnimationAction) {
         this._departureAction = animationAction
-    }
-
-    visible(value: boolean): void {
-        if (this._trainMesh) {
-            this._trainMesh.visible = value
-        } else {
-            console.error('Train mesh was not initialized')
-        }
     }
 
     startArrivalAnimation(speed = PARAMS.TRAIN_SPEED): void {

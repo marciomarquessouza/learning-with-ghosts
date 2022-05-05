@@ -4,9 +4,12 @@ import { ACTION_STATUS, ANIMATIONS, ARMATURES, MESHES } from '../../const'
 import { SceneModels } from '../../models'
 import { loadLight } from './light-loader'
 
-export async function loadScene(scene: THREE.Scene, models: SceneModels): Promise<THREE.AnimationMixer> {
+export async function loadScene(
+    scene: THREE.Scene,
+    models: SceneModels
+): Promise<THREE.AnimationMixer> {
     const loader = new GLTFLoader()
-    const { ghost, train, lighthouse } = models
+    const { ghost, train, lighthouse, scenario } = models
     return new Promise((resolve, reject) => {
         loader.load(
             'models/learning-with-ghosts.glb',
@@ -16,12 +19,13 @@ export async function loadScene(scene: THREE.Scene, models: SceneModels): Promis
                         const mesh = child as THREE.Mesh
                         mesh.receiveShadow = true
                         mesh.castShadow = true
-                        switch (mesh.name) {
-                            case MESHES.GHOST:
-                                ghost.ghostMesh = mesh
-                                break
-                            case MESHES.TRAIN:
-                                train.trainMesh = mesh
+
+                        if (mesh.name.includes(MESHES.GHOST)) {
+                            ghost.addMesh(mesh)
+                        }
+
+                        if (mesh.name.includes(MESHES.SCENARIO_COLLISION)) {
+                            scenario.addScenarioCollision(mesh)
                         }
                     }
 
@@ -59,6 +63,7 @@ export async function loadScene(scene: THREE.Scene, models: SceneModels): Promis
                     }
                 })
 
+                ghost.init(scene)
                 scene.add(gltf.scene)
                 ghost.currentStatus = ACTION_STATUS.LOADED
                 train.currentStatus = ACTION_STATUS.LOADED
