@@ -8,7 +8,9 @@ import {
     createLighthouse,
     createScenario,
     createTrainModel,
+    createSky,
     SceneModels,
+    createSea,
 } from '../models'
 import { createEndAnimationsTrigger } from './animations/trigger-end-animations'
 import { ACTION_STATUS, PARAMS } from '../const'
@@ -23,6 +25,8 @@ let mixer: THREE.AnimationMixer
 const clock = new THREE.Clock()
 const controls = createControls(camera, renderer)
 
+createSky(scene)
+createSea(scene)
 const train = createTrainModel()
 const lighthouse = createLighthouse()
 const scenario = createScenario()

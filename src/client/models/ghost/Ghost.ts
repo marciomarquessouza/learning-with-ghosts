@@ -33,6 +33,14 @@ export class Ghost {
         return this._currentStatus
     }
 
+    set ghostArmature(armature: THREE.Object3D) {
+        this._ghostArmature = armature
+    }
+
+    set levitationAction(animationAction: THREE.AnimationAction) {
+        this._levitationAction = animationAction
+    }
+
     public addMesh(mesh: THREE.Mesh) {
         this._ghostMeshes.push(mesh)
     }
@@ -47,14 +55,6 @@ export class Ghost {
 
         this._characterMesh.position.set(0, 5, -16)
         scene.add(this._characterMesh)
-    }
-
-    set ghostArmature(armature: THREE.Object3D) {
-        this._ghostArmature = armature
-    }
-
-    set levitationAction(animationAction: THREE.AnimationAction) {
-        this._levitationAction = animationAction
     }
 
     reset() {
@@ -184,8 +184,8 @@ export class Ghost {
 
         this._ghostArmature.updateMatrixWorld()
         this._camera.position.sub(this._controls.target)
-        this._controls.target.copy(this._ghostArmature.position)
-        this._camera.position.add(this._ghostArmature.position)
+        this._controls.target.copy(this._characterMesh.position)
+        this._camera.position.add(this._characterMesh.position)
     }
 }
 
