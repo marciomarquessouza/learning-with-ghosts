@@ -26,7 +26,7 @@ const clock = new THREE.Clock()
 const controls = createControls(camera, renderer)
 
 createSky(scene)
-createSea(scene)
+const sea = createSea(scene)
 const train = createTrainModel()
 const lighthouse = createLighthouse()
 const scenario = createScenario()
@@ -73,6 +73,7 @@ function animateScene() {
     mixer.update(delta)
     render()
     stats.update()
+    sea.update(clock.getElapsedTime())
     update(delta)
 }
 
