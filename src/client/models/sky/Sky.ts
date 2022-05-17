@@ -3,7 +3,7 @@ import * as THREE from 'three'
 export class Sky {
     constructor(scene: THREE.Scene) {
         const stars = this._createStars()
-        stars.position.y = 10
+        stars.position.set(0, 10, 30)
         scene.add(stars)
     }
 
@@ -18,7 +18,7 @@ export class Sky {
 
         particleGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3))
 
-        const material = new THREE.PointsMaterial({ size: 0.2 })
+        const material = new THREE.PointsMaterial({ size: 0.3 })
         return new THREE.Points(particleGeometry, material)
     }
 }

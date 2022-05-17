@@ -19,7 +19,7 @@ const bgColor = 0x000000
 
 const scene = new THREE.Scene()
 const renderer = createRenderer(bgColor)
-const camera = createPerspectiveCamera()
+const camera = createPerspectiveCamera({ fov: 32, far: 200, x: -35, y: 10, z: -41 })
 const stats = createStats()
 let mixer: THREE.AnimationMixer
 const clock = new THREE.Clock()

@@ -18,6 +18,7 @@ export class Ghost {
         new THREE.BoxGeometry(2.5, 5, 2.5),
         new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true, visible: false })
     )
+    private _lockCommands = false
 
     constructor(
         private _camera: THREE.PerspectiveCamera,
@@ -42,6 +43,7 @@ export class Ghost {
     }
 
     public addMesh(mesh: THREE.Mesh) {
+        mesh.frustumCulled = false
         this._ghostMeshes.push(mesh)
     }
 
@@ -50,10 +52,10 @@ export class Ghost {
         this._ghostMeshes.forEach((mesh) => {
             this._ghostMeshGroup.add(mesh)
         })
-        this._ghostArmature?.position.set(0, 5, -16)
+        this._ghostArmature?.position.set(0, 4, -16)
         this.visible(false)
 
-        this._characterMesh.position.set(0, 5, -16)
+        this._characterMesh.position.set(0, 4, -16)
         scene.add(this._characterMesh)
     }
 
@@ -72,6 +74,7 @@ export class Ghost {
 
     startLevitationAnimation(): void {
         this.visible(true)
+        this._lockCommands = true
         if (this._levitationAction) {
             this._levitationAction.play()
         } else {
@@ -101,11 +104,15 @@ export class Ghost {
     }
 
     onKeyDown(event: KeyboardEvent): void {
-        this._setKeyPressed(event, true)
+        if (this._lockCommands) {
+            this._setKeyPressed(event, true)
+        }
     }
 
     onKeyUp(event: KeyboardEvent): void {
-        this._setKeyPressed(event, false)
+        if (this._lockCommands) {
+            this._setKeyPressed(event, false)
+        }
     }
 
     private _checkCollisions(vector: THREE.Vector3, delta: number): boolean {

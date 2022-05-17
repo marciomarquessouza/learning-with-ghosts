@@ -10,13 +10,13 @@ import * as THREE from 'three'
  * @returns Camera
  * @example Animal Crossing perspective 40, 200, -275, 80, 0
  */
-export function createPerspectiveCamera(
+export function createPerspectiveCamera({
     fov = 40,
     far = 200,
     x = -35,
     y = 20,
-    z = -41
-): THREE.PerspectiveCamera {
+    z = -41,
+}): THREE.PerspectiveCamera {
     const camera = new THREE.PerspectiveCamera(
         fov,
         window.innerWidth / window.innerHeight,
