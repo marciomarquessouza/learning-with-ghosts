@@ -9,7 +9,7 @@ export async function loadScene(
     models: SceneModels
 ): Promise<THREE.AnimationMixer> {
     const loader = new GLTFLoader()
-    const { ghost, train, lighthouse, scenario } = models
+    const { ghost, princess, train, lighthouse, scenario } = models
     return new Promise((resolve, reject) => {
         loader.load(
             'models/learning-with-ghosts.glb',
@@ -22,6 +22,10 @@ export async function loadScene(
 
                         if (mesh.name.includes(MESHES.GHOST)) {
                             ghost.addMesh(mesh)
+                        }
+
+                        if (mesh.name.includes(MESHES.PRINCESS)) {
+                            princess.addMesh(mesh)
                         }
 
                         if (mesh.name.includes(MESHES.SCENARIO_COLLISION)) {
@@ -50,6 +54,9 @@ export async function loadScene(
                     switch (animation.name) {
                         case ANIMATIONS.GHOST_LEVITATION:
                             ghost.levitationAction = animationMixer.clipAction(animation)
+                            break
+                        case ANIMATIONS.PRINCESS_LEVITATION:
+                            princess.levitationAction = animationMixer.clipAction(animation)
                             break
                         case ANIMATIONS.TRAIN_ARRIVAL:
                             train.arrivalAction = animationMixer.clipAction(animation)

@@ -78,7 +78,7 @@ export class Ghost {
         if (this._levitationAction) {
             this._levitationAction.play()
         } else {
-            console.error('Levitation Action was not loaded properly')
+            console.error('Ghost Levitation Action was not loaded properly')
         }
     }
 
