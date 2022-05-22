@@ -5,6 +5,7 @@ import { loadScene } from './loaders'
 import { createStats, createControls, createAnimationFolders } from './utils'
 import {
     createGhostModel,
+    createPrincess,
     createLighthouse,
     createScenario,
     createTrainModel,
@@ -32,6 +33,7 @@ const lighthouse = createLighthouse()
 const scenario = createScenario()
 const scenarioColliders = scenario.colliders
 const ghost = createGhostModel(camera, controls, scenarioColliders)
+const princess = createPrincess()
 
 function render() {
     renderer.render(scene, camera)
@@ -55,6 +57,7 @@ function onWindowResize() {
 function initialAnimation() {
     train.startArrivalAnimation()
     lighthouse.startBulbAnimation()
+    princess.startLevitationAnimation()
 }
 
 function update(delta: number) {
@@ -79,7 +82,7 @@ function animateScene() {
 
 export async function createMainScene() {
     ghost.reset()
-    const models: SceneModels = { ghost, train, lighthouse, scenario }
+    const models: SceneModels = { ghost, princess, train, lighthouse, scenario }
     const animationMixer = await loadScene(scene, models)
     if (animationMixer) {
         mixer = animationMixer
