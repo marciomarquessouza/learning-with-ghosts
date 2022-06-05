@@ -1,4 +1,4 @@
-function html(text: TemplateStringsArray, ...props: string[]): HTMLElement {
+function html(text: TemplateStringsArray, ...props: (string | number)[]): HTMLElement {
     const element = document.createElement('div')
     const content = text.reduce(
         (result, currentString, index) =>

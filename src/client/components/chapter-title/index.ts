@@ -3,7 +3,7 @@ import ChapterTitle from './ChapterTitle'
 export interface ChapterTitleProps {
     title: string
     subtitle: string
-    chapterNumber: string
+    chapterNumber: number
 }
 
 function createChapterTitle(props: ChapterTitleProps) {

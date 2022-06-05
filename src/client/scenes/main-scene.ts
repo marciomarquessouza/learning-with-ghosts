@@ -12,6 +12,7 @@ import {
     createSky,
     SceneModels,
     createSea,
+    createScreenGUI,
 } from '../models'
 import { createEndAnimationsTrigger } from './animations/trigger-end-animations'
 import { ACTION_STATUS, PARAMS, COLORS } from '../const'
@@ -25,6 +26,7 @@ const stats = createStats()
 let mixer: THREE.AnimationMixer
 const clock = new THREE.Clock()
 const controls = createControls(camera, renderer)
+const screenGUI = createScreenGUI()
 
 createSky(scene)
 const sea = createSea(scene)
@@ -54,10 +56,22 @@ function onWindowResize() {
     render()
 }
 
-function initialAnimation() {
+function gameInitiation() {
     train.startArrivalAnimation()
     lighthouse.startBulbAnimation()
     princess.startLevitationAnimation()
+    screenGUI.showChapterTitle({
+        title: 'WELCOME TO GHOST TOWN',
+        subtitle: 'LEARNING HOW TO GREETING FRIENDS, STRANGERS AND FREAKS ',
+        chapterNumber: 1,
+    })
+    screenGUI.initiateLifeMenu({
+        lives: PARAMS.INITIAL_LIVES,
+        day: 1,
+        chapterNumber: 1,
+        chapterName: 'Greetings',
+    })
+    screenGUI.setLives(3)
 }
 
 function update(delta: number) {
@@ -90,7 +104,7 @@ export async function createMainScene() {
         window.addEventListener('keydown', handleKeyDown, false)
         window.addEventListener('keyup', handleKeyUp, false)
         window.addEventListener('resize', onWindowResize, false)
-        initialAnimation()
+        gameInitiation()
         animateScene()
     }
 
