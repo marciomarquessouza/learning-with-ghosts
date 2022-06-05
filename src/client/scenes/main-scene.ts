@@ -14,9 +14,9 @@ import {
     createSea,
 } from '../models'
 import { createEndAnimationsTrigger } from './animations/trigger-end-animations'
-import { ACTION_STATUS, PARAMS } from '../const'
+import { ACTION_STATUS, PARAMS, COLORS } from '../const'
 
-const bgColor = 0x000000
+const bgColor = COLORS.BACKGROUND
 
 const scene = new THREE.Scene()
 const renderer = createRenderer(bgColor)
@@ -93,4 +93,6 @@ export async function createMainScene() {
         initialAnimation()
         animateScene()
     }
+
+    return renderer.domElement
 }

@@ -7,4 +7,6 @@ export enum PARAMS {
     CONTROL_MAX_DISTANCE = 80,
     CONTROL_MIN_DISTANCE = 20,
     COLLISION_LIMIT = -2.5,
+    // in case of change, also change the tailwind.config.js animation/chapter-title-out and adjust the second
+    CHAPTER_TITLE_FADE_OUT = 7,
 }
