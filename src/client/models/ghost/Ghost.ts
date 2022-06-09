@@ -2,6 +2,8 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 import { ACTION_STATUS, PARAMS } from '../../const'
+import { Scenario } from '../scenario/Scenario'
+import { ScreenGUI } from '../screen-gui/ScreenGUI'
 
 export class Ghost {
     private _currentStatus = ACTION_STATUS.INITIAL
@@ -23,7 +25,8 @@ export class Ghost {
     constructor(
         private _camera: THREE.PerspectiveCamera,
         private _controls: OrbitControls,
-        private _scenarioColliders: THREE.Mesh[]
+        private _scenario: Scenario,
+        private _screenGUI: ScreenGUI
     ) {}
 
     set currentStatus(status: ACTION_STATUS) {
@@ -121,7 +124,10 @@ export class Ghost {
         const localVertex = new THREE.Vector3()
         const globalVertex = new THREE.Vector3()
         const nextPosition = this._characterMesh.position.clone()
+        const scenarioColliders = this._scenario.colliders
+        const princessDialogs = this._scenario.princessDialogs
         let hasCollision = false
+        let hasContactDialog = false
 
         for (let vertexIndex = 0; vertexIndex < positionAttribute.count; vertexIndex++) {
             localVertex.fromBufferAttribute(positionAttribute, vertexIndex)
@@ -133,7 +139,27 @@ export class Ghost {
                 )
             )
             let raycaster = new THREE.Raycaster(originPoint, directionVector.clone().normalize())
-            let collisions = raycaster.intersectObjects(this._scenarioColliders)
+            let collisions = raycaster.intersectObjects(scenarioColliders)
+            let princessContacts = raycaster.intersectObjects(princessDialogs)
+
+            if (
+                princessContacts.length > 0 &&
+                princessContacts[0].distance < directionVector.length()
+            ) {
+                if (!hasContactDialog) {
+                    this._screenGUI.showInfoMenu({
+                        avatar: '/img/lightning-princess/lighthouse-princess.png',
+                        title: 'LIGHTHOUSE PRINCESS',
+                        onClickTalk: () => undefined,
+                    })
+                }
+                hasContactDialog = true
+            } else {
+                if (hasContactDialog) {
+                    this._screenGUI.closeInfoMenu()
+                }
+                hasContactDialog = false
+            }
 
             if (collisions.length > 0 && collisions[0].distance < directionVector.length()) {
                 hasCollision = true
@@ -194,12 +220,4 @@ export class Ghost {
         this._controls.target.copy(this._characterMesh.position)
         this._camera.position.add(this._characterMesh.position)
     }
-}
-
-export function createGhostModel(
-    camera: THREE.PerspectiveCamera,
-    controls: OrbitControls,
-    scenarioColliders: THREE.Mesh[]
-) {
-    return new Ghost(camera, controls, scenarioColliders)
 }

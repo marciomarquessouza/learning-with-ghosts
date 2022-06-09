@@ -18,11 +18,11 @@ export default class ElementManager<P, S> {
         parentElement.replaceChildren(this.render())
     }
 
-    get states() {
+    public get states() {
         return this._states
     }
 
-    set states(newState: S) {
+    public set states(newState: S) {
         this._states = newState
         document.getElementById(this.elementId)?.replaceChildren(this.render())
     }

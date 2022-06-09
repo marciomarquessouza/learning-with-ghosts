@@ -33,8 +33,7 @@ const sea = createSea(scene)
 const train = createTrainModel()
 const lighthouse = createLighthouse()
 const scenario = createScenario()
-const scenarioColliders = scenario.colliders
-const ghost = createGhostModel(camera, controls, scenarioColliders)
+const ghost = createGhostModel(camera, controls, scenario, screenGUI)
 const princess = createPrincess()
 
 function render() {
@@ -71,7 +70,6 @@ function gameInitiation() {
         chapterNumber: 1,
         chapterName: 'Greetings',
     })
-    screenGUI.setLives(3)
 }
 
 function update(delta: number) {

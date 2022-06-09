@@ -25,7 +25,12 @@ export async function loadScene(
                         }
 
                         if (mesh.name.includes(MESHES.PRINCESS)) {
-                            princess.addMesh(mesh)
+                            if (mesh.name.includes(MESHES.PRINCESS_DIALOG)) {
+                                console.log('LOAD PRINCESS DIALOG')
+                                scenario.addPrincessDialog(mesh)
+                            } else {
+                                princess.addMesh(mesh)
+                            }
                         }
 
                         if (mesh.name.includes(MESHES.SCENARIO_COLLISION)) {
