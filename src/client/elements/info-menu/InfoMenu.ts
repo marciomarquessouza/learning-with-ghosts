@@ -1,12 +1,13 @@
 import { LitElement, html } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
+import { ELEMENTS } from '../../const'
 
 export interface InfoMenuProps {
     avatar: string
     title: string
 }
 
-@customElement('info-menu')
+@customElement(ELEMENTS.INFO_MENU)
 export class InfoMenu extends LitElement {
     @property()
     props: InfoMenuProps = {

@@ -1,5 +1,5 @@
 import { createMainScene } from './scenes/main-scene'
-import GhostLoading from './components/ghost-loading/GhostLoading'
+import GhostLoading from './elements/ghost-loading/GhostLoading'
 
 const ghostLoading = document.getElementById('ghost-loading') as GhostLoading
 

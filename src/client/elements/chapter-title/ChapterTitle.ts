@@ -1,5 +1,6 @@
 import { LitElement, html } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
+import { ELEMENTS } from '../../const'
 
 export interface ChapterTitleProps {
     title: string
@@ -7,7 +8,7 @@ export interface ChapterTitleProps {
     chapterNumber: number
 }
 
-@customElement('chapter-title')
+@customElement(ELEMENTS.CHAPTER_TITLE)
 export default class ChapterTitle extends LitElement {
     @property()
     props: ChapterTitleProps = {

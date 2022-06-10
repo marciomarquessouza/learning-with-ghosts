@@ -3,6 +3,6 @@ export enum ELEMENTS {
     INFO_MENU = 'info-menu',
     DIALOGS = 'dialogs',
     MAIN_MENU = 'main-menu',
-    LIFE_MENU = 'life-menu',
+    LIVE_MENU = 'live-menu',
     MAIN_SCENE = 'main-scene',
 }

@@ -15,6 +15,10 @@ export class Ghost {
     private _bkdPressed = false
     private _lftPressed = false
     private _rgtPressed = false
+    private _escPressed = false
+    private _spacePressed = false
+    private _iPressed = false
+    private _mPressed = false
     private _ghostVelocity = new THREE.Vector3()
     private _characterMesh = new THREE.Mesh(
         new THREE.BoxGeometry(2.5, 5, 2.5),
@@ -103,6 +107,9 @@ export class Ghost {
             case 'ArrowLeft':
                 this._lftPressed = keyPressed
                 break
+            case 'Escape':
+                this._escPressed = keyPressed
+                break
         }
     }
 
@@ -140,7 +147,7 @@ export class Ghost {
             )
             let raycaster = new THREE.Raycaster(originPoint, directionVector.clone().normalize())
             let collisions = raycaster.intersectObjects(scenarioColliders)
-            let princessContacts = raycaster.intersectObjects(princessDialogs)
+            const princessContacts = raycaster.intersectObjects(princessDialogs)
 
             if (
                 princessContacts.length > 0 &&
@@ -149,13 +156,13 @@ export class Ghost {
                 if (!hasContactDialog) {
                     this._screenGUI.showInfoMenu({
                         avatar: '/img/lightning-princess/lighthouse-princess.png',
-                        title: 'Lighthouse Pricess',
+                        title: 'Lighthouse Princess',
                     })
                 }
                 hasContactDialog = true
             } else {
                 if (hasContactDialog) {
-                    this._screenGUI.hideInfoMenu()
+                    this._screenGUI.closeInfoMenu()
                 }
                 hasContactDialog = false
             }
@@ -212,6 +219,10 @@ export class Ghost {
         if (this._rgtPressed) {
             quaternion.setFromAxisAngle(new THREE.Vector3(0, 1, 0), Math.PI / 2)
             this._setPosition(new THREE.Vector3(0, 0, 1), quaternion, delta)
+        }
+
+        if (this._escPressed) {
+            this._screenGUI.closeActiveMenus()
         }
 
         this._ghostArmature.updateMatrixWorld()

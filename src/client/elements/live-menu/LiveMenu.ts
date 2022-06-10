@@ -1,5 +1,6 @@
 import { LitElement, html } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
+import { ELEMENTS } from '../../const'
 
 export interface LiveMenuProps {
     lives: number
@@ -8,7 +9,7 @@ export interface LiveMenuProps {
     day: number
 }
 
-@customElement('live-menu')
+@customElement(ELEMENTS.LIVE_MENU)
 export class LiveMenu extends LitElement {
     @property()
     props: LiveMenuProps = {
