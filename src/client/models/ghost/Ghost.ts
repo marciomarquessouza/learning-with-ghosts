@@ -149,14 +149,13 @@ export class Ghost {
                 if (!hasContactDialog) {
                     this._screenGUI.showInfoMenu({
                         avatar: '/img/lightning-princess/lighthouse-princess.png',
-                        title: 'LIGHTHOUSE PRINCESS',
-                        onClickTalk: () => undefined,
+                        title: 'Lighthouse Pricess',
                     })
                 }
                 hasContactDialog = true
             } else {
                 if (hasContactDialog) {
-                    this._screenGUI.closeInfoMenu()
+                    this._screenGUI.hideInfoMenu()
                 }
                 hasContactDialog = false
             }

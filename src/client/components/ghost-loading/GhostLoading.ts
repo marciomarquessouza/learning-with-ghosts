@@ -1,10 +1,10 @@
-import { ELEMENTS } from '../../const'
-import ElementManager from '../../libs/ElementManager'
-import html from '../../libs/html'
+import { LitElement, html } from 'lit'
+import { customElement } from 'lit/decorators.js'
 
-export default class Loading extends ElementManager<{}, {}> {
-    constructor() {
-        super(ELEMENTS.MAIN_SCENE, {}, {})
+@customElement('ghost-loading')
+export default class GhostLoading extends LitElement {
+    createRenderRoot() {
+        return this
     }
 
     render() {

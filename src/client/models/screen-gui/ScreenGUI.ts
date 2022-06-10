@@ -1,32 +1,37 @@
-import createChapterTitle, { ChapterTitleProps } from '../../components/chapter-title'
-import createInfoMenu, { InfoMenuProps } from '../../components/info-menu'
-import { InfoMenu } from '../../components/info-menu/InfoMenu'
-import createLifeMenu, { LiveMenuProps } from '../../components/live-menu'
-import { LiveMenu } from '../../components/live-menu/LiveMenu'
+import ChapterTitle, { ChapterTitleProps } from '../../components/chapter-title/ChapterTitle'
+import { InfoMenu, InfoMenuProps } from '../../components/info-menu/InfoMenu'
+import { LiveMenu, LiveMenuProps } from '../../components/live-menu/LiveMenu'
 import { PARAMS } from '../../const'
 
 export class ScreenGUI {
-    private _liveMenu: LiveMenu | null = null
-    private _infoMenu: InfoMenu | null = null
-
     public showChapterTitle(props: ChapterTitleProps) {
-        const chapterTitle = createChapterTitle(props)
-        setTimeout(() => chapterTitle.unmount(), PARAMS.CHAPTER_TITLE_FADE_OUT)
+        const chapterTitle = document.getElementById('chapter-title') as ChapterTitle
+        chapterTitle.props = props
+        chapterTitle.hidden = false
+        setTimeout(() => {
+            chapterTitle.hidden = true
+        }, PARAMS.CHAPTER_TITLE_FADE_OUT)
     }
 
-    public initiateLifeMenu(props: LiveMenuProps) {
-        this._liveMenu = createLifeMenu(props)
+    public showLiveMenu(props: LiveMenuProps) {
+        const liveMenu = document.getElementById('live-menu') as LiveMenu
+        liveMenu.props = props
+        liveMenu.hidden = false
     }
 
     public setLives(lives: number) {
-        this._liveMenu?.setLives(lives)
+        const liveMenu = document.getElementById('live-menu') as LiveMenu
+        liveMenu.props = { ...liveMenu.props, lives }
     }
 
     public showInfoMenu(props: InfoMenuProps) {
-        this._infoMenu = createInfoMenu(props)
+        const infoMenu = document.getElementById('info-menu') as InfoMenu
+        infoMenu.props = props
+        infoMenu.hidden = false
     }
 
-    public closeInfoMenu() {
-        this._infoMenu?.unmount()
+    public hideInfoMenu() {
+        const infoMenu = document.getElementById('info-menu') as InfoMenu
+        infoMenu.hidden = true
     }
 }

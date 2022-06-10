@@ -1,41 +1,29 @@
-import { InfoMenuProps } from '.'
-import { ELEMENTS } from '../../const'
-import ElementManager from '../../libs/ElementManager'
-import html from '../../libs/html'
+import { LitElement, html } from 'lit'
+import { customElement, property } from 'lit/decorators.js'
 
-export interface InfoMenuStates {}
-
-enum BUTTONS {
-    INFO = 'button-info',
+export interface InfoMenuProps {
+    avatar: string
+    title: string
 }
 
-export class InfoMenu extends ElementManager<InfoMenuProps, InfoMenuStates> {
-    constructor(props: InfoMenuProps) {
-        super(ELEMENTS.INFO_MENU, props, {})
-        const self = this
-        const handlerClick = document.getElementById(BUTTONS.INFO)
-
-        if (handlerClick) {
-            handlerClick.onclick = self.handleClick
-        }
-        // @ts-ignore
-        document.showMenu = self.showMenu.bind(self)
-        // @ts-ignore
-        document.states = this.states
+@customElement('info-menu')
+export class InfoMenu extends LitElement {
+    @property()
+    props: InfoMenuProps = {
+        avatar: '',
+        title: '',
     }
 
-    public showMenu(value: boolean) {
-        // @ts-ignore
-        document.states = { ...this.states, showMenu: value }
+    createRenderRoot() {
+        return this
     }
 
-    public handleClick() {
-        // @ts-ignore
-        document.showMenu(false)
+    private _hidden() {
+        this.hidden = true
     }
 
-    render(): HTMLElement {
-        const { title, avatar } = this.props
+    render() {
+        const { avatar, title } = this.props
 
         return html`
             <div
@@ -78,7 +66,6 @@ export class InfoMenu extends ElementManager<InfoMenuProps, InfoMenuStates> {
                                             <rect width="15" height="15" fill="#00A1A4" />
                                         </svg>
                                         <button
-                                            id=${BUTTONS.INFO}
                                             class="font-josefin text-sm text-white ml-1 mt-1 bg-transparent hover:text-secondary focus:outline-none  active:outline-none"
                                         >
                                             INFO [I]
@@ -86,9 +73,12 @@ export class InfoMenu extends ElementManager<InfoMenuProps, InfoMenuStates> {
                                     </div>
                                 </div>
                             </div>
-                            <div class="items-start font-josefin font-normal text-sm text-white">
+                            <button
+                                @click="${this._hidden}"
+                                class="items-start font-josefin font-normal text-sm text-white bg-transparent hover:text-secondary focus:outline-none  active:outline-none"
+                            >
                                 CLOSE [ESC]
-                            </div>
+                            </button>
                             <div></div>
                         </div>
                     </div>

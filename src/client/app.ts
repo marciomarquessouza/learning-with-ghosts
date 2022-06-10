@@ -1,16 +1,9 @@
 import { createMainScene } from './scenes/main-scene'
-import createLoadingElement from './components/loading'
-import createMainSceneElement from './components/main-scene-element'
-// import createInfoMenu from './components/info-menu'
+import GhostLoading from './components/ghost-loading/GhostLoading'
 
-// createInfoMenu({
-//     avatar: '/img/lightning-princess/lighthouse-princess.png',
-//     title: 'LIGHTHOUSE PRINCESS',
-//     onClickTalk: () => undefined,
-// })
-
-createLoadingElement()
+const ghostLoading = document.getElementById('ghost-loading') as GhostLoading
 
 createMainScene().then((mainScene) => {
-    createMainSceneElement({ mainScene })
+    ghostLoading.hidden = true
+    document.getElementById('main-scene')?.appendChild(mainScene)
 })

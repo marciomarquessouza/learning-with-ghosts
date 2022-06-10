@@ -4,6 +4,6 @@ const common = require('./webpack.common.js')
 module.exports = merge(common, {
     mode: 'production',
     performance: {
-        hints: false,
+        hints: 'warning',
     },
 })

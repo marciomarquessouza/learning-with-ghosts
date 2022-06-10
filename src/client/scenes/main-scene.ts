@@ -64,7 +64,7 @@ function gameInitiation() {
         subtitle: 'LEARNING HOW TO GREETING FRIENDS, STRANGERS AND FREAKS ',
         chapterNumber: 1,
     })
-    screenGUI.initiateLifeMenu({
+    screenGUI.showLiveMenu({
         lives: PARAMS.INITIAL_LIVES,
         day: 1,
         chapterNumber: 1,

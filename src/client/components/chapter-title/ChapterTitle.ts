@@ -1,14 +1,26 @@
-import { ChapterTitleProps } from '.'
-import { ELEMENTS } from '../../const'
-import ElementManager from '../../libs/ElementManager'
-import html from '../../libs/html'
+import { LitElement, html } from 'lit'
+import { customElement, property } from 'lit/decorators.js'
 
-export default class ChapterTitle extends ElementManager<ChapterTitleProps, {}> {
-    constructor(props: ChapterTitleProps) {
-        super(ELEMENTS.CHAPTER_TITLE, props, {})
+export interface ChapterTitleProps {
+    title: string
+    subtitle: string
+    chapterNumber: number
+}
+
+@customElement('chapter-title')
+export default class ChapterTitle extends LitElement {
+    @property()
+    props: ChapterTitleProps = {
+        title: '',
+        subtitle: '',
+        chapterNumber: 1,
     }
 
-    render(): HTMLElement {
+    createRenderRoot() {
+        return this
+    }
+
+    render() {
         const { title, subtitle, chapterNumber } = this.props
 
         return html`
