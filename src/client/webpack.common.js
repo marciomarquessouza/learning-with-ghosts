@@ -1,9 +1,20 @@
 const path = require('path')
 
 module.exports = {
-    entry: './src/client/client.ts',
+    entry: './src/client/index.ts',
     module: {
         rules: [
+            {
+                test: /\.m?js/,
+                type: 'javascript/auto',
+                resolve: {
+                    fullySpecified: false,
+                },
+            },
+            {
+                test: /\.(css|s[ac]ss)$/i,
+                use: ['style-loader', 'css-loader', 'postcss-loader'],
+            },
             {
                 test: /\.tsx?$/,
                 use: 'ts-loader',

@@ -8,6 +8,5 @@ export function createRenderer(bgColor: number) {
     renderer.setSize(window.innerWidth, window.innerHeight)
     renderer.shadowMap.enabled = false
     renderer.outputEncoding = THREE.sRGBEncoding
-    document.body.appendChild(renderer.domElement)
     return renderer
 }

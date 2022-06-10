@@ -1,9 +1,11 @@
 {
     "compilerOptions": {
+        "experimentalDecorators": true,
         "target": "es6",
         "moduleResolution": "node",
         "allowJs": true,
-        "strict": true
+        "strict": true,
+        "useDefineForClassFields": false
     },
     "include": ["**/*.ts", "scenes/utils/animation-folderts"]
 }

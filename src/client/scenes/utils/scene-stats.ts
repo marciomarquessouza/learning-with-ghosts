@@ -7,7 +7,7 @@ class SceneStats {
 
     update() {
         if (process.env.NODE_ENV === 'development') {
-            this.stats.update()   
+            this.stats.update()
         }
     }
 }

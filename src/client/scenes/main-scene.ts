@@ -2,7 +2,7 @@ import * as THREE from 'three'
 
 import { createPerspectiveCamera, createRenderer } from './cameras-and-renderer'
 import { loadScene } from './loaders'
-import { createStats, createControls, createAnimationFolders } from './utils'
+import { createStats, createControls } from './utils'
 import {
     createGhostModel,
     createPrincess,
@@ -12,11 +12,12 @@ import {
     createSky,
     SceneModels,
     createSea,
+    createScreenGUI,
 } from '../models'
 import { createEndAnimationsTrigger } from './animations/trigger-end-animations'
-import { ACTION_STATUS, PARAMS } from '../const'
+import { ACTION_STATUS, PARAMS, COLORS } from '../const'
 
-const bgColor = 0x000000
+const bgColor = COLORS.BACKGROUND
 
 const scene = new THREE.Scene()
 const renderer = createRenderer(bgColor)
@@ -25,14 +26,14 @@ const stats = createStats()
 let mixer: THREE.AnimationMixer
 const clock = new THREE.Clock()
 const controls = createControls(camera, renderer)
+const screenGUI = createScreenGUI()
 
 createSky(scene)
 const sea = createSea(scene)
 const train = createTrainModel()
 const lighthouse = createLighthouse()
 const scenario = createScenario()
-const scenarioColliders = scenario.colliders
-const ghost = createGhostModel(camera, controls, scenarioColliders)
+const ghost = createGhostModel(camera, controls, scenario, screenGUI)
 const princess = createPrincess()
 
 function render() {
@@ -54,10 +55,21 @@ function onWindowResize() {
     render()
 }
 
-function initialAnimation() {
+function gameInitiation() {
     train.startArrivalAnimation()
     lighthouse.startBulbAnimation()
     princess.startLevitationAnimation()
+    screenGUI.showChapterTitle({
+        title: 'WELCOME TO GHOST TOWN',
+        subtitle: 'LEARNING HOW TO GREETING FRIENDS, STRANGERS AND FREAKS ',
+        chapterNumber: 1,
+    })
+    screenGUI.showLiveMenu({
+        lives: PARAMS.INITIAL_LIVES,
+        day: 1,
+        chapterNumber: 1,
+        chapterName: 'Greetings',
+    })
 }
 
 function update(delta: number) {
@@ -86,12 +98,13 @@ export async function createMainScene() {
     const animationMixer = await loadScene(scene, models)
     if (animationMixer) {
         mixer = animationMixer
-        createAnimationFolders(train)
         mixer.addEventListener('finished', createEndAnimationsTrigger(models))
         window.addEventListener('keydown', handleKeyDown, false)
         window.addEventListener('keyup', handleKeyUp, false)
         window.addEventListener('resize', onWindowResize, false)
-        initialAnimation()
+        gameInitiation()
         animateScene()
     }
+
+    return renderer.domElement
 }
