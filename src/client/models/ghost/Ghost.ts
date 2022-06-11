@@ -2,23 +2,16 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 import { CHARACTERS, PARAMS } from '../../const'
+import CharacterControls from '../character-control/CharacterControl'
 import { Scenario } from '../scenario/Scenario'
 import { ScreenGUI } from '../screen-gui/ScreenGUI'
 import toggleInfoMenu from './helpers/toggleInfoMenu'
 
-export class Ghost {
+export class Ghost extends CharacterControls {
     private _ghostMeshes: THREE.Mesh[] = []
     private _ghostMeshGroup = new THREE.Group()
     private _ghostArmature: THREE.Object3D | undefined
     private _levitationAction: THREE.AnimationAction | undefined
-    private _fwdPressed = false
-    private _bkdPressed = false
-    private _lftPressed = false
-    private _rgtPressed = false
-    private _escPressed = false
-    private _spacePressed = false
-    private _iPressed = false
-    private _mPressed = false
     private _isInfoMenuOpen = false
     private _hasContactWith: CHARACTERS | null = null
     private _ghostVelocity = new THREE.Vector3()
@@ -26,14 +19,15 @@ export class Ghost {
         new THREE.BoxGeometry(2.5, 5, 2.5),
         new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true, visible: false })
     )
-    private _lockCommands = false
 
     constructor(
         private _camera: THREE.PerspectiveCamera,
         private _controls: OrbitControls,
         private _scenario: Scenario,
         private _screenGUI: ScreenGUI
-    ) {}
+    ) {
+        super()
+    }
 
     set ghostArmature(armature: THREE.Object3D) {
         this._ghostArmature = armature
@@ -80,45 +74,6 @@ export class Ghost {
             this._levitationAction.play()
         } else {
             console.error('Ghost Levitation Action was not loaded properly')
-        }
-    }
-
-    private _setKeyPressed(event: KeyboardEvent, keyPressed: boolean): void {
-        switch (event.code) {
-            case 'KeyW':
-            case 'ArrowUp':
-                this._fwdPressed = keyPressed
-                break
-            case 'KeyS':
-            case 'ArrowDown':
-                this._bkdPressed = keyPressed
-                break
-            case 'KeyD':
-            case 'ArrowRight':
-                this._rgtPressed = keyPressed
-                break
-            case 'KeyA':
-            case 'ArrowLeft':
-                this._lftPressed = keyPressed
-                break
-            case 'Escape':
-                this._escPressed = keyPressed
-                break
-            case 'KeyI':
-                this._iPressed = keyPressed
-                break
-        }
-    }
-
-    onKeyDown(event: KeyboardEvent): void {
-        if (this._lockCommands) {
-            this._setKeyPressed(event, true)
-        }
-    }
-
-    onKeyUp(event: KeyboardEvent): void {
-        if (this._lockCommands) {
-            this._setKeyPressed(event, false)
         }
     }
 
@@ -232,7 +187,6 @@ export class Ghost {
         }
 
         if (this._iPressed) {
-            console.log('ĤERE')
             if (this._isInfoMenuOpen) {
                 console.log(`Contact with ${this._hasContactWith}`)
             }
