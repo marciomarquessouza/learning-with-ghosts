@@ -15,7 +15,7 @@ import {
     createScreenGUI,
 } from '../models'
 import { createEndAnimationsTrigger } from './animations/trigger-end-animations'
-import { ACTION_STATUS, PARAMS, COLORS } from '../const'
+import { PARAMS, COLORS } from '../const'
 
 const bgColor = COLORS.BACKGROUND
 
@@ -73,11 +73,9 @@ function gameInitiation() {
 }
 
 function update(delta: number) {
-    if (ghost.currentStatus !== ACTION_STATUS.INITIAL) {
-        const physicsSteps = PARAMS.PHYSICS_STEPS
-        for (let i = 0; i < physicsSteps; i++) {
-            ghost.updateControls(delta / physicsSteps)
-        }
+    const physicsSteps = PARAMS.PHYSICS_STEPS
+    for (let i = 0; i < physicsSteps; i++) {
+        ghost.updateControls(delta / physicsSteps)
     }
 }
 

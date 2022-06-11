@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import { ACTION_STATUS, ANIMATIONS, ARMATURES, MESHES } from '../../const'
+import { ANIMATIONS, ARMATURES, MESHES } from '../../const'
 import { SceneModels } from '../../models'
 import { loadLight } from './light-loader'
 
@@ -76,9 +76,6 @@ export async function loadScene(
 
                 ghost.init(scene)
                 scene.add(gltf.scene)
-                ghost.currentStatus = ACTION_STATUS.LOADED
-                train.currentStatus = ACTION_STATUS.LOADED
-                lighthouse.currentStatus = ACTION_STATUS.LOADED
                 resolve(animationMixer)
             },
             undefined,

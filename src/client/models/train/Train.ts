@@ -1,18 +1,9 @@
 import * as THREE from 'three'
-import { ACTION_STATUS, PARAMS } from '../../const'
+import { PARAMS } from '../../const'
 
 export class Train {
-    private _currentStatus = ACTION_STATUS.INITIAL
     private _arrivalAction: THREE.AnimationAction | undefined
     private _departureAction: THREE.AnimationAction | undefined
-
-    set currentStatus(status: ACTION_STATUS) {
-        this._currentStatus = status
-    }
-
-    get currentStatus(): ACTION_STATUS {
-        return this._currentStatus
-    }
 
     set arrivalAction(animationAction: THREE.AnimationAction) {
         this._arrivalAction = animationAction

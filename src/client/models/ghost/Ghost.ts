@@ -1,12 +1,12 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
-import { ACTION_STATUS, PARAMS } from '../../const'
+import { CHARACTERS, PARAMS } from '../../const'
 import { Scenario } from '../scenario/Scenario'
 import { ScreenGUI } from '../screen-gui/ScreenGUI'
+import toggleInfoMenu from './helpers/toggleInfoMenu'
 
 export class Ghost {
-    private _currentStatus = ACTION_STATUS.INITIAL
     private _ghostMeshes: THREE.Mesh[] = []
     private _ghostMeshGroup = new THREE.Group()
     private _ghostArmature: THREE.Object3D | undefined
@@ -19,6 +19,8 @@ export class Ghost {
     private _spacePressed = false
     private _iPressed = false
     private _mPressed = false
+    private _isInfoMenuOpen = false
+    private _hasContactWith: CHARACTERS | null = null
     private _ghostVelocity = new THREE.Vector3()
     private _characterMesh = new THREE.Mesh(
         new THREE.BoxGeometry(2.5, 5, 2.5),
@@ -32,14 +34,6 @@ export class Ghost {
         private _scenario: Scenario,
         private _screenGUI: ScreenGUI
     ) {}
-
-    set currentStatus(status: ACTION_STATUS) {
-        this._currentStatus = status
-    }
-
-    get currentStatus(): ACTION_STATUS {
-        return this._currentStatus
-    }
 
     set ghostArmature(armature: THREE.Object3D) {
         this._ghostArmature = armature
@@ -110,6 +104,9 @@ export class Ghost {
             case 'Escape':
                 this._escPressed = keyPressed
                 break
+            case 'KeyI':
+                this._iPressed = keyPressed
+                break
         }
     }
 
@@ -134,7 +131,8 @@ export class Ghost {
         const scenarioColliders = this._scenario.colliders
         const princessDialogs = this._scenario.princessDialogs
         let hasCollision = false
-        let hasContactDialog = false
+        let isInfoMenuOpen = false
+        let contactWith: CHARACTERS = CHARACTERS.GHOST
 
         for (let vertexIndex = 0; vertexIndex < positionAttribute.count; vertexIndex++) {
             localVertex.fromBufferAttribute(positionAttribute, vertexIndex)
@@ -147,31 +145,40 @@ export class Ghost {
             )
             let raycaster = new THREE.Raycaster(originPoint, directionVector.clone().normalize())
             let collisions = raycaster.intersectObjects(scenarioColliders)
-            const princessContacts = raycaster.intersectObjects(princessDialogs)
-
-            if (
-                princessContacts.length > 0 &&
-                princessContacts[0].distance < directionVector.length()
-            ) {
-                if (!hasContactDialog) {
-                    this._screenGUI.showInfoMenu({
-                        avatar: '/img/lightning-princess/lighthouse-princess.png',
-                        title: 'Lighthouse Princess',
+            const characterContacts = [
+                {
+                    character: CHARACTERS.PRINCESS,
+                    contacts: raycaster.intersectObjects(princessDialogs),
+                },
+            ]
+            const { hasDialogContact, contact } = characterContacts.reduce(
+                (result, { character, contacts }) => {
+                    const hasContact = toggleInfoMenu({
+                        isInfoMenuOpen,
+                        directionVector,
+                        contacts,
+                        character,
+                        screenGUI: this._screenGUI,
                     })
-                }
-                hasContactDialog = true
-            } else {
-                if (hasContactDialog) {
-                    this._screenGUI.closeInfoMenu()
-                }
-                hasContactDialog = false
-            }
+
+                    return hasContact
+                        ? { hasDialogContact: hasContact, contact: character }
+                        : result
+                },
+                { hasDialogContact: false, contact: CHARACTERS.PRINCESS }
+            )
+
+            isInfoMenuOpen = hasDialogContact
+            contactWith = contact
 
             if (collisions.length > 0 && collisions[0].distance < directionVector.length()) {
                 hasCollision = true
                 break
             }
         }
+
+        this._isInfoMenuOpen = isInfoMenuOpen
+        this._hasContactWith = contactWith
 
         return hasCollision
     }
@@ -194,7 +201,6 @@ export class Ghost {
 
     updateControls(delta: number): void {
         if (!this._ghostArmature) {
-            new THREE.BoxGeometry()
             throw new Error('Error loading Ghost Model')
         }
 
@@ -223,6 +229,13 @@ export class Ghost {
 
         if (this._escPressed) {
             this._screenGUI.closeActiveMenus()
+        }
+
+        if (this._iPressed) {
+            console.log('ĤERE')
+            if (this._isInfoMenuOpen) {
+                console.log(`Contact with ${this._hasContactWith}`)
+            }
         }
 
         this._ghostArmature.updateMatrixWorld()
