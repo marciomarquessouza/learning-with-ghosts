@@ -9,15 +9,17 @@ export interface LiveMenuProps {
     day: number
 }
 
+export const LIVE_MENU_DEFAULT: LiveMenuProps = {
+    lives: 5,
+    chapterNumber: 1,
+    chapterName: '',
+    day: 1,
+}
+
 @customElement(ELEMENTS.LIVE_MENU)
-export class LiveMenu extends LitElement {
+export default class LiveMenu extends LitElement {
     @property()
-    props: LiveMenuProps = {
-        lives: 5,
-        chapterNumber: 1,
-        chapterName: '',
-        day: 1,
-    }
+    props: LiveMenuProps = LIVE_MENU_DEFAULT
 
     createRenderRoot() {
         return this

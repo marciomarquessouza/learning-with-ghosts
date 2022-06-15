@@ -24,9 +24,16 @@ module.exports = {
                 test: /\.glsl$/,
                 use: ['raw-loader', 'glslify-loader'],
             },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: 'asset/resource',
+            },
         ],
     },
     resolve: {
+        alias: {
+            '@': path.resolve(__dirname, './src/client'),
+        },
         extensions: ['.tsx', '.ts', '.js'],
     },
     output: {

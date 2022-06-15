@@ -10,4 +10,6 @@ export enum PARAMS {
     COLLISION_LIMIT = -2.5,
     // in case of change, also change the tailwind.config.js animation/chapter-title-out and adjust the second
     CHAPTER_TITLE_FADE_OUT = 7000,
+    DEFAULT_ZOOM_IN = 18,
+    DEFAULT_ZOOM = 32,
 }

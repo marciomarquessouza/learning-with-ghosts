@@ -1,40 +1,42 @@
 import * as THREE from 'three'
-import { CHARACTERS, PARAMS } from '../../../const'
+import { CHARACTER, PARAMS } from '../../../const'
 import { Scenario } from '../../scenario/Scenario'
-import { ScreenGUI } from '../../screen-gui/ScreenGUI'
+import { ScreenGUI } from '../../../scenes/screen-gui/ScreenGUI'
 import toggleInfoMenu from './toggleInfoMenu'
 
-export interface CheckCollisionProps {
+export interface CheckContactProps {
     vector: THREE.Vector3
     delta: number
     characterMesh: THREE.Mesh
     scenario: Scenario
     screenGUI: ScreenGUI
+    onTalk?: (character: CHARACTER) => void
 }
 
-export interface CheckCollision {
+export interface CheckContact {
     hasCollision: boolean
     isInfoMenuOpen: boolean
-    contactWith: CHARACTERS
+    contactWith: CHARACTER | null
 }
 
-export default function checkCollisions({
+export default function checkContact({
     vector,
     delta,
     characterMesh,
     scenario,
     screenGUI,
-}: CheckCollisionProps): CheckCollision {
+    onTalk,
+}: CheckContactProps): CheckContact {
     let originPoint = characterMesh.position.clone()
     const positionAttribute = characterMesh.geometry.getAttribute('position')
     const localVertex = new THREE.Vector3()
     const globalVertex = new THREE.Vector3()
     const nextPosition = characterMesh.position.clone()
     const scenarioColliders = scenario.colliders
-    const princessDialogs = scenario.princessDialogs
+    const dialogBoxes = scenario.characterDialogBoxes
     let hasCollision = false
     let isInfoMenuOpen = false
-    let contactWith: CHARACTERS = CHARACTERS.GHOST
+    let contactWith: CHARACTER | null = null
 
     for (let vertexIndex = 0; vertexIndex < positionAttribute.count; vertexIndex++) {
         localVertex.fromBufferAttribute(positionAttribute, vertexIndex)
@@ -47,13 +49,17 @@ export default function checkCollisions({
         )
         let raycaster = new THREE.Raycaster(originPoint, directionVector.clone().normalize())
         let collisions = raycaster.intersectObjects(scenarioColliders)
-        const characterContacts = [
-            {
-                character: CHARACTERS.PRINCESS,
-                contacts: raycaster.intersectObjects(princessDialogs),
-            },
-        ]
-        const { hasDialogContact, contact } = characterContacts.reduce(
+        const characterContacts = dialogBoxes.map(({ character, dialogBox }) => ({
+            character,
+            contacts: raycaster.intersectObjects(dialogBox),
+        }))
+
+        if (collisions.length > 0 && collisions[0].distance < directionVector.length()) {
+            hasCollision = true
+            break
+        }
+
+        const { hasContact, contact } = characterContacts.reduce(
             (result, { character, contacts }) => {
                 const hasContact = toggleInfoMenu({
                     isInfoMenuOpen,
@@ -61,20 +67,16 @@ export default function checkCollisions({
                     contacts,
                     character,
                     screenGUI,
+                    onTalk,
                 })
 
-                return hasContact ? { hasDialogContact: hasContact, contact: character } : result
+                return hasContact ? { hasContact, contact: character } : result
             },
-            { hasDialogContact: false, contact: CHARACTERS.PRINCESS }
+            { hasContact: false, contact: CHARACTER.GHOST }
         )
 
-        isInfoMenuOpen = hasDialogContact
+        isInfoMenuOpen = hasContact
         contactWith = contact
-
-        if (collisions.length > 0 && collisions[0].distance < directionVector.length()) {
-            hasCollision = true
-            break
-        }
     }
 
     return { hasCollision, isInfoMenuOpen, contactWith }

@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 
-import { createPerspectiveCamera, createRenderer } from './cameras-and-renderer'
+import { createPerspectiveCamera } from './cameras'
+import { createRenderer } from './renderer'
 import { loadScene } from './loaders'
 import { createStats, createControls } from './utils'
 import {
@@ -21,23 +22,22 @@ const bgColor = COLORS.BACKGROUND
 
 const scene = new THREE.Scene()
 const renderer = createRenderer(bgColor)
-const camera = createPerspectiveCamera({ fov: 32, far: 200, x: -35, y: 10, z: -41 })
+const camera = createPerspectiveCamera({ far: 200, x: -35, y: 10, z: -41 })
 const stats = createStats()
 let mixer: THREE.AnimationMixer
 const clock = new THREE.Clock()
-const controls = createControls(camera, renderer)
+const controls = createControls(camera.perspectiveCamera, renderer)
 const screenGUI = createScreenGUI()
-
 createSky(scene)
 const sea = createSea(scene)
 const train = createTrainModel()
 const lighthouse = createLighthouse()
 const scenario = createScenario()
-const ghost = createGhostModel(camera, controls, scenario, screenGUI)
+const ghost = createGhostModel({ camera, controls, scenario, screenGUI })
 const princess = createPrincess()
 
 function render() {
-    renderer.render(scene, camera)
+    renderer.render(scene, camera.perspectiveCamera)
 }
 
 function handleKeyDown(event: KeyboardEvent) {
@@ -49,8 +49,8 @@ function handleKeyUp(event: KeyboardEvent) {
 }
 
 function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight
-    camera.updateProjectionMatrix()
+    camera.perspectiveCamera.aspect = window.innerWidth / window.innerHeight
+    camera.perspectiveCamera.updateProjectionMatrix()
     renderer.setSize(window.innerWidth, window.innerHeight)
     render()
 }
@@ -77,6 +77,7 @@ function update(delta: number) {
     for (let i = 0; i < physicsSteps; i++) {
         ghost.updateControls(delta / physicsSteps)
     }
+    camera.cameraUpdate(delta)
 }
 
 function animateScene() {

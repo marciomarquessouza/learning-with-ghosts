@@ -1,14 +1,16 @@
-import { Scenario } from '../scenario/Scenario'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { Ghost } from './Ghost'
-import { ScreenGUI } from '../screen-gui/ScreenGUI'
-import checkCollisions from './helpers/checkCollision'
+import checkContact, { CheckContact, CheckContactProps } from './helpers/checkContact'
+import { CharacterControlsServices } from '../../scenes/controllers/character-control/CharacterControl'
+
+export interface GhostHelpers {
+    checkContact: (props: CheckContactProps) => CheckContact
+}
+
+export interface GhostServices extends CharacterControlsServices {}
 
 export function createGhostModel(
-    camera: THREE.PerspectiveCamera,
-    controls: OrbitControls,
-    scenario: Scenario,
-    screenGUI: ScreenGUI
+    services: GhostServices,
+    helpers: GhostHelpers = { checkContact }
 ) {
-    return new Ghost(camera, controls, scenario, screenGUI, checkCollisions)
+    return new Ghost(services, helpers)
 }

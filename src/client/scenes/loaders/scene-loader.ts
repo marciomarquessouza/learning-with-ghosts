@@ -26,7 +26,7 @@ export async function loadScene(
 
                         if (mesh.name.includes(MESHES.PRINCESS)) {
                             if (mesh.name.includes(MESHES.PRINCESS_DIALOG)) {
-                                scenario.addPrincessDialog(mesh)
+                                scenario.addPrincessDialogBox(mesh)
                             } else {
                                 princess.addMesh(mesh)
                             }

@@ -1,33 +1,17 @@
 import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
-import { CHARACTERS, PARAMS } from '../../const'
-import CharacterControls from '../character-control/CharacterControl'
-import { Scenario } from '../scenario/Scenario'
-import { ScreenGUI } from '../screen-gui/ScreenGUI'
-import { CheckCollision, CheckCollisionProps } from './helpers/checkCollision'
+import { CHARACTER, DIALOG_MENU, EXPRESSION, PARAMS } from '../../const'
+import { GhostServices, GhostHelpers } from '.'
+import CharacterControls from '../../scenes/controllers/character-control/CharacterControl'
 
 export class Ghost extends CharacterControls {
-    characterMeshes: THREE.Mesh[] = []
-    characterGroup = new THREE.Group()
-    characterArmature: THREE.Object3D | undefined
-    characterMesh = new THREE.Mesh(
-        new THREE.BoxGeometry(2.5, 5, 2.5),
-        new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true, visible: false })
-    )
-    characterVelocity = new THREE.Vector3()
+    geometry = new THREE.BoxGeometry(2.5, 5, 2.5)
+    material = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true, visible: false })
+    characterMesh = new THREE.Mesh(this.geometry, this.material)
     private _levitationAction: THREE.AnimationAction | undefined
-    private _isInfoMenuOpen = false
-    private _hasContactWith: CHARACTERS | null = null
 
-    constructor(
-        camera: THREE.PerspectiveCamera,
-        controls: OrbitControls,
-        scenario: Scenario,
-        screenGUI: ScreenGUI,
-        private checkCollisions: (props: CheckCollisionProps) => CheckCollision
-    ) {
-        super(camera, controls, scenario, screenGUI)
+    constructor(services: GhostServices, private helpers: GhostHelpers) {
+        super(services)
     }
 
     set ghostArmature(armature: THREE.Object3D) {
@@ -57,7 +41,8 @@ export class Ghost extends CharacterControls {
 
     reset() {
         this.characterVelocity.set(0, 0, 0)
-        if (this.characterArmature) this.controls.target.copy(this.characterArmature.position)
+        if (this.characterArmature)
+            this.services.controls.target.copy(this.characterArmature.position)
     }
 
     visible(value: boolean): void {
@@ -70,7 +55,7 @@ export class Ghost extends CharacterControls {
 
     startLevitationAnimation(): void {
         this.visible(true)
-        this._lockCommands = true
+        this._lockCommands = false
         if (this._levitationAction) {
             this._levitationAction.play()
         } else {
@@ -78,17 +63,28 @@ export class Ghost extends CharacterControls {
         }
     }
 
+    talk(character: CHARACTER): void {
+        this.services.screenGUI.closeInfoMenu()
+        this.services.camera.zoomIn()
+        this._lockCommands = true
+        this.services.screenGUI.showDialogMenu({
+            character,
+            expression: DIALOG_MENU[character].expressions[EXPRESSION.HAPPINESS],
+            title: DIALOG_MENU[character].title,
+            text: 'Hello strange!!!',
+            onClose: () => this.stopInteraction(),
+        })
+    }
+
     handleCollision(vector: THREE.Vector3, delta: number): boolean {
-        const { hasCollision, contactWith, isInfoMenuOpen } = this.checkCollisions({
+        const { hasCollision } = this.helpers.checkContact({
             vector,
             delta,
             characterMesh: this.characterMesh,
-            scenario: this.scenario,
-            screenGUI: this.screenGUI,
+            scenario: this.services.scenario,
+            screenGUI: this.services.screenGUI,
+            onTalk: this.talk.bind(this),
         })
-
-        this._hasContactWith = contactWith
-        this._isInfoMenuOpen = isInfoMenuOpen
 
         return hasCollision
     }
@@ -98,14 +94,16 @@ export class Ghost extends CharacterControls {
             throw new Error('Error to load Ghost Model')
         }
 
-        const characterQuaternion = this.characterMesh.quaternion.clone()
-        const hasCollisions = this.handleCollision(vector, delta)
+        if (!this._lockCommands) {
+            const characterQuaternion = this.characterMesh.quaternion.clone()
+            const hasCollisions = this.handleCollision(vector, delta)
 
-        if (!hasCollisions) {
-            characterQuaternion.slerp(quaternion, delta * PARAMS.GHOST_SPEED)
-            this.characterMesh.quaternion.copy(characterQuaternion)
-            this.characterMesh.position.addScaledVector(vector, delta * PARAMS.GHOST_SPEED)
-            this.characterArmature.copy(this.characterMesh)
+            if (!hasCollisions) {
+                characterQuaternion.slerp(quaternion, delta * PARAMS.GHOST_SPEED)
+                this.characterMesh.quaternion.copy(characterQuaternion)
+                this.characterMesh.position.addScaledVector(vector, delta * PARAMS.GHOST_SPEED)
+                this.characterArmature.copy(this.characterMesh)
+            }
         }
     }
 }

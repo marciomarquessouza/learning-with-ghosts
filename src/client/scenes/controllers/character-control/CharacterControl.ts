@@ -1,20 +1,25 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
-import { Scenario } from '../scenario/Scenario'
-import { ScreenGUI } from '../screen-gui/ScreenGUI'
+import { Scenario } from '../../../models/scenario/Scenario'
+import { ScreenGUI } from '../../screen-gui/ScreenGUI'
+import { CHARACTER } from '../../../const'
+import { Camera } from '../../cameras/camera'
 
-export default class CharacterControls {
-    characterMeshes: THREE.Mesh[] = []
-    characterGroup = new THREE.Group()
-    characterArmature: THREE.Object3D | undefined
-    characterMesh = new THREE.Mesh()
-    characterVelocity = new THREE.Vector3()
-    camera: THREE.PerspectiveCamera
+export interface CharacterControlsServices {
+    camera: Camera
     controls: OrbitControls
     scenario: Scenario
     screenGUI: ScreenGUI
-    protected _lockCommands = false
+}
+
+export default class CharacterControls {
+    characterMesh = new THREE.Mesh()
+    characterMeshes: THREE.Mesh[] = []
+    characterGroup = new THREE.Group()
+    characterArmature: THREE.Object3D | undefined
+    characterVelocity = new THREE.Vector3()
+    protected _lockCommands = true
     protected _fwdPressed = false
     protected _bkdPressed = false
     protected _lftPressed = false
@@ -23,18 +28,9 @@ export default class CharacterControls {
     protected _spacePressed = false
     protected _iPressed = false
     protected _mPressed = false
+    protected _pressed = false
 
-    constructor(
-        camera: THREE.PerspectiveCamera,
-        controls: OrbitControls,
-        scenario: Scenario,
-        screenGUI: ScreenGUI
-    ) {
-        this.camera = camera
-        this.controls = controls
-        this.scenario = scenario
-        this.screenGUI = screenGUI
-    }
+    constructor(protected services: CharacterControlsServices) {}
 
     protected setPosition(
         vector: THREE.Vector3,
@@ -72,19 +68,29 @@ export default class CharacterControls {
             case 'KeyI':
                 this._iPressed = keyPressed
                 break
+            case 'Space':
+                this._spacePressed = keyPressed
+                break
         }
     }
 
     onKeyDown(event: KeyboardEvent): void {
-        if (this._lockCommands) {
-            this._setKeyPressed(event, true)
-        }
+        this._setKeyPressed(event, true)
     }
 
     onKeyUp(event: KeyboardEvent): void {
-        if (this._lockCommands) {
-            this._setKeyPressed(event, false)
-        }
+        this._setKeyPressed(event, false)
+        this._pressed = false
+    }
+
+    talk(character: CHARACTER) {
+        throw new Error('You need to implement the talk method')
+    }
+
+    stopInteraction() {
+        this.services.screenGUI.closeActiveMenus()
+        this.services.camera.zoomOut()
+        this._lockCommands = false
     }
 
     updateControls(delta: number): void {
@@ -115,16 +121,28 @@ export default class CharacterControls {
             this.setPosition(new THREE.Vector3(0, 0, 1), quaternion, delta)
         }
 
-        if (this._escPressed) {
-            this.screenGUI.closeActiveMenus()
+        if (this._escPressed && !this._pressed) {
+            this.stopInteraction()
+            this._pressed = true
         }
 
-        if (this._iPressed) {
+        if (this._iPressed && !this._pressed) {
+            this._pressed = true
+        }
+
+        if (this._spacePressed && !this._pressed) {
+            const infoMenu = this.services.screenGUI.isInfoMenuOpenWith()
+
+            if (infoMenu.isOpen && infoMenu.openedWith) {
+                this.talk(infoMenu.openedWith)
+            }
+
+            this._pressed = true
         }
 
         this.characterArmature.updateMatrixWorld()
-        this.camera.position.sub(this.controls.target)
-        this.controls.target.copy(this.characterMesh.position)
-        this.camera.position.add(this.characterMesh.position)
+        this.services.camera.perspectiveCamera.position.sub(this.services.controls.target)
+        this.services.controls.target.copy(this.characterMesh.position)
+        this.services.camera.perspectiveCamera.position.add(this.characterMesh.position)
     }
 }

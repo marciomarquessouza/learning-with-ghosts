@@ -1,7 +1,11 @@
 import ChapterTitle, { ChapterTitleProps } from '../../elements/chapter-title/ChapterTitle'
-import { InfoMenu, InfoMenuProps } from '../../elements/info-menu/InfoMenu'
-import { LiveMenu, LiveMenuProps } from '../../elements/live-menu/LiveMenu'
-import { ELEMENTS, PARAMS } from '../../const'
+import InfoMenu, { InfoMenuProps, INFO_MENU_DEFAULTS } from '../../elements/info-menu/InfoMenu'
+import LiveMenu, { LiveMenuProps } from '../../elements/live-menu/LiveMenu'
+import DialogMenu, {
+    DialogMenuProps,
+    DIALOG_MENU_DEFAULTS,
+} from '../../elements/dialog-menu/DialogMenu'
+import { CHARACTER, ELEMENTS, PARAMS } from '../../const'
 
 export class ScreenGUI {
     private _activeMenus: ELEMENTS[] = []
@@ -43,7 +47,14 @@ export class ScreenGUI {
     public closeInfoMenu() {
         const infoMenu = this.getElement<InfoMenu>(ELEMENTS.INFO_MENU)
         infoMenu.hidden = true
+        infoMenu.props = INFO_MENU_DEFAULTS
         this.removeActiveMenu(ELEMENTS.INFO_MENU)
+    }
+
+    public isInfoMenuOpenWith(): { isOpen: boolean; openedWith: CHARACTER | null } {
+        const infoMenu = this.getElement<InfoMenu>(ELEMENTS.INFO_MENU)
+        const openedWith = infoMenu.props.character
+        return { isOpen: !infoMenu.hidden, openedWith }
     }
 
     public showLiveMenu(props: LiveMenuProps) {
@@ -55,6 +66,20 @@ export class ScreenGUI {
     public setLives(lives: number) {
         const liveMenu = this.getElement<LiveMenu>(ELEMENTS.LIVE_MENU)
         liveMenu.props = { ...liveMenu.props, lives }
+    }
+
+    public showDialogMenu(props: DialogMenuProps) {
+        const dialogMenu = this.getElement<DialogMenu>(ELEMENTS.DIALOG_MENU)
+        dialogMenu.props = props
+        dialogMenu.hidden = false
+        this.addActiveMenu(ELEMENTS.DIALOG_MENU)
+    }
+
+    public closeDialogMenu() {
+        const dialogMenu = this.getElement<DialogMenu>(ELEMENTS.DIALOG_MENU)
+        dialogMenu.props = DIALOG_MENU_DEFAULTS
+        dialogMenu.hidden = true
+        this.removeActiveMenu(ELEMENTS.DIALOG_MENU)
     }
 
     public closeActiveMenus() {
