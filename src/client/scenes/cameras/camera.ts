@@ -1,6 +1,6 @@
 import * as THREE from 'three'
+import { CameraProps } from '.'
 import { PARAMS } from '../../const'
-import { CameraProps } from './create-camera'
 
 export class Camera {
     private _camera: THREE.PerspectiveCamera

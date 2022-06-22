@@ -2,10 +2,13 @@
     "compilerOptions": {
         "experimentalDecorators": true,
         "target": "es6",
+        "module": "esnext",
         "moduleResolution": "node",
+        "resolveJsonModule": true,
         "allowJs": true,
         "strict": true,
-        "useDefineForClassFields": false
+        "useDefineForClassFields": false,
+        "allowSyntheticDefaultImports": true
     },
-    "include": ["**/*.ts", "scenes/utils/animation-folderts"]
+    "include": ["**/*.ts"]
 }

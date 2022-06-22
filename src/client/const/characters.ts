@@ -1,4 +1,3 @@
-import { DialogMenuProps } from '../elements/dialog-menu/DialogMenu'
 import { InfoMenuProps } from '../elements/info-menu/InfoMenu'
 
 export enum CHARACTER {

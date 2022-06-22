@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import { CHARACTER, INFO_MENU } from '../../../const'
-import { ScreenGUI } from '../../../scenes/screen-gui/ScreenGUI'
+import { ScreenGUI } from '../../../services/screen-gui/ScreenGUI'
 
 export interface ToggleInfoMenuProps {
     contacts: THREE.Intersection<THREE.Object3D<THREE.Event>>[]

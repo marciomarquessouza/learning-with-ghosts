@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { CHARACTER, PARAMS } from '../../../const'
 import { Scenario } from '../../scenario/Scenario'
-import { ScreenGUI } from '../../../scenes/screen-gui/ScreenGUI'
+import { ScreenGUI } from '../../../services/screen-gui/ScreenGUI'
 import toggleInfoMenu from './toggleInfoMenu'
 
 export interface CheckContactProps {

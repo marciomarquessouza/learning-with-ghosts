@@ -21,7 +21,3 @@ export class Princess {
         }
     }
 }
-
-export function createPrincess() {
-    return new Princess()
-}

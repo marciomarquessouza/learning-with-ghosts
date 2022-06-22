@@ -35,7 +35,3 @@ export class Train {
         }
     }
 }
-
-export function createTrainModel(): Train {
-    return new Train()
-}

@@ -1,16 +1,16 @@
 import { Ghost } from './Ghost'
-import checkContact, { CheckContact, CheckContactProps } from './helpers/checkContact'
-import { CharacterControlsServices } from '../../scenes/controllers/character-control/CharacterControl'
+import { Services } from '../../services/types'
+import { SceneComponents } from '../../scenes/types'
+import { Models } from '../types'
 
-export interface GhostHelpers {
-    checkContact: (props: CheckContactProps) => CheckContact
+export interface GhostProps {
+    services: Services
+    sceneComponents: SceneComponents
+    models: Models
 }
 
-export interface GhostServices extends CharacterControlsServices {}
-
-export function createGhostModel(
-    services: GhostServices,
-    helpers: GhostHelpers = { checkContact }
-) {
-    return new Ghost(services, helpers)
+function createGhost({ services, sceneComponents, models }: GhostProps) {
+    return new Ghost(services, sceneComponents, models)
 }
+
+export { Ghost, createGhost }

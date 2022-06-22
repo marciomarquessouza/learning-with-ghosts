@@ -16,7 +16,3 @@ export class Lighthouse {
         }
     }
 }
-
-export function createLighthouse() {
-    return new Lighthouse()
-}

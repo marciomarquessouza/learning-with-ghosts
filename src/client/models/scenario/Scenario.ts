@@ -48,7 +48,3 @@ export class Scenario {
         return this._characterDialogBoxes
     }
 }
-
-export function createScenario() {
-    return new Scenario()
-}

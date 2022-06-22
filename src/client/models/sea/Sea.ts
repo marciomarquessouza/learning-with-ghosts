@@ -40,7 +40,3 @@ export class Sea {
         }
     }
 }
-
-export function createSea(scene: THREE.Scene) {
-    return new Sea(scene)
-}

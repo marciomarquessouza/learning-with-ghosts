@@ -1,43 +1,31 @@
 import * as THREE from 'three'
 
-import { createPerspectiveCamera } from './cameras'
 import { createRenderer } from './renderer'
-import { loadScene } from './loaders'
-import { createStats, createControls } from './utils'
-import {
-    createGhostModel,
-    createPrincess,
-    createLighthouse,
-    createScenario,
-    createTrainModel,
-    createSky,
-    SceneModels,
-    createSea,
-    createScreenGUI,
-} from '../models'
-import { createEndAnimationsTrigger } from './animations/trigger-end-animations'
+import { loadScene } from './helpers/loaders'
+import { createGhost, createModels } from '../models'
+import { createEndAnimationsTrigger } from './helpers/animations/trigger-end-animations'
 import { PARAMS, COLORS } from '../const'
+import { sceneInitiation } from './helpers/scene-initiation/sceneInitiation'
+import { createSceneComponents } from './factory/sceneComponentsFactory'
+import { createServices } from '../services/factory/servicesFactory'
+import { createUtils } from '../utils/factory/utilsFactory'
 
 const bgColor = COLORS.BACKGROUND
+let mixer: THREE.AnimationMixer
 
 const scene = new THREE.Scene()
 const renderer = createRenderer(bgColor)
-const camera = createPerspectiveCamera({ far: 200, x: -35, y: 10, z: -41 })
-const stats = createStats()
-let mixer: THREE.AnimationMixer
 const clock = new THREE.Clock()
-const controls = createControls(camera.perspectiveCamera, renderer)
-const screenGUI = createScreenGUI()
-createSky(scene)
-const sea = createSea(scene)
-const train = createTrainModel()
-const lighthouse = createLighthouse()
-const scenario = createScenario()
-const ghost = createGhostModel({ camera, controls, scenario, screenGUI })
-const princess = createPrincess()
+
+const utils = createUtils()
+const models = createModels(scene)
+const services = createServices(utils)
+const sceneComponents = createSceneComponents(renderer)
+
+const ghost = createGhost({ services, models, sceneComponents })
 
 function render() {
-    renderer.render(scene, camera.perspectiveCamera)
+    renderer.render(scene, sceneComponents.camera.perspectiveCamera)
 }
 
 function handleKeyDown(event: KeyboardEvent) {
@@ -49,27 +37,10 @@ function handleKeyUp(event: KeyboardEvent) {
 }
 
 function onWindowResize() {
-    camera.perspectiveCamera.aspect = window.innerWidth / window.innerHeight
-    camera.perspectiveCamera.updateProjectionMatrix()
+    sceneComponents.camera.perspectiveCamera.aspect = window.innerWidth / window.innerHeight
+    sceneComponents.camera.perspectiveCamera.updateProjectionMatrix()
     renderer.setSize(window.innerWidth, window.innerHeight)
     render()
-}
-
-function gameInitiation() {
-    train.startArrivalAnimation()
-    lighthouse.startBulbAnimation()
-    princess.startLevitationAnimation()
-    screenGUI.showChapterTitle({
-        title: 'WELCOME TO GHOST TOWN',
-        subtitle: 'LEARNING HOW TO GREETING FRIENDS, STRANGERS AND FREAKS ',
-        chapterNumber: 1,
-    })
-    screenGUI.showLiveMenu({
-        lives: PARAMS.INITIAL_LIVES,
-        day: 1,
-        chapterNumber: 1,
-        chapterName: 'Greetings',
-    })
 }
 
 function update(delta: number) {
@@ -77,31 +48,30 @@ function update(delta: number) {
     for (let i = 0; i < physicsSteps; i++) {
         ghost.updateControls(delta / physicsSteps)
     }
-    camera.cameraUpdate(delta)
+    sceneComponents.camera.cameraUpdate(delta)
 }
 
 function animateScene() {
     const delta = Math.min(clock.getDelta(), 0.1)
     requestAnimationFrame(animateScene)
-    controls.update()
+    sceneComponents.controls.update()
     mixer.update(delta)
     render()
-    stats.update()
-    sea.update(clock.getElapsedTime())
+    utils.sceneStats.update()
+    models.sea.update(clock.getElapsedTime())
     update(delta)
 }
 
 export async function createMainScene() {
     ghost.reset()
-    const models: SceneModels = { ghost, princess, train, lighthouse, scenario }
-    const animationMixer = await loadScene(scene, models)
+    const animationMixer = await loadScene(scene, models, ghost)
     if (animationMixer) {
         mixer = animationMixer
-        mixer.addEventListener('finished', createEndAnimationsTrigger(models))
+        mixer.addEventListener('finished', createEndAnimationsTrigger(models, ghost))
         window.addEventListener('keydown', handleKeyDown, false)
         window.addEventListener('keyup', handleKeyUp, false)
         window.addEventListener('resize', onWindowResize, false)
-        gameInitiation()
+        await sceneInitiation({ models, services, utils })
         animateScene()
     }
 

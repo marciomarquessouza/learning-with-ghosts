@@ -1,8 +1,11 @@
 import * as THREE from 'three'
 
 import { CHARACTER, DIALOG_MENU, EXPRESSION, PARAMS } from '../../const'
-import { GhostServices, GhostHelpers } from '.'
-import CharacterControls from '../../scenes/controllers/character-control/CharacterControl'
+import { Services } from '../../services/types'
+import { SceneComponents } from '../../scenes/types'
+import { Models } from '../types'
+import CharacterControls from '../controllers/character-control/CharacterControls'
+import Helpers from './helpers'
 
 export class Ghost extends CharacterControls {
     geometry = new THREE.BoxGeometry(2.5, 5, 2.5)
@@ -10,8 +13,13 @@ export class Ghost extends CharacterControls {
     characterMesh = new THREE.Mesh(this.geometry, this.material)
     private _levitationAction: THREE.AnimationAction | undefined
 
-    constructor(services: GhostServices, private helpers: GhostHelpers) {
-        super(services)
+    constructor(
+        services: Services,
+        sceneComponents: SceneComponents,
+        private models: Models,
+        private helpers = Helpers
+    ) {
+        super(services, sceneComponents)
     }
 
     set ghostArmature(armature: THREE.Object3D) {
@@ -42,7 +50,7 @@ export class Ghost extends CharacterControls {
     reset() {
         this.characterVelocity.set(0, 0, 0)
         if (this.characterArmature)
-            this.services.controls.target.copy(this.characterArmature.position)
+            this.sceneComponents.controls.target.copy(this.characterArmature.position)
     }
 
     visible(value: boolean): void {
@@ -65,15 +73,18 @@ export class Ghost extends CharacterControls {
 
     talk(character: CHARACTER): void {
         this.services.screenGUI.closeInfoMenu()
-        this.services.camera.zoomIn()
+        this.sceneComponents.camera.zoomIn()
         this._lockCommands = true
-        this.services.screenGUI.showDialogMenu({
-            character,
-            expression: DIALOG_MENU[character].expressions[EXPRESSION.HAPPINESS],
-            title: DIALOG_MENU[character].title,
-            text: 'Hello strange!!!',
-            onClose: () => this.stopInteraction(),
-        })
+        const nextInteraction = () => {
+            this.services.screenGUI.showDialogMenu({
+                character,
+                expression: DIALOG_MENU[character].expressions[EXPRESSION.HAPPINESS],
+                title: DIALOG_MENU[character].title,
+                text: 'Hello strange!!!',
+                onClose: () => this.stopInteraction(),
+            })
+            nextInteraction()
+        }
     }
 
     handleCollision(vector: THREE.Vector3, delta: number): boolean {
@@ -81,7 +92,7 @@ export class Ghost extends CharacterControls {
             vector,
             delta,
             characterMesh: this.characterMesh,
-            scenario: this.services.scenario,
+            scenario: this.models.scenario,
             screenGUI: this.services.screenGUI,
             onTalk: this.talk.bind(this),
         })

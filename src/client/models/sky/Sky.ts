@@ -22,7 +22,3 @@ export class Sky {
         return new THREE.Points(particleGeometry, material)
     }
 }
-
-export function createSky(scene: THREE.Scene): Sky {
-    return new Sky(scene)
-}

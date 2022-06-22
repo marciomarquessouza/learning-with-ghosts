@@ -5,7 +5,7 @@ import { ELEMENTS } from '../../const'
 export interface ChapterTitleProps {
     title: string
     subtitle: string
-    chapterNumber: number
+    chapterNumber: string
 }
 
 @customElement(ELEMENTS.CHAPTER_TITLE)
@@ -14,7 +14,7 @@ export default class ChapterTitle extends LitElement {
     props: ChapterTitleProps = {
         title: '',
         subtitle: '',
-        chapterNumber: 1,
+        chapterNumber: '01',
     }
 
     createRenderRoot() {
