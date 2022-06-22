@@ -1,17 +1,12 @@
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { ANIMATIONS, ARMATURES, MESHES } from '../../../const'
-import { Ghost } from '../../../models'
 import { Models } from '../../../models/types'
 import { loadLight } from './loadLight'
 
-export async function loadScene(
-    scene: THREE.Scene,
-    models: Models,
-    ghost: Ghost
-): Promise<THREE.AnimationMixer> {
+export async function loadScene(scene: THREE.Scene, models: Models): Promise<THREE.AnimationMixer> {
     const loader = new GLTFLoader()
-    const { princess, train, lighthouse, scenario } = models
+    const { princess, train, lighthouse, scenario, ghost } = models
     return new Promise((resolve, reject) => {
         loader.load(
             'models/learning-with-ghosts.glb',

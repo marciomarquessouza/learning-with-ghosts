@@ -1,20 +1,19 @@
 import * as THREE from 'three'
 
 import { CHARACTER } from '../../../const'
-import KeyboardControls from '../keyboard-control/KeyboardControls'
 import { Services } from '../../../services/types'
 import { SceneComponents } from '../../../scenes/types'
+import { KeyboardInputs } from '../keyboard-inputs/KeyboardInputs'
+import { PlayerMesh } from '../../../models/types'
 
-export interface CharacterControlsProps {}
+export class PlayerControls extends KeyboardInputs {
+    protected _characterVelocity = new THREE.Vector3()
 
-export default class CharacterControls extends KeyboardControls {
-    characterMesh = new THREE.Mesh()
-    characterMeshes: THREE.Mesh[] = []
-    characterGroup = new THREE.Group()
-    characterArmature: THREE.Object3D | undefined
-    characterVelocity = new THREE.Vector3()
-
-    constructor(protected services: Services, protected sceneComponents: SceneComponents) {
+    constructor(
+        protected services: Services,
+        protected sceneComponents: SceneComponents,
+        protected player: PlayerMesh
+    ) {
         super()
     }
 
@@ -30,23 +29,23 @@ export default class CharacterControls extends KeyboardControls {
         throw new Error('You need to implement the _setPosition method')
     }
 
-    talk(character: CHARACTER) {
+    interaction(character: CHARACTER) {
         throw new Error('You need to implement the talk method')
     }
 
     stopInteraction() {
         this.services.screenGUI.closeActiveMenus()
         this.sceneComponents.camera.zoomOut()
-        this._lockCommands = false
+        this.player.isLocked = false
     }
 
     updateControls(delta: number): void {
-        if (!this.characterArmature) {
+        if (!this.player.characterArmature) {
             throw new Error('Error loading Ghost Model')
         }
 
         const quaternion = new THREE.Quaternion()
-        this.characterMesh.position.addScaledVector(this.characterVelocity, delta)
+        this.player.characterMesh.position.addScaledVector(this._characterVelocity, delta)
 
         if (this._fwdPressed) {
             quaternion.setFromAxisAngle(new THREE.Vector3(0, 1, 0), Math.PI)
@@ -81,17 +80,19 @@ export default class CharacterControls extends KeyboardControls {
             const infoMenu = this.services.screenGUI.isInfoMenuOpenWith()
 
             if (infoMenu.isOpen && infoMenu.openedWith) {
-                this.talk(infoMenu.openedWith)
+                this.interaction(infoMenu.openedWith)
             }
 
             this._pressed = true
         }
 
-        this.characterArmature.updateMatrixWorld()
+        this.player.characterArmature.updateMatrixWorld()
         this.sceneComponents.camera.perspectiveCamera.position.sub(
             this.sceneComponents.controls.target
         )
-        this.sceneComponents.controls.target.copy(this.characterMesh.position)
-        this.sceneComponents.camera.perspectiveCamera.position.add(this.characterMesh.position)
+        this.sceneComponents.controls.target.copy(this.player.characterMesh.position)
+        this.sceneComponents.camera.perspectiveCamera.position.add(
+            this.player.characterMesh.position
+        )
     }
 }

@@ -1,29 +1,46 @@
 import * as THREE from 'three'
+import { PlayerMesh } from '../types'
 
-import { CHARACTER, DIALOG_MENU, EXPRESSION, PARAMS } from '../../const'
-import { Services } from '../../services/types'
-import { SceneComponents } from '../../scenes/types'
-import { Models } from '../types'
-import CharacterControls from '../controllers/character-control/CharacterControls'
-import Helpers from './helpers'
-
-export class Ghost extends CharacterControls {
-    geometry = new THREE.BoxGeometry(2.5, 5, 2.5)
-    material = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true, visible: false })
-    characterMesh = new THREE.Mesh(this.geometry, this.material)
+export class Ghost implements PlayerMesh {
+    private _geometry = new THREE.BoxGeometry(2.5, 5, 2.5)
+    private _material = new THREE.MeshBasicMaterial({
+        color: 0x00ff00,
+        wireframe: true,
+        visible: false,
+    })
+    private _characterMesh = new THREE.Mesh(this._geometry, this._material)
+    private _characterMeshes: THREE.Mesh[] = []
+    private _characterGroup = new THREE.Group()
+    private _characterArmature = new THREE.Object3D()
+    private _isLocked = true
     private _levitationAction: THREE.AnimationAction | undefined
 
-    constructor(
-        services: Services,
-        sceneComponents: SceneComponents,
-        private models: Models,
-        private helpers = Helpers
-    ) {
-        super(services, sceneComponents)
+    get characterMesh(): THREE.Mesh<THREE.BufferGeometry, THREE.Material | THREE.Material[]> {
+        return this._characterMesh
+    }
+
+    get characterMeshes(): THREE.Mesh<THREE.BufferGeometry, THREE.Material | THREE.Material[]>[] {
+        return this._characterMeshes
+    }
+
+    get characterGroup(): THREE.Group {
+        return this._characterGroup
+    }
+
+    get characterArmature(): THREE.Object3D<THREE.Event> {
+        return this._characterArmature
+    }
+
+    set isLocked(value: boolean) {
+        this._isLocked = value
+    }
+
+    get isLocked(): boolean {
+        return this._isLocked
     }
 
     set ghostArmature(armature: THREE.Object3D) {
-        this.characterArmature = armature
+        this._characterArmature = armature
     }
 
     set levitationAction(animationAction: THREE.AnimationAction) {
@@ -32,25 +49,19 @@ export class Ghost extends CharacterControls {
 
     addMesh(mesh: THREE.Mesh) {
         mesh.frustumCulled = false
-        this.characterMeshes.push(mesh)
+        this._characterMeshes.push(mesh)
     }
 
     init(scene: THREE.Scene) {
-        scene.add(this.characterGroup)
-        this.characterMeshes.forEach((mesh) => {
-            this.characterGroup.add(mesh)
+        scene.add(this._characterGroup)
+        this._characterMeshes.forEach((mesh) => {
+            this._characterGroup.add(mesh)
         })
-        this.characterArmature?.position.set(0, 4, -16)
+        this._characterArmature?.position.set(0, 4, -16)
         this.visible(false)
 
-        this.characterMesh.position.set(0, 4, -16)
-        scene.add(this.characterMesh)
-    }
-
-    reset() {
-        this.characterVelocity.set(0, 0, 0)
-        if (this.characterArmature)
-            this.sceneComponents.controls.target.copy(this.characterArmature.position)
+        this._characterMesh.position.set(0, 4, -16)
+        scene.add(this._characterMesh)
     }
 
     visible(value: boolean): void {
@@ -62,59 +73,12 @@ export class Ghost extends CharacterControls {
     }
 
     startLevitationAnimation(): void {
+        this.isLocked = false
         this.visible(true)
-        this._lockCommands = false
         if (this._levitationAction) {
             this._levitationAction.play()
         } else {
             console.error('Ghost Levitation Action was not loaded properly')
-        }
-    }
-
-    talk(character: CHARACTER): void {
-        this.services.screenGUI.closeInfoMenu()
-        this.sceneComponents.camera.zoomIn()
-        this._lockCommands = true
-        const nextInteraction = () => {
-            this.services.screenGUI.showDialogMenu({
-                character,
-                expression: DIALOG_MENU[character].expressions[EXPRESSION.HAPPINESS],
-                title: DIALOG_MENU[character].title,
-                text: 'Hello strange!!!',
-                onClose: () => this.stopInteraction(),
-            })
-            nextInteraction()
-        }
-    }
-
-    handleCollision(vector: THREE.Vector3, delta: number): boolean {
-        const { hasCollision } = this.helpers.checkContact({
-            vector,
-            delta,
-            characterMesh: this.characterMesh,
-            scenario: this.models.scenario,
-            screenGUI: this.services.screenGUI,
-            onTalk: this.talk.bind(this),
-        })
-
-        return hasCollision
-    }
-
-    setPosition(vector: THREE.Vector3, quaternion: THREE.Quaternion, delta: number): void {
-        if (!this.characterArmature) {
-            throw new Error('Error to load Ghost Model')
-        }
-
-        if (!this._lockCommands) {
-            const characterQuaternion = this.characterMesh.quaternion.clone()
-            const hasCollisions = this.handleCollision(vector, delta)
-
-            if (!hasCollisions) {
-                characterQuaternion.slerp(quaternion, delta * PARAMS.GHOST_SPEED)
-                this.characterMesh.quaternion.copy(characterQuaternion)
-                this.characterMesh.position.addScaledVector(vector, delta * PARAMS.GHOST_SPEED)
-                this.characterArmature.copy(this.characterMesh)
-            }
         }
     }
 }

@@ -1,5 +1,4 @@
-export default class KeyboardControls {
-    protected _lockCommands = true
+export class KeyboardInputs {
     protected _fwdPressed = false
     protected _bkdPressed = false
     protected _lftPressed = false
@@ -40,11 +39,11 @@ export default class KeyboardControls {
         }
     }
 
-    onKeyDown(event: KeyboardEvent): void {
+    public onKeyDown(event: KeyboardEvent): void {
         this._setKeyPressed(event, true)
     }
 
-    onKeyUp(event: KeyboardEvent): void {
+    public onKeyUp(event: KeyboardEvent): void {
         this._setKeyPressed(event, false)
         this._pressed = false
     }

@@ -2,13 +2,14 @@ import * as THREE from 'three'
 
 import { createRenderer } from './renderer'
 import { loadScene } from './helpers/loaders'
-import { createGhost, createModels } from '../models'
+import { createModels } from '../models'
 import { createEndAnimationsTrigger } from './helpers/animations/trigger-end-animations'
 import { PARAMS, COLORS } from '../const'
 import { sceneInitiation } from './helpers/scene-initiation/sceneInitiation'
 import { createSceneComponents } from './factory/sceneComponentsFactory'
 import { createServices } from '../services/factory/servicesFactory'
 import { createUtils } from '../utils/factory/utilsFactory'
+import { createPlayer } from '../player'
 
 const bgColor = COLORS.BACKGROUND
 let mixer: THREE.AnimationMixer
@@ -22,18 +23,18 @@ const models = createModels(scene)
 const services = createServices(utils)
 const sceneComponents = createSceneComponents(renderer)
 
-const ghost = createGhost({ services, models, sceneComponents })
+const player = createPlayer({ services, sceneComponents, models })
 
 function render() {
     renderer.render(scene, sceneComponents.camera.perspectiveCamera)
 }
 
 function handleKeyDown(event: KeyboardEvent) {
-    ghost.onKeyDown(event)
+    player.onKeyDown(event)
 }
 
 function handleKeyUp(event: KeyboardEvent) {
-    ghost.onKeyUp(event)
+    player.onKeyUp(event)
 }
 
 function onWindowResize() {
@@ -46,7 +47,7 @@ function onWindowResize() {
 function update(delta: number) {
     const physicsSteps = PARAMS.PHYSICS_STEPS
     for (let i = 0; i < physicsSteps; i++) {
-        ghost.updateControls(delta / physicsSteps)
+        player.updateControls(delta / physicsSteps)
     }
     sceneComponents.camera.cameraUpdate(delta)
 }
@@ -63,11 +64,11 @@ function animateScene() {
 }
 
 export async function createMainScene() {
-    ghost.reset()
-    const animationMixer = await loadScene(scene, models, ghost)
+    player.reset()
+    const animationMixer = await loadScene(scene, models)
     if (animationMixer) {
         mixer = animationMixer
-        mixer.addEventListener('finished', createEndAnimationsTrigger(models, ghost))
+        mixer.addEventListener('finished', createEndAnimationsTrigger(models))
         window.addEventListener('keydown', handleKeyDown, false)
         window.addEventListener('keyup', handleKeyUp, false)
         window.addEventListener('resize', onWindowResize, false)
