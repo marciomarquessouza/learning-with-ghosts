@@ -4,23 +4,22 @@ import { createRenderer } from './renderer'
 import { loadScene } from './helpers/loaders'
 import { createModels } from '../models'
 import { createEndAnimationsTrigger } from './helpers/animations/trigger-end-animations'
-import { PARAMS, COLORS } from '../const'
+import { PARAMS } from '../const'
 import { sceneInitiation } from './helpers/scene-initiation/sceneInitiation'
 import { createSceneComponents } from './factory/sceneComponentsFactory'
 import { createServices } from '../services/factory/servicesFactory'
 import { createUtils } from '../utils/factory/utilsFactory'
 import { createPlayer } from '../player'
 
-const bgColor = COLORS.BACKGROUND
 let mixer: THREE.AnimationMixer
 
 const scene = new THREE.Scene()
-const renderer = createRenderer(bgColor)
+const renderer = createRenderer()
 const clock = new THREE.Clock()
 
 const utils = createUtils()
 const models = createModels(scene)
-const services = createServices(utils)
+const services = createServices()
 const sceneComponents = createSceneComponents(renderer)
 
 const player = createPlayer({ services, sceneComponents, models })
@@ -72,7 +71,7 @@ export async function createMainScene() {
         window.addEventListener('keydown', handleKeyDown, false)
         window.addEventListener('keyup', handleKeyUp, false)
         window.addEventListener('resize', onWindowResize, false)
-        await sceneInitiation({ models, services, utils })
+        await sceneInitiation({ models, services })
         animateScene()
     }
 

@@ -1,5 +1,14 @@
 {
-    "cSpell.words": ["glsl", "gltf", "Josefin", "krampus", "Looooading", "Raycaster", "wireframe"],
+    "cSpell.words": [
+        "Amatic",
+        "glsl",
+        "gltf",
+        "Josefin",
+        "krampus",
+        "Looooading",
+        "Raycaster",
+        "wireframe"
+    ],
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "[javascript]": {

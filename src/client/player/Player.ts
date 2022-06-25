@@ -1,72 +1,86 @@
-import { CHARACTER, DIALOG_MENU, EXPRESSION, PARAMS } from '../const'
+import { CHARACTER, DIALOG_MENU, PARAMS } from '../const'
 import { Models } from '../models/types'
 import { SceneComponents } from '../scenes/types'
+import { InteractionType } from '../services/interactions/types'
 import { Services } from '../services/types'
 import { PlayerControls } from './controls'
 import Helpers from './helpers'
 
 export class Player extends PlayerControls {
+    private _interactionGenerator: Generator<InteractionType, void, unknown> | null = null
     constructor(
         services: Services,
         sceneComponents: SceneComponents,
         private models: Models,
         private helpers = Helpers
     ) {
-        const player = models.ghost
-        super(services, sceneComponents, player)
+        const playerMesh = models.ghost
+        super(services, sceneComponents, playerMesh)
     }
 
     reset() {
         this._characterVelocity.set(0, 0, 0)
-        this.sceneComponents.controls.target.copy(this.player.characterArmature.position)
+        this.sceneComponents.controls.target.copy(this.playerMesh.characterArmature.position)
     }
 
-    interaction(character: CHARACTER): void {
+    nextInteraction() {
+        if (!this._interactionGenerator) {
+            throw new Error('error to load interaction generator')
+        }
+        const interactionGenerator = this._interactionGenerator
+        const interactionData = interactionGenerator.next().value
+        if (!interactionData) {
+            return this.stopInteraction()
+        }
+        const { expression, text, from: character } = interactionData
+        this.services.screenGUI.showDialogMenu({
+            character,
+            expression,
+            text,
+            onClose: this.stopInteraction,
+            onNext: this.nextInteraction,
+        })
+    }
+
+    startInteraction(character: CHARACTER): void {
+        this._isInInteraction = true
         this.services.screenGUI.closeInfoMenu()
         this.sceneComponents.camera.zoomIn()
-        this.player.isLocked = true
-        const nextInteraction = () => {
-            this.services.screenGUI.showDialogMenu({
-                character,
-                expression: DIALOG_MENU[character].expressions[EXPRESSION.HAPPINESS],
-                title: DIALOG_MENU[character].title,
-                text: 'Hello strange!!!',
-                onClose: () => this.stopInteraction(),
-            })
-            nextInteraction()
-        }
+        this.playerMesh.isLocked = true
+        this._interactionGenerator = this.services.interactions.getInteractions(character)
+        this.nextInteraction()
     }
 
     handleCollision(vector: THREE.Vector3, delta: number): boolean {
         const { hasCollision } = this.helpers.checkContact({
             vector,
             delta,
-            characterMesh: this.player.characterMesh,
+            characterMesh: this.playerMesh.characterMesh,
             scenario: this.models.scenario,
             screenGUI: this.services.screenGUI,
-            onTalk: this.interaction.bind(this),
+            onTalk: this.startInteraction.bind(this),
         })
 
         return hasCollision
     }
 
     setPosition(vector: THREE.Vector3, quaternion: THREE.Quaternion, delta: number): void {
-        if (!this.player.characterArmature) {
+        if (!this.playerMesh.characterArmature) {
             throw new Error('Error to load Ghost Model')
         }
 
-        if (!this.player.isLocked) {
-            const characterQuaternion = this.player.characterMesh.quaternion.clone()
+        if (!this.playerMesh.isLocked) {
+            const characterQuaternion = this.playerMesh.characterMesh.quaternion.clone()
             const hasCollisions = this.handleCollision(vector, delta)
 
             if (!hasCollisions) {
                 characterQuaternion.slerp(quaternion, delta * PARAMS.GHOST_SPEED)
-                this.player.characterMesh.quaternion.copy(characterQuaternion)
-                this.player.characterMesh.position.addScaledVector(
+                this.playerMesh.characterMesh.quaternion.copy(characterQuaternion)
+                this.playerMesh.characterMesh.position.addScaledVector(
                     vector,
                     delta * PARAMS.GHOST_SPEED
                 )
-                this.player.characterArmature.copy(this.player.characterMesh)
+                this.playerMesh.characterArmature.copy(this.playerMesh.characterMesh)
             }
         }
     }

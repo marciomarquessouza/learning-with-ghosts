@@ -1,8 +1,9 @@
 import * as THREE from 'three'
+import { COLORS } from '../../const'
 
-export function createRenderer(bgColor: number) {
+export function createRenderer() {
     const renderer = new THREE.WebGL1Renderer({ antialias: true })
-    renderer.setClearColor(bgColor, 1)
+    renderer.setClearColor(COLORS.BACKGROUND, 1)
     renderer.setPixelRatio(window.devicePixelRatio)
     renderer.physicallyCorrectLights = true
     renderer.setSize(window.innerWidth, window.innerHeight)

@@ -17,6 +17,7 @@ export const INFO_MENU: { [key: string]: InfoMenuProps } = {
 }
 
 export enum EXPRESSION {
+    NORMAL = 'normal',
     HAPPINESS = 'happiness',
     ANGER = 'anger',
     SADNESS = 'sadness',
@@ -28,7 +29,8 @@ export const DIALOG_MENU = {
     [CHARACTER.GHOST]: {
         title: 'FOREIGN GHOST',
         expressions: {
-            [EXPRESSION.HAPPINESS]: '',
+            [EXPRESSION.NORMAL]: '',
+            [EXPRESSION.HAPPINESS]: '/img/ghost/expression-happiness.png',
             [EXPRESSION.ANGER]: '',
             [EXPRESSION.SADNESS]: '',
             [EXPRESSION.SURPRISE]: '',
@@ -38,6 +40,7 @@ export const DIALOG_MENU = {
     [CHARACTER.PRINCESS]: {
         title: 'LIGHTHOUSE PRINCESS',
         expressions: {
+            [EXPRESSION.NORMAL]: '',
             [EXPRESSION.HAPPINESS]: '/img/princess/expression-happiness.png',
             [EXPRESSION.ANGER]: '',
             [EXPRESSION.SADNESS]: '',
@@ -48,6 +51,7 @@ export const DIALOG_MENU = {
     [CHARACTER.REAPER]: {
         title: 'TBD',
         expressions: {
+            [EXPRESSION.NORMAL]: '',
             [EXPRESSION.HAPPINESS]: '',
             [EXPRESSION.ANGER]: '',
             [EXPRESSION.SADNESS]: '',
@@ -58,6 +62,7 @@ export const DIALOG_MENU = {
     [CHARACTER.WITCH]: {
         title: 'TBD',
         expressions: {
+            [EXPRESSION.NORMAL]: '',
             [EXPRESSION.HAPPINESS]: '',
             [EXPRESSION.ANGER]: '',
             [EXPRESSION.SADNESS]: '',
@@ -68,6 +73,7 @@ export const DIALOG_MENU = {
     [CHARACTER.KRAMPUS]: {
         title: 'TBD',
         expressions: {
+            [EXPRESSION.NORMAL]: '',
             [EXPRESSION.HAPPINESS]: '',
             [EXPRESSION.ANGER]: '',
             [EXPRESSION.SADNESS]: '',

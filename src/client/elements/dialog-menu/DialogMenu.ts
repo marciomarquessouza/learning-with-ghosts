@@ -1,23 +1,24 @@
 import { LitElement, html } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 
-import { CHARACTER, ELEMENTS } from '../../const'
+import { CHARACTER, DIALOG_MENU, ELEMENTS, EXPRESSION } from '../../const'
 import getDialogMenuStylesByCharacter from './utils/getDialogMenuStylesByCharacter'
 
 export interface DialogMenuProps {
     character: CHARACTER | null
-    expression: string
-    title: string
+    expression: EXPRESSION
+    title?: string
     text: string
     onClose: () => void
+    onNext: () => void
 }
 
 export const DIALOG_MENU_DEFAULTS: DialogMenuProps = {
     character: null,
-    expression: '',
-    title: '',
+    expression: EXPRESSION.NORMAL,
     text: '',
     onClose: () => undefined,
+    onNext: () => undefined,
 }
 
 @customElement(ELEMENTS.DIALOG_MENU)
@@ -37,6 +38,8 @@ export default class DialogMenu extends LitElement {
         }
 
         const styles = getDialogMenuStylesByCharacter(character)
+        const expressionImg = DIALOG_MENU[character].expressions[expression]
+        const dialogTitle = title || DIALOG_MENU[character].title
 
         return html`
             <div
@@ -56,7 +59,7 @@ export default class DialogMenu extends LitElement {
                             <div class="flex items-center space-x-4">
                                 <div class="flex-shrink-0 m-2 px-2">
                                     <img
-                                        src="${expression}"
+                                        src="${expressionImg}"
                                         class="rounded-full h-28 w-28 border-4 border-${styles.color}"
                                     />
                                 </div>
@@ -64,11 +67,11 @@ export default class DialogMenu extends LitElement {
                                     <p
                                         class="font-josefin font-bold text-lg text-${styles.color} uppercase"
                                     >
-                                        ${title}
+                                        ${dialogTitle}
                                     </p>
                                     <div class="flex flex-row mt-1">
                                         <p
-                                            class="${styles.font} text-5xl text-${styles.color} ml-1 mt-1"
+                                            class="${styles.font} text-5xl text-${styles.textColor} ml-1 mt-1"
                                         >
                                             ${text}
                                         </p>
@@ -76,10 +79,10 @@ export default class DialogMenu extends LitElement {
                                 </div>
                                 <div class="mb-16">
                                     <button
-                                        @click="${() => undefined}"
-                                        class="items-start font-josefin font-normal text-sm text-${styles.color} bg-transparent hover:text-${styles.color} focus:outline-none  active:outline-none"
+                                        @click="${this.props.onNext}"
+                                        class="items-start font-josefin font-normal text-sm text-${styles.nextColor} bg-transparent hover:text-${styles.nextColor} focus:outline-none  active:outline-none"
                                     >
-                                        Next [SPACE]
+                                        NEXT [SPACE]
                                     </button>
                                 </div>
                                 <div></div>

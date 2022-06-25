@@ -2,6 +2,7 @@ import { CHARACTER } from '../../const'
 import { InteractionType } from '../interactions/types'
 
 export interface ChapterData {
+    chapterNumber: string
     title: string
     subtitle: string
     shortTitle: string

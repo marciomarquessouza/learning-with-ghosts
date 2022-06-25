@@ -1,25 +1,28 @@
 import { LANGUAGES, PARAMS } from '../../../const'
 import { Models } from '../../../models/types'
 import { Services } from '../../../services/types'
+import { createUtils } from '../../../utils/factory/utilsFactory'
 import { Utils } from '../../../utils/types'
 
 export interface SceneInitiationProps {
     models: Models
     services: Services
-    utils: Utils
+    utils?: Utils
 }
 
 export async function sceneInitiation({
     models,
     services,
-    utils,
+    utils = createUtils(),
 }: SceneInitiationProps): Promise<void> {
     const { train, lighthouse, princess } = models
     const { screenGUI, levels } = services
     const { storage } = utils
 
     const chapter = '01'
-    const { title, subtitle, shortTitle: chapterName } = await levels.fetchChapter(chapter)
+    const currentChapterData = await levels.fetchChapter(chapter)
+    const { title, subtitle, shortTitle: chapterName } = currentChapterData
+    services.interactions.loadChapterDialogs(currentChapterData)
     train.startArrivalAnimation()
     lighthouse.startBulbAnimation()
     princess.startLevitationAnimation()

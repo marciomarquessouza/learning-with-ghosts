@@ -24,6 +24,7 @@ module.exports = {
             fontFamily: {
                 josefin: ['Josefin Sans', 'sans-serif'],
                 princess: ['Square Peg', 'cursive'],
+                ghost: ['Amatic SC', 'cursive'],
             },
             keyframes: {
                 'progress-bar-keys': {

@@ -3,6 +3,8 @@ import { MenuStyles } from '../../types'
 
 export interface DialogMenuStyles extends MenuStyles {
     font: string
+    textColor: string
+    nextColor: string
 }
 
 export default function getDialogMenuStylesByCharacter(character: CHARACTER): DialogMenuStyles {
@@ -12,8 +14,19 @@ export default function getDialogMenuStylesByCharacter(character: CHARACTER): Di
             return {
                 pattern: 'bg-lighthouse-princess-pattern',
                 color: 'cherry',
+                textColor: 'cherry',
+                nextColor: 'cherry',
                 fillColor: '#CB214A',
                 font: 'font-princess',
+            }
+        case CHARACTER.GHOST:
+            return {
+                pattern: 'bg-black',
+                color: 'primary-light',
+                textColor: 'white',
+                nextColor: 'white',
+                fillColor: '#6C63FF',
+                font: 'font-ghost',
             }
     }
 }
