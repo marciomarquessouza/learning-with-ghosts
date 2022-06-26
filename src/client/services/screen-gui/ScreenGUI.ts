@@ -72,6 +72,13 @@ export class ScreenGUI {
         const dialogMenu = this.getElement<DialogMenu>(ELEMENTS.DIALOG_MENU)
         dialogMenu.props = props
         dialogMenu.hidden = false
+        // animation reset - TODO: move this for a utils folder
+        const textElement = document.getElementById(ELEMENTS.DIALOG_MENU_TEXT)
+        if (textElement) {
+            textElement.classList.remove('animate-typing-slow')
+            void textElement.offsetWidth
+            textElement.classList.add('animate-typing-slow')
+        }
         this.addActiveMenu(ELEMENTS.DIALOG_MENU)
     }
 

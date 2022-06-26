@@ -65,6 +65,11 @@ module.exports = {
                     '0%': { transform: 'translateX(0)' },
                     '100%': { transform: 'translateX(20rem)' },
                 },
+                'type-keys': {
+                    from: {
+                        width: 0,
+                    },
+                },
             },
             animation: {
                 'progress-bar': 'progress-bar-keys 2s 2s linear infinite',
@@ -75,6 +80,7 @@ module.exports = {
                 'info-menu-out': 'info-menu-out-keys 0.5s ease-in-out',
                 'dialog-menu-in': 'dialog-menu-in-keys 0.5s ease-in-out',
                 'dialog-menu-out': 'dialog-menu-out-keys 0.5s ease-in-out',
+                'typing-slow': 'type-keys 1.6s ease-out .6s 1 normal both',
             },
             backgroundImage: {
                 'lighthouse-princess-pattern': "url('assets/img/cherry-tree.png')",

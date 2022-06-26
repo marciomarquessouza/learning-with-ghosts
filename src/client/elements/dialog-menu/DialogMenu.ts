@@ -69,9 +69,12 @@ export default class DialogMenu extends LitElement {
                                     >
                                         ${dialogTitle}
                                     </p>
-                                    <div class="flex flex-row mt-1">
+                                    <div
+                                        id="${ELEMENTS.DIALOG_MENU_TEXT}"
+                                        class="w-full h-16 overflow-hidden animate-typing-slow will-change-transform"
+                                    >
                                         <p
-                                            class="${styles.font} text-5xl text-${styles.textColor} ml-1 mt-1"
+                                            class="${styles.font} text-5xl text-${styles.textColor} ml-1 mt-1 text-clip whitespace-nowrap"
                                         >
                                             ${text}
                                         </p>

@@ -4,4 +4,5 @@ export enum ELEMENTS {
     MAIN_MENU = 'main-menu',
     LIVE_MENU = 'live-menu',
     DIALOG_MENU = 'dialog-menu',
+    DIALOG_MENU_TEXT = 'dialog-text',
 }

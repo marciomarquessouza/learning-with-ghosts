@@ -1,4 +1,4 @@
-import { CHARACTER, DIALOG_MENU, PARAMS } from '../const'
+import { CHARACTER, PARAMS } from '../const'
 import { Models } from '../models/types'
 import { SceneComponents } from '../scenes/types'
 import { InteractionType } from '../services/interactions/types'
@@ -37,8 +37,8 @@ export class Player extends PlayerControls {
             character,
             expression,
             text,
-            onClose: this.stopInteraction,
-            onNext: this.nextInteraction,
+            onClose: this.stopInteraction.bind(this),
+            onNext: this.nextInteraction.bind(this),
         })
     }
 
