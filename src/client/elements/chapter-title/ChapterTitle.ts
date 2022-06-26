@@ -26,9 +26,9 @@ export default class ChapterTitle extends LitElement {
 
         return html`
             <div
-                class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full animate-chapter-title-out"
+                class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full animate-chapter-title-out opacity-0"
             >
-                <div class="flex h-full animate-chapter-title-in">
+                <div class="flex h-full">
                     <div class="flex flex-col flex-auto items-center justify-center">
                         <img src="/img/logo.png" width="124px" height="77.51px" />
                         <div class="relative flex py-2 items-center w-96">

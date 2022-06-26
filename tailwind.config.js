@@ -41,12 +41,9 @@ module.exports = {
                     '0%': { transform: 'translateY(0)' },
                     '100%': { transform: 'translateY(-50px)' },
                 },
-                'chapter-title-in-keys': {
-                    '0%': { opacity: 0 },
-                    '100%': { opacity: 1 },
-                },
                 'chapter-title-out-keys': {
-                    '0%': { opacity: 1 },
+                    '0%': { opacity: 0 },
+                    '50%': { opacity: 1 },
                     '100%': { opacity: 0 },
                 },
                 'info-menu-in-keys': {
@@ -74,7 +71,6 @@ module.exports = {
             animation: {
                 'progress-bar': 'progress-bar-keys 2s 2s linear infinite',
                 'ghost-levitation': 'ghost-levitation-keys 2s 2s ease-in-out infinite alternate',
-                'chapter-title-in': `chapter-title-in-keys 2s ease-in-out`,
                 'chapter-title-out': 'chapter-title-out-keys 5s 2s ease-in-out',
                 'info-menu-in': 'info-menu-in-keys 0.5s ease-in-out',
                 'info-menu-out': 'info-menu-out-keys 0.5s ease-in-out',
