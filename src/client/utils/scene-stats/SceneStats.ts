@@ -1,12 +1,14 @@
 import Stats from 'three/examples/jsm/libs/stats.module'
 
 export class SceneStats {
+    private _isDevEnv = process.env.NODE_ENV === 'development'
+
     constructor(private stats = Stats()) {
-        document.body.appendChild(this.stats.domElement)
+        this._isDevEnv && document.body.appendChild(this.stats.domElement)
     }
 
     update() {
-        if (process.env.NODE_ENV === 'development') {
+        if (this._isDevEnv) {
             this.stats.update()
         }
     }

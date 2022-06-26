@@ -1,19 +1,18 @@
 import { LANGUAGES, PARAMS } from '../../../const'
 import { Models } from '../../../models/types'
 import { Services } from '../../../services/types'
-import { createUtils } from '../../../utils/factory/utilsFactory'
 import { Utils } from '../../../utils/types'
 
 export interface SceneInitiationProps {
     models: Models
     services: Services
-    utils?: Utils
+    utils: Utils
 }
 
 export async function sceneInitiation({
     models,
     services,
-    utils = createUtils(),
+    utils,
 }: SceneInitiationProps): Promise<void> {
     const { train, lighthouse, princess } = models
     const { screenGUI, levels } = services

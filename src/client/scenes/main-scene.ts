@@ -19,7 +19,7 @@ const clock = new THREE.Clock()
 
 const utils = createUtils()
 const models = createModels(scene)
-const services = createServices()
+const services = createServices(utils)
 const sceneComponents = createSceneComponents(renderer)
 
 const player = createPlayer({ services, sceneComponents, models })
@@ -71,7 +71,7 @@ export async function createMainScene() {
         window.addEventListener('keydown', handleKeyDown, false)
         window.addEventListener('keyup', handleKeyUp, false)
         window.addEventListener('resize', onWindowResize, false)
-        await sceneInitiation({ models, services })
+        await sceneInitiation({ models, services, utils })
         animateScene()
     }
 

@@ -1,12 +1,12 @@
 import { CHARACTER } from '../../const'
-import { createUtils } from '../../utils/factory/utilsFactory'
+import { Utils } from '../../utils/types'
 import { ChapterData } from '../levels/types'
 import { InteractionType } from './types'
 
 export class Interactions {
     private _currentChapterData: ChapterData | null = null
 
-    constructor(private utils = createUtils()) {}
+    constructor(private utils: Utils) {}
 
     public loadChapterDialogs(data: ChapterData) {
         this._currentChapterData = data
