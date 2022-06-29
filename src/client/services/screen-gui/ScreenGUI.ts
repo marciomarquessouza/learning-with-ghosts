@@ -6,6 +6,7 @@ import DialogMenu, {
     DIALOG_MENU_DEFAULTS,
 } from '../../elements/dialog-menu/DialogMenu'
 import { CHARACTER, ELEMENTS, PARAMS } from '../../const'
+import MainMenu from '../../elements/main-menu/MainMenu'
 
 export class ScreenGUI {
     private _activeMenus: ELEMENTS[] = []
@@ -87,6 +88,16 @@ export class ScreenGUI {
         dialogMenu.props = DIALOG_MENU_DEFAULTS
         dialogMenu.hidden = true
         this.removeActiveMenu(ELEMENTS.DIALOG_MENU)
+    }
+
+    public showMainMenu() {
+        const mainMenu = this.getElement<MainMenu>(ELEMENTS.MAIN_MENU)
+        mainMenu.hidden = false
+    }
+
+    public closeMainMenu() {
+        const mainMenu = this.getElement<MainMenu>(ELEMENTS.MAIN_MENU)
+        mainMenu.hidden = true
     }
 
     public closeActiveMenus() {

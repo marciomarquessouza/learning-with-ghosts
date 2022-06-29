@@ -36,6 +36,7 @@ export async function sceneInitiation({
         chapterNumber: 1,
         chapterName,
     })
+    screenGUI.showMainMenu()
     storage.chapter = chapter
     storage.day = 1
     storage.step = 1
