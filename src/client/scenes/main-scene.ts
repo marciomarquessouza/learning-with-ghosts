@@ -58,7 +58,6 @@ function animateScene() {
     mixer.update(delta)
     render()
     utils.sceneStats.update()
-    models.sea.update(clock.getElapsedTime())
     update(delta)
 }
 

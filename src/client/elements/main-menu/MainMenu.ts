@@ -57,9 +57,7 @@ export default class MainMenu extends LitElement {
                         : 'hidden'} overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full flex justify-center items-center"
                 >
                     <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
-                        <!-- Modal content -->
                         <div class="relative shadow ">
-                            <!-- Modal header -->
                             <div class="flex p-4 border-b border-white">
                                 <div class="flex flex-1 justify-center items-center">
                                     <img src="/img/logo.png" width="124px" height="77.51px" />
@@ -83,8 +81,7 @@ export default class MainMenu extends LitElement {
                                     </svg>
                                 </button>
                             </div>
-                            <!-- Modal body -->
-                            <div class="p-6 space-y-4">
+                            <div class="p-6 space-y-4 bg-indigo-700">
                                 <p class="font-josefin text-4xl text-white">MENU</p>
                                 <section class="space-y-2 pl-4">
                                     <button
@@ -113,7 +110,6 @@ export default class MainMenu extends LitElement {
                                     </button>
                                 </section>
                             </div>
-                            <!-- Modal footer -->
                             <div
                                 class="flex items-center p-6 space-x-2 rounded-b border-t border-white"
                             ></div>
