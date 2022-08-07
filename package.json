@@ -9,6 +9,9 @@
         "dev": "webpack serve --config ./src/client/webpack.dev.js",
         "start": "node ./dist/server/server.js"
     },
+    "engines": {
+        "node": "16.0.0"
+    },
     "author": "",
     "license": "ISC",
     "dependencies": {
