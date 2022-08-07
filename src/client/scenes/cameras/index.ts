@@ -1,4 +1,4 @@
-import { Camera } from './Camera'
+import { Camera } from './camera'
 
 export interface CameraProps {
     fov?: number
