@@ -1,7 +1,7 @@
 {
     "name": "learning-with-ghosts",
     "version": "1.0.0",
-    "description": "Learning with Ghosts",
+    "description": "GHOST TOWN - Learning with Ghosts",
     "main": "index.js",
     "scripts": {
         "build": "rimraf dist && webpack --config ./src/client/webpack.prod.js && tsc -p ./src/server",
@@ -12,7 +12,7 @@
     "engines": {
         "node": "16.0.0"
     },
-    "author": "",
+    "author": "Marcio Marques de Souza (https://github.com/marciomarquessouza)",
     "license": "ISC",
     "dependencies": {
         "express": "^4.18.1",
