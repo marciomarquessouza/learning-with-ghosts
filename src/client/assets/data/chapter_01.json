@@ -1,0 +1,71 @@
+{
+    "chapterNumber": "01",
+    "title": "WELCOME TO GHOST TOWN",
+    "subtitle": "LEARNING HOW TO GREETING FRIENDS, STRANGERS AND FREAKS",
+    "shortTitle": "Greeting",
+    "days": [
+        {
+            "day": 1,
+            "steps": [
+                {
+                    "step": 1,
+                    "characterInteractions": [
+                        {
+                            "character": "princess",
+                            "interactions": [
+                                {
+                                    "type": "dialog",
+                                    "from": "princess",
+                                    "text": "Hello strange!!!",
+                                    "expression": "happiness"
+                                },
+                                {
+                                    "type": "dialog",
+                                    "from": "ghost",
+                                    "text": "...Oh my God, I'm in love with you!!!!",
+                                    "expression": "happiness"
+                                },
+                                {
+                                    "type": "dialog",
+                                    "from": "princess",
+                                    "text": "But we just met...",
+                                    "expression": "happiness"
+                                },
+                                {
+                                    "type": "dialog",
+                                    "from": "princess",
+                                    "text": "You're the type of weird guys...",
+                                    "expression": "happiness"
+                                },
+                                {
+                                    "type": "dialog",
+                                    "from": "princess",
+                                    "text": "..who falls in love for any girl...",
+                                    "expression": "happiness"
+                                },
+                                {
+                                    "type": "dialog",
+                                    "from": "princess",
+                                    "text": "..who gives any slightest bit of attention?",
+                                    "expression": "happiness"
+                                },
+                                {
+                                    "type": "dialog",
+                                    "from": "ghost",
+                                    "text": "Maybe....",
+                                    "expression": "happiness"
+                                },
+                                {
+                                    "type": "dialog",
+                                    "from": "princess",
+                                    "text": "Loser!",
+                                    "expression": "happiness"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
