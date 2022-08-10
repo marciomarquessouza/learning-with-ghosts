@@ -4,7 +4,6 @@ import { Lighthouse } from './lighthouse/Lighthouse'
 import { Train } from './train/Train'
 import { Scenario } from './scenario/Scenario'
 import { Princess } from './princess/Princess'
-import { Sky } from './sky/Sky'
 import { Ghost } from './ghost'
 
 export interface PlayerMesh {
@@ -21,6 +20,5 @@ export interface Models {
     lighthouse: Lighthouse
     princess: Princess
     scenario: Scenario
-    sky: Sky
     train: Train
 }
