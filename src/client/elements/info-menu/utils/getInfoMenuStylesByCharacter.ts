@@ -8,7 +8,7 @@ export default function getInfoMenuStylesByCharacter(character: CHARACTER): Info
         case CHARACTER.PRINCESS:
         default:
             return {
-                pattern: 'bg-lighthouse-princess-pattern',
+                pattern: 'bg-white',
                 color: 'cherry',
                 fillColor: '#CB214A',
             }

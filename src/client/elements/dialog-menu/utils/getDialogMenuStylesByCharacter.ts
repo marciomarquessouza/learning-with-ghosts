@@ -12,7 +12,7 @@ export default function getDialogMenuStylesByCharacter(character: CHARACTER): Di
         case CHARACTER.PRINCESS:
         default:
             return {
-                pattern: 'bg-lighthouse-princess-pattern',
+                pattern: 'bg-white',
                 color: 'cherry',
                 textColor: 'cherry',
                 nextColor: 'cherry',
