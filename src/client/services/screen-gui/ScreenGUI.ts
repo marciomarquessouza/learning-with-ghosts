@@ -26,7 +26,10 @@ export class ScreenGUI {
 
     public showChapterTitle(props: ChapterTitleProps) {
         const chapterTitle = this.getElement<ChapterTitle>(ELEMENTS.CHAPTER_TITLE)
-        chapterTitle.props = props
+        const { mainTitle, subtitle, chapterNumber } = props
+        chapterTitle.mainTitle = mainTitle
+        chapterTitle.subtitle = subtitle
+        chapterTitle.chapterNumber = chapterNumber
         chapterTitle.hidden = false
         this.addActiveMenu(ELEMENTS.CHAPTER_TITLE)
         setTimeout(() => this.closeChapterTitle(), PARAMS.CHAPTER_TITLE_FADE_OUT)
@@ -71,7 +74,13 @@ export class ScreenGUI {
 
     public showDialogMenu(props: DialogMenuProps) {
         const dialogMenu = this.getElement<DialogMenu>(ELEMENTS.DIALOG_MENU)
-        dialogMenu.props = props
+        const { character, expression, text, onClose, onNext } = props
+        dialogMenu.character = character
+        dialogMenu.expression = expression
+        dialogMenu.text = text
+        dialogMenu.onClose = onClose
+        dialogMenu.onNext = onNext
+
         dialogMenu.hidden = false
         // animation reset - TODO: move this for a utils folder
         const textElement = document.getElementById(ELEMENTS.DIALOG_MENU_TEXT)
@@ -85,7 +94,11 @@ export class ScreenGUI {
 
     public closeDialogMenu() {
         const dialogMenu = this.getElement<DialogMenu>(ELEMENTS.DIALOG_MENU)
-        dialogMenu.props = DIALOG_MENU_DEFAULTS
+        dialogMenu.character = DIALOG_MENU_DEFAULTS.character
+        dialogMenu.expression = DIALOG_MENU_DEFAULTS.expression
+        dialogMenu.text = DIALOG_MENU_DEFAULTS.text
+        dialogMenu.onClose = DIALOG_MENU_DEFAULTS.onClose
+        dialogMenu.onNext = DIALOG_MENU_DEFAULTS.onNext
         dialogMenu.hidden = true
         this.removeActiveMenu(ELEMENTS.DIALOG_MENU)
     }

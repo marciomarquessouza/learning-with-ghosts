@@ -20,13 +20,13 @@ export async function sceneInitiation({
 
     const chapter = '01'
     const currentChapterData = await levels.fetchChapter(chapter)
-    const { title, subtitle, shortTitle: chapterName } = currentChapterData
+    const { title: mainTitle, subtitle, shortTitle: chapterName } = currentChapterData
     services.interactions.loadChapterDialogs(currentChapterData)
     train.startArrivalAnimation()
     lighthouse.startBulbAnimation()
     princess.startLevitationAnimation()
     screenGUI.showChapterTitle({
-        title,
+        mainTitle,
         subtitle,
         chapterNumber: chapter,
     })

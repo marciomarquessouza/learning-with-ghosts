@@ -14,32 +14,41 @@ export interface DialogMenuProps {
 }
 
 export const DIALOG_MENU_DEFAULTS: DialogMenuProps = {
-    character: null,
+    character: CHARACTER.GHOST,
     expression: EXPRESSION.NORMAL,
+    title: '',
     text: '',
-    onClose: () => undefined,
-    onNext: () => undefined,
+    onClose: () => {},
+    onNext: () => {},
 }
 
 @customElement(ELEMENTS.DIALOG_MENU)
 export default class DialogMenu extends LitElement {
     @property()
-    props: DialogMenuProps = DIALOG_MENU_DEFAULTS
+    character: CHARACTER | null = DIALOG_MENU_DEFAULTS.character
+    @property()
+    expression: EXPRESSION = DIALOG_MENU_DEFAULTS.expression
+    @property()
+    title = ''
+    @property()
+    text: string = ''
+    @property()
+    onClose = () => {}
+    @property()
+    onNext = () => {}
 
     createRenderRoot(): Element | ShadowRoot {
         return this
     }
 
     render() {
-        const { character, expression, title, text } = this.props
-
-        if (!character) {
+        if (!this.character) {
             return null
         }
 
-        const styles = getDialogMenuStylesByCharacter(character)
-        const expressionImg = DIALOG_MENU[character].expressions[expression]
-        const dialogTitle = title || DIALOG_MENU[character].title
+        const styles = getDialogMenuStylesByCharacter(this.character)
+        const expressionImg = DIALOG_MENU[this.character].expressions[this.expression]
+        const dialogTitle = this.title || DIALOG_MENU[this.character].title
 
         return html`
             <div
@@ -49,7 +58,7 @@ export default class DialogMenu extends LitElement {
                     <div class="w-3/5 max-w-4xl h-32 animate-dialog-menu-in  mb-14">
                         <div class="flex flex-1 pb-1">
                             <button
-                                @click="${this.props.onClose}"
+                                @click="${this.onClose}"
                                 class="items-start font-josefin font-normal text-sm text-white bg-transparent hover:text-${styles.color} focus:outline-none  active:outline-none"
                             >
                                 CLOSE [ESC]
@@ -76,13 +85,13 @@ export default class DialogMenu extends LitElement {
                                         <p
                                             class="${styles.font} text-5xl text-${styles.textColor} ml-1 mt-1 text-clip whitespace-nowrap"
                                         >
-                                            ${text}
+                                            ${this.text}
                                         </p>
                                     </div>
                                 </div>
                                 <div class="mb-16">
                                     <button
-                                        @click="${this.props.onNext}"
+                                        @click="${this.onNext}"
                                         class="items-start font-josefin font-normal text-sm text-${styles.nextColor} bg-transparent hover:text-${styles.nextColor} focus:outline-none  active:outline-none"
                                     >
                                         NEXT [SPACE]

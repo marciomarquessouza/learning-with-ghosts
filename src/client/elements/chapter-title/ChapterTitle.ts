@@ -3,27 +3,22 @@ import { customElement, property } from 'lit/decorators.js'
 import { ELEMENTS } from '../../const'
 
 export interface ChapterTitleProps {
-    title: string
+    mainTitle: string
     subtitle: string
     chapterNumber: string
 }
 
 @customElement(ELEMENTS.CHAPTER_TITLE)
 export default class ChapterTitle extends LitElement {
-    @property()
-    props: ChapterTitleProps = {
-        title: '',
-        subtitle: '',
-        chapterNumber: '01',
-    }
+    @property({ type: String }) mainTitle = ''
+    @property({ type: String }) subtitle = ''
+    @property({ type: String }) chapterNumber = '01'
 
     createRenderRoot() {
         return this
     }
 
     render() {
-        const { title, subtitle, chapterNumber } = this.props
-
         return html`
             <div
                 class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full animate-chapter-title-out opacity-0"
@@ -38,14 +33,14 @@ export default class ChapterTitle extends LitElement {
                             <p
                                 class="font-josefin font-normal text-5xl text-ivory uppercase text-center"
                             >
-                                ${title}
+                                ${this.mainTitle}
                             </p>
                         </div>
                         <div class="relative flex items-center w-96">
                             <div class="flex-grow border-t border-white"></div>
                             <span
                                 class="font-josefin font-light flex-shrink mx-4 text-white text-base"
-                                >Chapter ${chapterNumber}
+                                >Chapter ${this.chapterNumber}
                             </span>
                             <div class="flex-grow border-t border-white"></div>
                         </div>
@@ -53,7 +48,7 @@ export default class ChapterTitle extends LitElement {
                             <p
                                 class="font-josefin font-light flex-shrink mx-4 text-white text-lg uppercase text-center"
                             >
-                                ${subtitle}
+                                ${this.subtitle}
                             </p>
                         </div>
                     </div>
