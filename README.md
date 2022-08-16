@@ -34,9 +34,18 @@ This project is not finished yet, but you can check a small demo here: https://l
 - Typescript (TypeScript is a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.) - https://www.typescriptlang.org/
 - Express (Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.) - https://expressjs.com/
 - Tailwind (Tailwind CSS components & templates with support for React, Angular, & Vue) - https://tailwindui.com/
+- Web Test Runner (Test runner for web applications) - https://modern-web.dev/docs/test-runner/overview/#web-test-runner
 - Figrma (UI)
 - Blender (3D Models) 
 - Trello (Kanban Board)
+
+## Motivations
+
+The main motivations to start and continuing to work on this project are:
+- **Explore different concepts and use of JavaScript that I haven't had the opportunity to work on in my professional projects.**
+- **Opportunity to use different tools and methods** - Using Lit instead of React was not only a decision for the size of the bundle, but also for working more deeply with web elements and webpack (which is bringing me immense satisfaction).
+- **Updating my tests concepts** - I've been working with Jest for testing for a long time and it's been a wonderful experience to work with another test library like Web Test Runner. I highly recommend her for other projects.
+- **The web is increasingly standardized.** I believe that using WebGl is a good method to bring different flavors to gamification for the sake of teaching.
 
 ## Setup
 To run the project locally
