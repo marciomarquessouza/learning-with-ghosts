@@ -11,7 +11,6 @@
 ![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)
 
 ![repository-status](https://badgen.net/badge/project-status/WIP/purple)
-![heroku-status](https://heroku-badge.herokuapp.com/?app=learning-with-ghosts)
 </div>
 
 The idea of the project is to use the resources provided by webgl (through three.js) to create a small educational game.
