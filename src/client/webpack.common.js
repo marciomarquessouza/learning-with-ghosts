@@ -1,9 +1,15 @@
 const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
     module: {
         rules: [
+            {
+                test: /\.(tsx)$/,
+                exclude: /node_modules/,
+                use: 'babel-loader',
+            },
             {
                 test: /\.m?js/,
                 type: 'javascript/auto',
@@ -16,7 +22,7 @@ module.exports = {
                 use: ['style-loader', 'css-loader', 'postcss-loader'],
             },
             {
-                test: /\.tsx?$/,
+                test: /\.ts?$/,
                 use: 'ts-loader',
                 exclude: /node_modules/,
             },
@@ -38,6 +44,7 @@ module.exports = {
         extensions: ['.tsx', '.ts', '.js'],
     },
     entry: {
+        'main-page': './src/client/main-page/main-page.tsx',
         'ghost-town': './src/client/ghost-town-map/ghost-town.ts',
         lighthouse: './src/client/lighthouse-challenge/lighthouse.ts',
     },
@@ -47,11 +54,22 @@ module.exports = {
     },
     plugins: [
         new CopyWebpackPlugin({
-            patterns: [
-                { from: 'src/client/assets' },
-                { from: 'src/client/ghost-town-map/ghost-town.html' },
-                { from: 'src/client/lighthouse-challenge/lighthouse.html' },
-            ],
+            patterns: [{ from: 'src/client/assets' }],
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: 'src/client/main-page/main-page.html',
+            chunks: ['main-page'],
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'ghost-town.html',
+            template: 'src/client/ghost-town-map/ghost-town.html',
+            chunks: ['ghost-town'],
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'lighthouse.html',
+            template: 'src/client/lighthouse-challenge/lighthouse.html',
+            chunks: ['lighthouse'],
         }),
     ],
 }
