@@ -13,7 +13,7 @@ export class PlayerControls extends KeyboardInputs {
     constructor(
         protected services: Services,
         protected sceneComponents: SceneComponents,
-        protected playerMesh: PlayerMesh
+        public playerMesh: PlayerMesh
     ) {
         super()
     }

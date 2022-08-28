@@ -1,26 +1,15 @@
 import express from 'express'
-import path from 'path'
 import http from 'http'
+import { setupRouter } from './routes'
 
 const port = Number(process.env.PORT) || 3000
 
-class App {
-    private server: http.Server
-    private port: number
+const app = express()
 
-    constructor(port: number) {
-        this.port = port
-        const app = express()
-        app.use(express.static(path.join(__dirname, '../client')))
-        this.server = new http.Server(app)
-    }
+setupRouter(app)
 
-    public start() {
-        this.server.listen(this.port, () => {
-            console.log(`App listening on port: ${this.port}`)
-        })
-    }
-}
+const server = new http.Server(app)
 
-const app = new App(port)
-app.start()
+server.listen(port, () => {
+    console.log(`App listening on port: ${port}`)
+})

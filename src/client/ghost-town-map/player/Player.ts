@@ -1,3 +1,5 @@
+import * as THREE from 'three'
+
 import { CHARACTER, PARAMS } from '../const'
 import { Models } from '../models/types'
 import { SceneComponents } from '../scenes/types'
@@ -5,6 +7,7 @@ import { InteractionType } from '../services/interactions/types'
 import { Services } from '../services/types'
 import { PlayerControls } from './controls'
 import Helpers from './helpers'
+import { lerp } from 'three/src/math/MathUtils'
 
 export class Player extends PlayerControls {
     private _interactionGenerator: Generator<InteractionType, void, unknown> | null = null

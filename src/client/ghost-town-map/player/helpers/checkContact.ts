@@ -41,13 +41,13 @@ export default function checkContact({
     for (let vertexIndex = 0; vertexIndex < positionAttribute.count; vertexIndex++) {
         localVertex.fromBufferAttribute(positionAttribute, vertexIndex)
         globalVertex.copy(localVertex).applyMatrix4(characterMesh.matrix)
-        let directionVector = globalVertex.sub(
+        const directionVector = globalVertex.sub(
             nextPosition.addScaledVector(
                 vector,
                 delta * PARAMS.GHOST_SPEED * PARAMS.COLLISION_LIMIT
             )
         )
-        let raycaster = new THREE.Raycaster(originPoint, directionVector.clone().normalize())
+        const raycaster = new THREE.Raycaster(originPoint, directionVector.clone().normalize())
         let collisions = raycaster.intersectObjects(scenarioColliders)
         const characterContacts = dialogBoxes.map(({ character, dialogBox }) => ({
             character,

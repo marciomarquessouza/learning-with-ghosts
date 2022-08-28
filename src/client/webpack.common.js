@@ -2,7 +2,6 @@ const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
-    entry: './src/client/index.ts',
     module: {
         rules: [
             {
@@ -38,13 +37,21 @@ module.exports = {
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
     },
+    entry: {
+        'ghost-town': './src/client/ghost-town-map/ghost-town.ts',
+        lighthouse: './src/client/lighthouse-challenge/lighthouse.ts',
+    },
     output: {
-        filename: 'bundle.js',
+        filename: '[name].js',
         path: path.resolve(__dirname, '../../dist/client'),
     },
     plugins: [
         new CopyWebpackPlugin({
-            patterns: [{ from: 'src/client/assets' }, { from: 'src/client/index.html' }],
+            patterns: [
+                { from: 'src/client/assets' },
+                { from: 'src/client/ghost-town-map/ghost-town.html' },
+                { from: 'src/client/lighthouse-challenge/lighthouse.html' },
+            ],
         }),
     ],
 }
