@@ -1,11 +1,22 @@
 import React from 'react'
 
-function SocialMediaLogin() {
+export interface SocialMediaLoginProps {
+    onClick: (target: string) => void
+}
+
+function SocialMediaLogin({ onClick }: SocialMediaLoginProps) {
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+        onClick(e.currentTarget.name)
+    }
+
     return (
         <div className="flex flex-row items-center justify-center lg:justify-start">
-            <p className="text-3xl text-white mb-0 mr-4">Sign in with</p>
+            <p className="text-3xl text-white mb-0 mr-4">Looogin</p>
             <button
                 type="button"
+                name="facebook"
+                onClick={handleClick}
                 data-mdb-ripple="true"
                 data-mdb-ripple-color="light"
                 className="inline-block p-3 bg-primary-light text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-primary-dark hover:shadow-lg focus:bg-primary focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary active:shadow-lg transition duration-150 ease-in-out mx-1"
@@ -20,6 +31,8 @@ function SocialMediaLogin() {
 
             <button
                 type="button"
+                name="twitter"
+                onClick={handleClick}
                 data-mdb-ripple="true"
                 data-mdb-ripple-color="light"
                 className="inline-block p-3 bg-primary-light text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-primary-dark hover:shadow-lg focus:bg-primary focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary active:shadow-lg transition duration-150 ease-in-out mx-1"
@@ -34,14 +47,16 @@ function SocialMediaLogin() {
 
             <button
                 type="button"
+                name="google"
+                onClick={handleClick}
                 data-mdb-ripple="true"
                 data-mdb-ripple-color="light"
                 className="inline-block p-3 bg-primary-light text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-primary-dark hover:shadow-lg focus:bg-primary focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary active:shadow-lg transition duration-150 ease-in-out mx-1"
             >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="w-4 h-4">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" className="w-4 h-4">
                     <path
                         fill="currentColor"
-                        d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"
+                        d="M881 442.4H519.7v148.5h206.4c-8.9 48-35.9 88.6-76.6 115.8-34.4 23-78.3 36.6-129.9 36.6-99.9 0-184.4-67.5-214.6-158.2-7.6-23-12-47.6-12-72.9s4.4-49.9 12-72.9c30.3-90.6 114.8-158.1 214.7-158.1 56.3 0 106.8 19.4 146.6 57.4l110-110.1c-66.5-62-153.2-100-256.6-100-149.9 0-279.6 86-342.7 211.4-26 51.8-40.8 110.4-40.8 172.4S151 632.8 177 684.6C240.1 810 369.8 896 519.7 896c103.6 0 190.4-34.4 253.8-93 72.5-66.8 114.4-165.2 114.4-282.1 0-27.2-2.4-53.3-6.9-78.5z"
                     />
                 </svg>
             </button>

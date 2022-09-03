@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { LoginForm } from '../components'
-import { logInWithEmailAndPassword, signInWithFacebook, signInWithGoogle } from '../auth'
-import useAuth from '../hooks/useAuth'
-import signInWithTwitter from '../auth/SignInWithTwitter'
-import useAlert from '../hooks/useAlert'
-import { ALERTS_TYPE_ENUM } from '../contexts/AlertContext'
+import { registerWithEmailAndPassword } from '../auth'
+import { RegisterForm } from '../components'
 import BackButton from '../components/BackButton'
+import { ALERTS_TYPE_ENUM } from '../contexts/AlertContext'
+import useAlert from '../hooks/useAlert'
+import useAuth from '../hooks/useAuth'
 
-function Login() {
+function Register() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [name, setName] = useState('')
     const { user, loading } = useAuth()
     const navigate = useNavigate()
     const { openAlert } = useAlert()
@@ -24,8 +24,12 @@ function Login() {
         setPassword(password)
     }
 
+    const handleChangeName = (name: string) => {
+        setName(name)
+    }
+
     const handleSubmit = () => {
-        if (!email || !password) {
+        if (!name || !email || !password) {
             openAlert({
                 title: 'Error',
                 message: 'All fields are required',
@@ -33,51 +37,8 @@ function Login() {
             })
             return
         }
-        logInWithEmailAndPassword(email, password)
-    }
 
-    const handleRegister = () => {
-        navigate('/register')
-    }
-
-    const handleReset = () => {
-        navigate('/reset')
-    }
-
-    const handleGoogleLogin = async () => {
-        try {
-            await signInWithGoogle()
-        } catch (error: any) {
-            openAlert({
-                title: 'Error',
-                message: error?.message,
-                type: ALERTS_TYPE_ENUM.ERROR,
-            })
-        }
-    }
-
-    const handleTwitterLogin = async () => {
-        try {
-            await signInWithTwitter()
-        } catch (error: any) {
-            openAlert({
-                title: 'Error',
-                message: error?.message,
-                type: ALERTS_TYPE_ENUM.ERROR,
-            })
-        }
-    }
-
-    const handleFacebookLogin = async () => {
-        try {
-            await signInWithFacebook()
-        } catch (error: any) {
-            openAlert({
-                title: 'Error',
-                message: error?.message,
-                type: ALERTS_TYPE_ENUM.ERROR,
-            })
-        }
+        registerWithEmailAndPassword(name, email, password)
     }
 
     useEffect(() => {
@@ -95,17 +56,14 @@ function Login() {
                         <img src="/img/login-logo.png" alt="Ghost Town" />
                     </div>
                     <div className="xl:ml-20 xl:w-4/12 lg:w-4/12 md:w-8/12 mb-12 md:mb-0">
-                        <LoginForm
+                        <RegisterForm
+                            name={name}
                             email={email}
                             password={password}
                             loading={loading}
                             onChangeEmail={handleChangeEmail}
                             onChangePassword={handleChangePassword}
-                            onClickRegister={handleRegister}
-                            onClickForgotPassword={handleReset}
-                            onClickTwitterLogin={handleTwitterLogin}
-                            onClickFacebookLogin={handleFacebookLogin}
-                            onClickGoogleLogin={handleGoogleLogin}
+                            onChangeName={handleChangeName}
                             onSubmit={handleSubmit}
                         />
                     </div>
@@ -115,4 +73,4 @@ function Login() {
     )
 }
 
-export default Login
+export default Register
