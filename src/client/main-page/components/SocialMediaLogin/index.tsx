@@ -13,21 +13,6 @@ function SocialMediaLogin({ onClick }: SocialMediaLoginProps) {
     return (
         <div className="flex flex-row items-center justify-center lg:justify-start">
             <p className="text-3xl text-white mb-0 mr-4">Looogin</p>
-            <button
-                type="button"
-                name="facebook"
-                onClick={handleClick}
-                data-mdb-ripple="true"
-                data-mdb-ripple-color="light"
-                className="inline-block p-3 bg-primary-light text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-primary-dark hover:shadow-lg focus:bg-primary focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary active:shadow-lg transition duration-150 ease-in-out mx-1"
-            >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" className="w-4 h-4">
-                    <path
-                        fill="currentColor"
-                        d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"
-                    />
-                </svg>
-            </button>
 
             <button
                 type="button"
