@@ -21,16 +21,6 @@ In this game, the user will control a small ghost that arrives every day in a se
 
 **Figma:** https://www.figma.com/file/p883Ak5XqmfBgaeEjZZ539/Games?node-id=1078%3A160
 
-## Demo
-
-This project is not finished yet, but you can check a small demo here: https://learning-with-ghosts.herokuapp.com/
-
-**Notes:**
-
--   Only the main page structure is working (despite having the login page, I'm still implementing this functionality). Click "Let's Start" to start the scenario created in ThreeJs;
--   Use the arrow keys to move the character;
--   So far, there is only interaction with the princess who is next to the lighthouse;
-
 ## Libs and Tools
 
 -   Three.js (Three.js is a 3D library that tries to make it as easy as possible to get 3D content on a webpage) - https://threejs.org/

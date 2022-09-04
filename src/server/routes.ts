@@ -16,6 +16,10 @@ export function setupRouter(app: express.Express) {
         res.sendFile(path.join(__dirname, '../client/lighthouse.html'))
     })
 
+    router.get('/terms', (req: express.Request, res: express.Response) => {
+        res.sendFile(path.join(__dirname, '../client/terms-conditions.html'))
+    })
+
     app.use(express.static(path.join(__dirname, '../client')))
 
     app.use('/', router)

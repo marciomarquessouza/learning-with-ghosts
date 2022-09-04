@@ -62,6 +62,11 @@ module.exports = {
             chunks: ['main-page'],
         }),
         new HtmlWebpackPlugin({
+            filename: 'terms-conditions.html',
+            template: 'src/client/main-page/terms-conditions-page.html',
+            chunks: ['main-page'],
+        }),
+        new HtmlWebpackPlugin({
             filename: 'ghost-town.html',
             template: 'src/client/ghost-town-map/ghost-town.html',
             chunks: ['ghost-town'],
