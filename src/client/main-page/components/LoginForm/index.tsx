@@ -77,7 +77,7 @@ function LoginForm({
     return (
         <form onSubmit={handleSubmit}>
             <SocialMediaLogin onClick={handleSocialMediaClick} />
-            <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
+            <div className="flex items-center justify-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
                 <p className="text-white text-center font-semibold mx-4 mb-0">Or</p>
             </div>
 
@@ -103,7 +103,7 @@ function LoginForm({
                 />
             </div>
 
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex items-center justify-center md:justify-start mb-6">
                 <a onClick={handleForgotPassword} className="text-white" href="#">
                     Forgot password?
                 </a>
@@ -116,7 +116,7 @@ function LoginForm({
                 >
                     {loading ? <Spinner /> : 'Login'}
                 </button>
-                <p className="text-lg text-white font-semibold mt-2 pt-1 mb-0">
+                <p className="text-lg text-white font-semibold mt-4 pt-1 mb-0">
                     Don't have an account?{' '}
                     <a
                         onClick={handleRegister}
