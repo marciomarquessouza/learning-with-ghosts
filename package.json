@@ -4,7 +4,7 @@
     "description": "GHOST TOWN - Learning with Ghosts",
     "main": "index.js",
     "scripts": {
-        "build": "rimraf dist && webpack --config ./src/client/webpack.prod.js && tsc -p ./src/server",
+        "build": "npm install && rimraf dist && webpack --config ./src/client/webpack.prod.js && tsc -p ./src/server",
         "test": "web-test-runner \"src/**/*.test.ts\" \"src/**/*.spec.ts\" --node-resolve",
         "test:dev": "wtr \"src/**/*.test.ts\" \"src/**/*.spec.ts\" --node-resolve --watch",
         "test:ci": "wtr \"src/**/*.test.ts\" \"src/**/*.spec.ts\" --node-resolve --coverage",
