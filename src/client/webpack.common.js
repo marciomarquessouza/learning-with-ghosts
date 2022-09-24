@@ -22,8 +22,16 @@ module.exports = {
                 use: ['style-loader', 'css-loader', 'postcss-loader'],
             },
             {
-                test: /\.ts?$/,
-                use: 'ts-loader',
+                test: /\.ts$/,
+                use: [
+                    {
+                        loader: 'ts-loader',
+                        options: {
+                            onlyCompileBundledFiles: true,
+                            configFile: 'tsconfig.json',
+                        },
+                    },
+                ],
                 exclude: /node_modules/,
             },
             {

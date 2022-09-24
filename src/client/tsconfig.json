@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "experimentalDecorators": true,
+        "skipLibCheck": true,
         "target": "es6",
         "module": "esnext",
         "moduleResolution": "node",
@@ -11,5 +12,11 @@
         "allowSyntheticDefaultImports": true,
         "jsx": "react"
     },
-    "include": ["**/*.ts", "**/*.tsx"]
+    "include": ["**/*.ts", "**/*.tsx"],
+    "exclude": [
+        "node_modules",
+        "./node_modules",
+        "./node_modules/*",
+        "./node_modules/@types/node/index.d.ts"
+    ]
 }
