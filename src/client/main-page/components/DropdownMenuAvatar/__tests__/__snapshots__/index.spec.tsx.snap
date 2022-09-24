@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components >> DropdownMenuAvatar should render the DropdownMenuAvatar component properly: DropdownMenuAvatar-default 1`] = `
+<div>
+  <div
+    class="relative inline-block text-left"
+    data-headlessui-state=""
+  >
+    <div>
+      <button
+        aria-expanded="false"
+        aria-haspopup="true"
+        class=""
+        data-headlessui-state=""
+        id="headlessui-menu-button-:r0:"
+        type="button"
+      >
+        <div>
+          <span
+            class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-gray-500"
+          >
+            <span
+              class="text-lg font-medium leading-none text-white"
+            >
+              MN
+            </span>
+          </span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+`;

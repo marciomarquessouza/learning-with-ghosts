@@ -6,9 +6,10 @@ export interface DropdownMenuMobileProps {
     user?: User | null
     onLogin: () => void
     onLogout: () => void
+    onPressAboutMe: (e: React.MouseEvent<HTMLElement>) => void
 }
 
-function DropdownMenuMobile({ user, onLogin, onLogout }: DropdownMenuMobileProps) {
+function DropdownMenuMobile({ user, onLogin, onLogout, onPressAboutMe }: DropdownMenuMobileProps) {
     const handleLogin = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault()
         onLogin()
@@ -41,7 +42,7 @@ function DropdownMenuMobile({ user, onLogin, onLogout }: DropdownMenuMobileProps
                             {() => (
                                 <button
                                     type="button"
-                                    onClick={handleLogout}
+                                    onClick={onPressAboutMe}
                                     className="
                                         bg-gray-100 text-gray-900 block w-full px-4 py-2 text-left text-sm"
                                 >
@@ -60,7 +61,7 @@ function DropdownMenuMobile({ user, onLogin, onLogout }: DropdownMenuMobileProps
                                         className="
                                         bg-gray-100 text-gray-900 block w-full px-4 py-2 text-left text-sm"
                                     >
-                                        Sign out
+                                        Logout
                                     </button>
                                 )}
                             </Menu.Item>

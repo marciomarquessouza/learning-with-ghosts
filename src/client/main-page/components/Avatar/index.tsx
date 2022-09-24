@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { getInitials } from '../../utils'
 
 interface AvatarProps {
@@ -7,7 +8,6 @@ interface AvatarProps {
 }
 
 function Avatar({ name, photoUrl }: AvatarProps) {
-    console.log(photoUrl)
     return (
         <div>
             {photoUrl ? (

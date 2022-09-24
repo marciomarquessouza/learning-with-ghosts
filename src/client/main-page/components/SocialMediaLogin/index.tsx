@@ -17,6 +17,7 @@ function SocialMediaLogin({ onClick }: SocialMediaLoginProps) {
             <button
                 type="button"
                 name="twitter"
+                aria-label="twitter"
                 onClick={handleClick}
                 data-mdb-ripple="true"
                 data-mdb-ripple-color="light"
@@ -33,6 +34,7 @@ function SocialMediaLogin({ onClick }: SocialMediaLoginProps) {
             <button
                 type="button"
                 name="google"
+                aria-label="google"
                 onClick={handleClick}
                 data-mdb-ripple="true"
                 data-mdb-ripple-color="light"

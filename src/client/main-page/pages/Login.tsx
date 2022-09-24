@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { LoginForm } from '../components'
-import { logInWithEmailAndPassword, signInWithFacebook, signInWithGoogle } from '../auth'
+import { logInWithEmailAndPassword, signInWithGoogle } from '../auth'
 import useAuth from '../hooks/useAuth'
 import signInWithTwitter from '../auth/SignInWithTwitter'
 import useAlert from '../hooks/useAlert'
@@ -68,18 +68,6 @@ function Login() {
         }
     }
 
-    const handleFacebookLogin = async () => {
-        try {
-            await signInWithFacebook()
-        } catch (error: any) {
-            openAlert({
-                title: 'Error',
-                message: error?.message,
-                type: ALERTS_TYPE_ENUM.ERROR,
-            })
-        }
-    }
-
     useEffect(() => {
         if (user) {
             navigate('/')
@@ -104,7 +92,6 @@ function Login() {
                             onClickRegister={handleRegister}
                             onClickForgotPassword={handleReset}
                             onClickTwitterLogin={handleTwitterLogin}
-                            onClickFacebookLogin={handleFacebookLogin}
                             onClickGoogleLogin={handleGoogleLogin}
                             onSubmit={handleSubmit}
                         />

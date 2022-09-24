@@ -10,7 +10,7 @@ export interface DropdownMenuAvatarProps {
     onLogout: () => void
 }
 
-function DropdownMenuAvatar({ name, email, photoUrl, onLogout }: DropdownMenuAvatarProps) {
+function DropdownMenuAvatar({ name, photoUrl, onLogout }: DropdownMenuAvatarProps) {
     const handleLogout = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault()
         onLogout()

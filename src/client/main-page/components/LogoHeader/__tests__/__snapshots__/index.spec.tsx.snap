@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components >> LogoHeader should render the LogoHeader component properly: LogoHeader-default 1`] = `
+<div>
+  <a>
+    <img
+      alt="Ghost Town - Learning with Ghosts"
+      src="/img/logo.png"
+    />
+  </a>
+</div>
+`;

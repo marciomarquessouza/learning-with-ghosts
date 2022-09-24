@@ -1,4 +1,5 @@
 import React from 'react'
+
 import SocialMediaLogin from '../SocialMediaLogin'
 import Spinner from '../Spinner'
 
@@ -11,7 +12,6 @@ export interface LoginFormProps {
     onClickRegister: () => void
     onClickForgotPassword: () => void
     onClickTwitterLogin: () => void
-    onClickFacebookLogin: () => void
     onClickGoogleLogin: () => void
     onSubmit: () => void
 }
@@ -25,7 +25,6 @@ function LoginForm({
     onClickRegister,
     onClickForgotPassword,
     onClickTwitterLogin,
-    onClickFacebookLogin,
     onClickGoogleLogin,
     onSubmit,
 }: LoginFormProps) {
@@ -48,9 +47,6 @@ function LoginForm({
         switch (target) {
             case 'twitter':
                 onClickTwitterLogin()
-                break
-            case 'facebook':
-                onClickFacebookLogin()
                 break
             case 'google':
                 onClickGoogleLogin()

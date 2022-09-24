@@ -1,0 +1,147 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components >> NavigationMenu should render the NavigationMenu component properly when the user is signed: NavigationMenu-user 1`] = `
+<div>
+  <div
+    class="flex flex-row items-center"
+  >
+    <div
+      class="block md:hidden mx-4"
+    >
+      <div
+        class="relative inline-block text-left"
+        data-headlessui-state=""
+      >
+        <button
+          aria-expanded="false"
+          aria-haspopup="true"
+          class=""
+          data-headlessui-state=""
+          id="headlessui-menu-button-:r1:"
+          type="button"
+        >
+          <svg
+            fill="white"
+            height="32px"
+            id="Layer_1"
+            version="1.1"
+            viewBox="0 0 32 32"
+          >
+            <path
+              d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2  s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2  S29.104,22,28,22z"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div
+      class="hidden md:flex flex-row justify-items-center items-center"
+    >
+      <div
+        class="mx-4"
+      >
+        <a
+          href="#"
+        >
+          <span
+            class="font-josefin font-bold text-lg text-white"
+          >
+            ABOUT
+          </span>
+        </a>
+      </div>
+      <div
+        class="mx-4"
+      >
+        <div
+          class="relative inline-block text-left"
+          data-headlessui-state=""
+        >
+          <div>
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              class=""
+              data-headlessui-state=""
+              id="headlessui-menu-button-:r2:"
+              type="button"
+            >
+              <div>
+                <span
+                  class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-gray-500"
+                >
+                  <span
+                    class="text-lg font-medium leading-none text-white"
+                  >
+                    U
+                  </span>
+                </span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`components >> NavigationMenu should render the NavigationMenu component properly: NavigationMenu-default 1`] = `
+<div>
+  <div
+    class="flex flex-row items-center"
+  >
+    <div
+      class="block md:hidden mx-4"
+    >
+      <div
+        class="relative inline-block text-left"
+        data-headlessui-state=""
+      >
+        <button
+          aria-expanded="false"
+          aria-haspopup="true"
+          class=""
+          data-headlessui-state=""
+          id="headlessui-menu-button-:r0:"
+          type="button"
+        >
+          <svg
+            fill="white"
+            height="32px"
+            id="Layer_1"
+            version="1.1"
+            viewBox="0 0 32 32"
+          >
+            <path
+              d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2  s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2  S29.104,22,28,22z"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div
+      class="hidden md:flex flex-row justify-items-center items-center"
+    >
+      <div
+        class="mx-4"
+      >
+        <a
+          href="#"
+        >
+          <span
+            class="font-josefin font-bold text-lg text-white"
+          >
+            ABOUT
+          </span>
+        </a>
+      </div>
+      <div
+        class="mx-4"
+      >
+        <a />
+      </div>
+    </div>
+  </div>
+</div>
+`;
