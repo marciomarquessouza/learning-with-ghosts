@@ -28,7 +28,7 @@ describe('components >> DropdownMenuAvatar', () => {
         fireEvent.click(getByText('MN'))
 
         await waitFor(() => {
-            fireEvent.click(getByText('Sign out'))
+            fireEvent.click(getByText('Logout'))
         })
 
         expect(mockOnLogout).toHaveBeenCalledTimes(1)

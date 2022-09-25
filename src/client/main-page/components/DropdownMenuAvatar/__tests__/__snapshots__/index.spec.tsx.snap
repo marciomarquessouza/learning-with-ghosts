@@ -4,14 +4,12 @@ exports[`components >> DropdownMenuAvatar should render the DropdownMenuAvatar c
 <div>
   <div
     class="relative inline-block text-left"
-    data-headlessui-state=""
   >
     <div>
       <button
         aria-expanded="false"
         aria-haspopup="true"
         class=""
-        data-headlessui-state=""
         id="headlessui-menu-button-:r0:"
         type="button"
       >

@@ -1,4 +1,7 @@
 import React, { useState, createContext } from 'react'
+
+import { MESSAGE_TIMEOUT } from '../../const'
+
 import Alert from '../../components/Alert'
 
 export enum ALERTS_TYPE_ENUM {
@@ -28,7 +31,7 @@ function AlertProvider({ children }: AlertProviderProps) {
         setOpen(true)
         setTimeout(() => {
             setOpen(false)
-        }, 5000)
+        }, MESSAGE_TIMEOUT)
     }
 
     const handleClose = () => {

@@ -4,7 +4,7 @@ import { auth, db } from '../config/firebase'
 
 const twitterProvider = new TwitterAuthProvider()
 
-async function signInWithTwitter() {
+export async function signInWithTwitter() {
     try {
         const res = await signInWithPopup(auth, twitterProvider)
         const user = res.user
@@ -19,8 +19,6 @@ async function signInWithTwitter() {
             })
         }
     } catch (err) {
-        throw new Error('Error to sign in with Twitter')
+        throw new Error('Error to sign in with a Twitter Account')
     }
 }
-
-export default signInWithTwitter

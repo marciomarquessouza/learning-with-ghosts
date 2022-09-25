@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { User } from 'firebase/auth'
 
 import DropdownMenuAvatar from '../DropdownMenuAvatar'
@@ -17,6 +16,11 @@ function NavigationMenu({ user, onLogout, onLogin }: NavigationMenuProps) {
     const handlePressAboutMe = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault()
         window.open(GITHUB_URL, '_blank')
+    }
+
+    const handleOnLogin = (e: React.MouseEvent<HTMLElement>) => {
+        e.preventDefault()
+        onLogin()
     }
 
     return (
@@ -44,13 +48,12 @@ function NavigationMenu({ user, onLogout, onLogin }: NavigationMenuProps) {
                             onLogout={onLogout}
                         />
                     ) : (
-                        <Link to="/login">
-                            <button className="bg-primary hover:bg-primary-dark py-2 px-4 rounded">
-                                <span className="font-josefin font-bold text-lg text-white">
-                                    LOGIN
-                                </span>
-                            </button>
-                        </Link>
+                        <button
+                            className="bg-primary hover:bg-primary-dark py-2 px-4 rounded"
+                            onClick={handleOnLogin}
+                        >
+                            <span className="font-josefin font-bold text-lg text-white">LOGIN</span>
+                        </button>
                     )}
                 </div>
             </div>

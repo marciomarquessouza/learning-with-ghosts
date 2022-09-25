@@ -4,7 +4,7 @@ import { auth, db } from '../config/firebase'
 
 const googleProvider = new GoogleAuthProvider()
 
-async function signInWithGoogle() {
+export async function signInWithGoogle() {
     try {
         const res = await signInWithPopup(auth, googleProvider)
         const user = res.user
@@ -19,8 +19,6 @@ async function signInWithGoogle() {
             })
         }
     } catch (err) {
-        throw new Error('Error to sign in with Google')
+        throw new Error('Error to sign in with a Google Account')
     }
 }
-
-export default signInWithGoogle

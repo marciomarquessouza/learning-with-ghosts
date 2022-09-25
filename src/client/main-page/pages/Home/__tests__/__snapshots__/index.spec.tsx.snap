@@ -1,0 +1,617 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pages >> Home should fire the logout event when the Logout button is pressed: Home-opened-menu 1`] = `
+<div>
+  <div
+    aria-live="assertive"
+    class="pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6"
+  >
+    <div
+      class="flex w-full flex-col items-center space-y-4 sm:items-end"
+    />
+  </div>
+  <main
+    class="bg-background h-screen bg-cover bg-no-repeat bg-center"
+    style="background-image: url(img/background_main_page.png);"
+  >
+    <section
+      class="flex flex-row justify-between items-center mx-1 md:mx-4"
+    >
+      <header
+        class="w-2/5 m-2"
+      >
+        <a
+          href="/"
+        >
+          <img
+            alt="Ghost Town - Learning with Ghosts"
+            src="/img/logo.png"
+          />
+        </a>
+      </header>
+      <nav>
+        <div
+          class="flex flex-row items-center"
+        >
+          <div
+            class="block md:hidden mx-4"
+          >
+            <div
+              class="relative inline-block text-left"
+            >
+              <button
+                aria-expanded="false"
+                aria-haspopup="true"
+                class=""
+                id="headlessui-menu-button-:r4:"
+                type="button"
+              >
+                <svg
+                  fill="white"
+                  height="32px"
+                  id="Layer_1"
+                  version="1.1"
+                  viewBox="0 0 32 32"
+                >
+                  <path
+                    d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2  s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2  S29.104,22,28,22z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div
+            class="hidden md:flex flex-row justify-items-center items-center"
+          >
+            <div
+              class="mx-4"
+            >
+              <a
+                href="#"
+              >
+                <span
+                  class="font-josefin font-bold text-lg text-white"
+                >
+                  ABOUT
+                </span>
+              </a>
+            </div>
+            <div
+              class="mx-4"
+            >
+              <div
+                class="relative inline-block text-left"
+              >
+                <div>
+                  <button
+                    aria-controls="headlessui-menu-items-:r7:"
+                    aria-expanded="true"
+                    aria-haspopup="true"
+                    class=""
+                    id="headlessui-menu-button-:r5:"
+                    type="button"
+                  >
+                    <div>
+                      <span
+                        class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-gray-500"
+                      >
+                        <span
+                          class="text-lg font-medium leading-none text-white"
+                        >
+                          U
+                        </span>
+                      </span>
+                    </div>
+                  </button>
+                </div>
+                <div
+                  aria-labelledby="headlessui-menu-button-:r5:"
+                  class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none transition ease-out duration-100 transform opacity-0 scale-95"
+                  id="headlessui-menu-items-:r7:"
+                  role="menu"
+                  tabindex="0"
+                >
+                  <div
+                    class="py-1"
+                    role="none"
+                  >
+                    <button
+                      class=" bg-gray-100 text-gray-900 block w-full px-4 py-2 text-left text-sm"
+                      id="headlessui-menu-item-:r8:"
+                      role="menuitem"
+                      tabindex="-1"
+                      type="button"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </section>
+    <section
+      class="flex h-full flex-row justify-start items-center md:ml-4"
+    >
+      <article
+        class="font-josefin text-white"
+      >
+        <section
+          class="text-4xl md:text-6xl font-bold md:w-4/6 mb-2 mx-2 text-center md:text-left shadow"
+        >
+          <p>
+            How about learning something new
+          </p>
+          <p
+            class="text-primary-light"
+          >
+            while you're having fun?
+          </p>
+        </section>
+        <section
+          class="mb-6"
+        >
+          <p
+            class="text-lg mx-2 text-center md:text-left shadow"
+          >
+            <span
+              class="font-bold"
+            >
+              Ghost Town 
+            </span>
+            <span
+              class="font-light"
+            >
+              is a new way to gamify education using the full power of WebGL
+            </span>
+          </p>
+        </section>
+        <section
+          class="my-10 flex flex-col md:flex-row justify-items-center items-center"
+        >
+          <a
+            href="/ghost-town"
+          >
+            <button
+              class="bg-transparent hover:bg-primary-light text-white font-semibold hover:text-white py-4 px-14 border-4 border-primary-light hover:border-transparent rounded-full"
+            >
+              <p
+                class="text-3xl"
+              >
+                Let's Start
+              </p>
+            </button>
+          </a>
+        </section>
+      </article>
+    </section>
+  </main>
+</div>
+`;
+
+exports[`pages >> Home should render the Home page properly when loading: Home-loading 1`] = `
+<div>
+  <div
+    aria-live="assertive"
+    class="pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6"
+  >
+    <div
+      class="flex w-full flex-col items-center space-y-4 sm:items-end"
+    />
+  </div>
+  <main
+    class="bg-background h-screen bg-cover bg-no-repeat bg-center"
+    style="background-image: url(img/background_main_page.png);"
+  >
+    <section
+      class="flex flex-row justify-between items-center mx-1 md:mx-4"
+    >
+      <header
+        class="w-2/5 m-2"
+      >
+        <a
+          href="/"
+        >
+          <img
+            alt="Ghost Town - Learning with Ghosts"
+            src="/img/logo.png"
+          />
+        </a>
+      </header>
+      <nav>
+        <div
+          class="flex items-center justify-center"
+        >
+          <div
+            class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
+            role="status"
+          >
+            <span
+              class="visually-hidden"
+            >
+              Loading...
+            </span>
+          </div>
+        </div>
+      </nav>
+    </section>
+    <section
+      class="flex h-full flex-row justify-start items-center md:ml-4"
+    >
+      <article
+        class="font-josefin text-white"
+      >
+        <section
+          class="text-4xl md:text-6xl font-bold md:w-4/6 mb-2 mx-2 text-center md:text-left shadow"
+        >
+          <p>
+            How about learning something new
+          </p>
+          <p
+            class="text-primary-light"
+          >
+            while you're having fun?
+          </p>
+        </section>
+        <section
+          class="mb-6"
+        >
+          <p
+            class="text-lg mx-2 text-center md:text-left shadow"
+          >
+            <span
+              class="font-bold"
+            >
+              Ghost Town 
+            </span>
+            <span
+              class="font-light"
+            >
+              is a new way to gamify education using the full power of WebGL
+            </span>
+          </p>
+        </section>
+        <section
+          class="my-10 flex flex-col md:flex-row justify-items-center items-center"
+        >
+          <a
+            href="/ghost-town"
+          >
+            <button
+              class="bg-transparent hover:bg-primary-light text-white font-semibold hover:text-white py-4 px-14 border-4 border-primary-light hover:border-transparent rounded-full"
+            >
+              <p
+                class="text-3xl"
+              >
+                Let's Start
+              </p>
+            </button>
+          </a>
+        </section>
+      </article>
+    </section>
+  </main>
+</div>
+`;
+
+exports[`pages >> Home should render the Home page properly with user signed: Home-signed 1`] = `
+<div>
+  <div
+    aria-live="assertive"
+    class="pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6"
+  >
+    <div
+      class="flex w-full flex-col items-center space-y-4 sm:items-end"
+    />
+  </div>
+  <main
+    class="bg-background h-screen bg-cover bg-no-repeat bg-center"
+    style="background-image: url(img/background_main_page.png);"
+  >
+    <section
+      class="flex flex-row justify-between items-center mx-1 md:mx-4"
+    >
+      <header
+        class="w-2/5 m-2"
+      >
+        <a
+          href="/"
+        >
+          <img
+            alt="Ghost Town - Learning with Ghosts"
+            src="/img/logo.png"
+          />
+        </a>
+      </header>
+      <nav>
+        <div
+          class="flex flex-row items-center"
+        >
+          <div
+            class="block md:hidden mx-4"
+          >
+            <div
+              class="relative inline-block text-left"
+            >
+              <button
+                aria-expanded="false"
+                aria-haspopup="true"
+                class=""
+                id="headlessui-menu-button-:r1:"
+                type="button"
+              >
+                <svg
+                  fill="white"
+                  height="32px"
+                  id="Layer_1"
+                  version="1.1"
+                  viewBox="0 0 32 32"
+                >
+                  <path
+                    d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2  s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2  S29.104,22,28,22z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div
+            class="hidden md:flex flex-row justify-items-center items-center"
+          >
+            <div
+              class="mx-4"
+            >
+              <a
+                href="#"
+              >
+                <span
+                  class="font-josefin font-bold text-lg text-white"
+                >
+                  ABOUT
+                </span>
+              </a>
+            </div>
+            <div
+              class="mx-4"
+            >
+              <div
+                class="relative inline-block text-left"
+              >
+                <div>
+                  <button
+                    aria-expanded="false"
+                    aria-haspopup="true"
+                    class=""
+                    id="headlessui-menu-button-:r2:"
+                    type="button"
+                  >
+                    <div>
+                      <span
+                        class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-gray-500"
+                      >
+                        <span
+                          class="text-lg font-medium leading-none text-white"
+                        >
+                          U
+                        </span>
+                      </span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </section>
+    <section
+      class="flex h-full flex-row justify-start items-center md:ml-4"
+    >
+      <article
+        class="font-josefin text-white"
+      >
+        <section
+          class="text-4xl md:text-6xl font-bold md:w-4/6 mb-2 mx-2 text-center md:text-left shadow"
+        >
+          <p>
+            How about learning something new
+          </p>
+          <p
+            class="text-primary-light"
+          >
+            while you're having fun?
+          </p>
+        </section>
+        <section
+          class="mb-6"
+        >
+          <p
+            class="text-lg mx-2 text-center md:text-left shadow"
+          >
+            <span
+              class="font-bold"
+            >
+              Ghost Town 
+            </span>
+            <span
+              class="font-light"
+            >
+              is a new way to gamify education using the full power of WebGL
+            </span>
+          </p>
+        </section>
+        <section
+          class="my-10 flex flex-col md:flex-row justify-items-center items-center"
+        >
+          <a
+            href="/ghost-town"
+          >
+            <button
+              class="bg-transparent hover:bg-primary-light text-white font-semibold hover:text-white py-4 px-14 border-4 border-primary-light hover:border-transparent rounded-full"
+            >
+              <p
+                class="text-3xl"
+              >
+                Let's Start
+              </p>
+            </button>
+          </a>
+        </section>
+      </article>
+    </section>
+  </main>
+</div>
+`;
+
+exports[`pages >> Home should render the Home page properly: Home-default 1`] = `
+<div>
+  <div
+    aria-live="assertive"
+    class="pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6"
+  >
+    <div
+      class="flex w-full flex-col items-center space-y-4 sm:items-end"
+    />
+  </div>
+  <main
+    class="bg-background h-screen bg-cover bg-no-repeat bg-center"
+    style="background-image: url(img/background_main_page.png);"
+  >
+    <section
+      class="flex flex-row justify-between items-center mx-1 md:mx-4"
+    >
+      <header
+        class="w-2/5 m-2"
+      >
+        <a
+          href="/"
+        >
+          <img
+            alt="Ghost Town - Learning with Ghosts"
+            src="/img/logo.png"
+          />
+        </a>
+      </header>
+      <nav>
+        <div
+          class="flex flex-row items-center"
+        >
+          <div
+            class="block md:hidden mx-4"
+          >
+            <div
+              class="relative inline-block text-left"
+            >
+              <button
+                aria-expanded="false"
+                aria-haspopup="true"
+                class=""
+                id="headlessui-menu-button-:r0:"
+                type="button"
+              >
+                <svg
+                  fill="white"
+                  height="32px"
+                  id="Layer_1"
+                  version="1.1"
+                  viewBox="0 0 32 32"
+                >
+                  <path
+                    d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2  s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2  S29.104,22,28,22z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div
+            class="hidden md:flex flex-row justify-items-center items-center"
+          >
+            <div
+              class="mx-4"
+            >
+              <a
+                href="#"
+              >
+                <span
+                  class="font-josefin font-bold text-lg text-white"
+                >
+                  ABOUT
+                </span>
+              </a>
+            </div>
+            <div
+              class="mx-4"
+            >
+              <button
+                class="bg-primary hover:bg-primary-dark py-2 px-4 rounded"
+              >
+                <span
+                  class="font-josefin font-bold text-lg text-white"
+                >
+                  LOGIN
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </section>
+    <section
+      class="flex h-full flex-row justify-start items-center md:ml-4"
+    >
+      <article
+        class="font-josefin text-white"
+      >
+        <section
+          class="text-4xl md:text-6xl font-bold md:w-4/6 mb-2 mx-2 text-center md:text-left shadow"
+        >
+          <p>
+            How about learning something new
+          </p>
+          <p
+            class="text-primary-light"
+          >
+            while you're having fun?
+          </p>
+        </section>
+        <section
+          class="mb-6"
+        >
+          <p
+            class="text-lg mx-2 text-center md:text-left shadow"
+          >
+            <span
+              class="font-bold"
+            >
+              Ghost Town 
+            </span>
+            <span
+              class="font-light"
+            >
+              is a new way to gamify education using the full power of WebGL
+            </span>
+          </p>
+        </section>
+        <section
+          class="my-10 flex flex-col md:flex-row justify-items-center items-center"
+        >
+          <a
+            href="/ghost-town"
+          >
+            <button
+              class="bg-transparent hover:bg-primary-light text-white font-semibold hover:text-white py-4 px-14 border-4 border-primary-light hover:border-transparent rounded-full"
+            >
+              <p
+                class="text-3xl"
+              >
+                Let's Start
+              </p>
+            </button>
+          </a>
+        </section>
+      </article>
+    </section>
+  </main>
+</div>
+`;

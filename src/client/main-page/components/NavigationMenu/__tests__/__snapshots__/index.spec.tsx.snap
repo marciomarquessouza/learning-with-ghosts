@@ -3,6 +3,14 @@
 exports[`components >> NavigationMenu should render the NavigationMenu component properly when the user is signed: NavigationMenu-user 1`] = `
 <div>
   <div
+    aria-live="assertive"
+    class="pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6"
+  >
+    <div
+      class="flex w-full flex-col items-center space-y-4 sm:items-end"
+    />
+  </div>
+  <div
     class="flex flex-row items-center"
   >
     <div
@@ -10,13 +18,11 @@ exports[`components >> NavigationMenu should render the NavigationMenu component
     >
       <div
         class="relative inline-block text-left"
-        data-headlessui-state=""
       >
         <button
           aria-expanded="false"
           aria-haspopup="true"
           class=""
-          data-headlessui-state=""
           id="headlessui-menu-button-:r1:"
           type="button"
         >
@@ -55,14 +61,12 @@ exports[`components >> NavigationMenu should render the NavigationMenu component
       >
         <div
           class="relative inline-block text-left"
-          data-headlessui-state=""
         >
           <div>
             <button
               aria-expanded="false"
               aria-haspopup="true"
               class=""
-              data-headlessui-state=""
               id="headlessui-menu-button-:r2:"
               type="button"
             >
@@ -89,6 +93,14 @@ exports[`components >> NavigationMenu should render the NavigationMenu component
 exports[`components >> NavigationMenu should render the NavigationMenu component properly: NavigationMenu-default 1`] = `
 <div>
   <div
+    aria-live="assertive"
+    class="pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6"
+  >
+    <div
+      class="flex w-full flex-col items-center space-y-4 sm:items-end"
+    />
+  </div>
+  <div
     class="flex flex-row items-center"
   >
     <div
@@ -96,13 +108,11 @@ exports[`components >> NavigationMenu should render the NavigationMenu component
     >
       <div
         class="relative inline-block text-left"
-        data-headlessui-state=""
       >
         <button
           aria-expanded="false"
           aria-haspopup="true"
           class=""
-          data-headlessui-state=""
           id="headlessui-menu-button-:r0:"
           type="button"
         >
@@ -139,7 +149,15 @@ exports[`components >> NavigationMenu should render the NavigationMenu component
       <div
         class="mx-4"
       >
-        <a />
+        <button
+          class="bg-primary hover:bg-primary-dark py-2 px-4 rounded"
+        >
+          <span
+            class="font-josefin font-bold text-lg text-white"
+          >
+            LOGIN
+          </span>
+        </button>
       </div>
     </div>
   </div>

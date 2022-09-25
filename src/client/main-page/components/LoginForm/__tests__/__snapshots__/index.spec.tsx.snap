@@ -3,14 +3,14 @@
 exports[`components >> LoginForm should render the LoginFrom properly in loading state: LoginFrom-loading 1`] = `
 <div>
   <form>
+    <p
+      class="text-3xl text-white mb-0 mr-4"
+    >
+      Looogin
+    </p>
     <div
       class="flex flex-row items-center justify-center lg:justify-start"
     >
-      <p
-        class="text-3xl text-white mb-0 mr-4"
-      >
-        Looogin
-      </p>
       <button
         aria-label="twitter"
         class="inline-block p-3 bg-primary-light text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-primary-dark hover:shadow-lg focus:bg-primary focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary active:shadow-lg transition duration-150 ease-in-out mx-1"
@@ -133,14 +133,14 @@ exports[`components >> LoginForm should render the LoginFrom properly in loading
 exports[`components >> LoginForm should render the LoginFrom properly: LoginFrom-default 1`] = `
 <div>
   <form>
+    <p
+      class="text-3xl text-white mb-0 mr-4"
+    >
+      Looogin
+    </p>
     <div
       class="flex flex-row items-center justify-center lg:justify-start"
     >
-      <p
-        class="text-3xl text-white mb-0 mr-4"
-      >
-        Looogin
-      </p>
       <button
         aria-label="twitter"
         class="inline-block p-3 bg-primary-light text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-primary-dark hover:shadow-lg focus:bg-primary focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary active:shadow-lg transition duration-150 ease-in-out mx-1"

@@ -4,15 +4,13 @@ exports[`components >> DropdownMenuMobile should render the DropdownMenuMobile c
 <div>
   <div
     class="relative inline-block text-left"
-    data-headlessui-state="open"
   >
     <button
-      aria-controls="headlessui-menu-items-:r7:"
+      aria-controls="headlessui-menu-items-:r9:"
       aria-expanded="true"
       aria-haspopup="true"
       class=""
-      data-headlessui-state="open"
-      id="headlessui-menu-button-:r6:"
+      id="headlessui-menu-button-:r7:"
       type="button"
     >
       <svg
@@ -28,10 +26,9 @@ exports[`components >> DropdownMenuMobile should render the DropdownMenuMobile c
       </svg>
     </button>
     <div
-      aria-labelledby="headlessui-menu-button-:r6:"
+      aria-labelledby="headlessui-menu-button-:r7:"
       class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none transition ease-out duration-100 transform opacity-0 scale-95"
-      data-headlessui-state="open"
-      id="headlessui-menu-items-:r7:"
+      id="headlessui-menu-items-:r9:"
       role="menu"
       tabindex="0"
     >
@@ -41,8 +38,7 @@ exports[`components >> DropdownMenuMobile should render the DropdownMenuMobile c
       >
         <button
           class=" bg-gray-100 text-gray-900 block w-full px-4 py-2 text-left text-sm"
-          data-headlessui-state=""
-          id="headlessui-menu-item-:r8:"
+          id="headlessui-menu-item-:ra:"
           role="menuitem"
           tabindex="-1"
           type="button"
@@ -56,8 +52,7 @@ exports[`components >> DropdownMenuMobile should render the DropdownMenuMobile c
       >
         <button
           class=" bg-gray-100 text-gray-900 block w-full px-4 py-2 text-left text-sm"
-          data-headlessui-state=""
-          id="headlessui-menu-item-:r9:"
+          id="headlessui-menu-item-:rb:"
           role="menuitem"
           tabindex="-1"
           type="button"
@@ -74,14 +69,12 @@ exports[`components >> DropdownMenuMobile should render the DropdownMenuMobile c
 <div>
   <div
     class="relative inline-block text-left"
-    data-headlessui-state="open"
   >
     <button
-      aria-controls="headlessui-menu-items-:r3:"
+      aria-controls="headlessui-menu-items-:r4:"
       aria-expanded="true"
       aria-haspopup="true"
       class=""
-      data-headlessui-state="open"
       id="headlessui-menu-button-:r2:"
       type="button"
     >
@@ -100,8 +93,7 @@ exports[`components >> DropdownMenuMobile should render the DropdownMenuMobile c
     <div
       aria-labelledby="headlessui-menu-button-:r2:"
       class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none transition ease-out duration-100 transform opacity-0 scale-95"
-      data-headlessui-state="open"
-      id="headlessui-menu-items-:r3:"
+      id="headlessui-menu-items-:r4:"
       role="menu"
       tabindex="0"
     >
@@ -111,8 +103,7 @@ exports[`components >> DropdownMenuMobile should render the DropdownMenuMobile c
       >
         <button
           class=" bg-gray-100 text-gray-900 block w-full px-4 py-2 text-left text-sm"
-          data-headlessui-state=""
-          id="headlessui-menu-item-:r4:"
+          id="headlessui-menu-item-:r5:"
           role="menuitem"
           tabindex="-1"
           type="button"
@@ -126,8 +117,7 @@ exports[`components >> DropdownMenuMobile should render the DropdownMenuMobile c
       >
         <button
           class=" bg-gray-100 text-gray-900 block w-full px-4 py-2 text-left text-sm"
-          data-headlessui-state=""
-          id="headlessui-menu-item-:r5:"
+          id="headlessui-menu-item-:r6:"
           role="menuitem"
           tabindex="-1"
           type="button"
@@ -144,13 +134,11 @@ exports[`components >> DropdownMenuMobile should render the DropdownMenuMobile c
 <div>
   <div
     class="relative inline-block text-left"
-    data-headlessui-state=""
   >
     <button
       aria-expanded="false"
       aria-haspopup="true"
       class=""
-      data-headlessui-state=""
       id="headlessui-menu-button-:r1:"
       type="button"
     >
@@ -174,13 +162,11 @@ exports[`components >> DropdownMenuMobile should render the DropdownMenuMobile c
 <div>
   <div
     class="relative inline-block text-left"
-    data-headlessui-state=""
   >
     <button
       aria-expanded="false"
       aria-haspopup="true"
       class=""
-      data-headlessui-state=""
       id="headlessui-menu-button-:r0:"
       type="button"
     >

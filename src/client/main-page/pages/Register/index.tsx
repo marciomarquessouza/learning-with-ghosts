@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { LoginForm } from '../components'
-import { logInWithEmailAndPassword, signInWithGoogle } from '../auth'
-import useAuth from '../hooks/useAuth'
-import signInWithTwitter from '../auth/SignInWithTwitter'
-import useAlert from '../hooks/useAlert'
-import { ALERTS_TYPE_ENUM } from '../contexts/AlertContext'
-import BackButton from '../components/BackButton'
+import { registerWithEmailAndPassword } from '../../auth'
+import { RegisterForm } from '../../components'
+import { ALERTS_TYPE_ENUM } from '../../contexts/AlertContext'
+import { useAlert, useAuth } from '../../hooks'
 
-function Login() {
-    const navigate = useNavigate()
+import BackButton from '../../components/BackButton'
+
+function Register() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [name, setName] = useState('')
     const { user, loading } = useAuth()
+    const navigate = useNavigate()
     const { openAlert } = useAlert()
 
     const handleChangeEmail = (email: string) => {
@@ -24,8 +24,12 @@ function Login() {
         setPassword(password)
     }
 
+    const handleChangeName = (name: string) => {
+        setName(name)
+    }
+
     const handleSubmit = () => {
-        if (!email || !password) {
+        if (!name || !email || !password) {
             openAlert({
                 title: 'Error',
                 message: 'All fields are required',
@@ -33,39 +37,8 @@ function Login() {
             })
             return
         }
-        logInWithEmailAndPassword(email, password)
-    }
 
-    const handleRegister = () => {
-        navigate('/register')
-    }
-
-    const handleReset = () => {
-        navigate('/reset')
-    }
-
-    const handleGoogleLogin = async () => {
-        try {
-            await signInWithGoogle()
-        } catch (error: any) {
-            openAlert({
-                title: 'Error',
-                message: error?.message,
-                type: ALERTS_TYPE_ENUM.ERROR,
-            })
-        }
-    }
-
-    const handleTwitterLogin = async () => {
-        try {
-            await signInWithTwitter()
-        } catch (error: any) {
-            openAlert({
-                title: 'Error',
-                message: error?.message,
-                type: ALERTS_TYPE_ENUM.ERROR,
-            })
-        }
+        registerWithEmailAndPassword(name, email, password)
     }
 
     useEffect(() => {
@@ -77,22 +50,20 @@ function Login() {
     return (
         <section className="h-screen bg-background font-josefin">
             <BackButton />
-            <div className="px-6 py-8 md:py-0 h-full text-gray-800">
+            <div className="px-6 h-full text-gray-800">
                 <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
                     <div className="hidden grow-0 shrink-1 md:shrink-0 basis-auto xl:w-4/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0 md:flex items-center justify-center">
                         <img src="/img/login-logo.png" alt="Ghost Town" />
                     </div>
                     <div className="xl:ml-20 xl:w-4/12 lg:w-4/12 md:w-8/12 mb-12 md:mb-0">
-                        <LoginForm
+                        <RegisterForm
+                            name={name}
                             email={email}
                             password={password}
                             loading={loading}
                             onChangeEmail={handleChangeEmail}
                             onChangePassword={handleChangePassword}
-                            onClickRegister={handleRegister}
-                            onClickForgotPassword={handleReset}
-                            onClickTwitterLogin={handleTwitterLogin}
-                            onClickGoogleLogin={handleGoogleLogin}
+                            onChangeName={handleChangeName}
                             onSubmit={handleSubmit}
                         />
                     </div>
@@ -102,4 +73,4 @@ function Login() {
     )
 }
 
-export default Login
+export default Register

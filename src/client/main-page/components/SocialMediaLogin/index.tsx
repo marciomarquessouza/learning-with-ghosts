@@ -12,8 +12,6 @@ function SocialMediaLogin({ onClick }: SocialMediaLoginProps) {
 
     return (
         <div className="flex flex-row items-center justify-center lg:justify-start">
-            <p className="text-3xl text-white mb-0 mr-4">Looogin</p>
-
             <button
                 type="button"
                 name="twitter"

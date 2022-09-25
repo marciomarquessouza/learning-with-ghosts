@@ -1,9 +1,9 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { logout } from '../auth'
-import { Hero, LogoHeader, NavigationMenu, Spinner } from '../components'
-import useAuth from '../hooks/useAuth'
+import { logout } from '../../auth'
+import { Hero, LogoHeader, NavigationMenu, Spinner } from '../../components'
+import { useAuth } from '../../hooks'
 
 const BACKGROUND_IMAGE = "url('img/background_main_page.png')"
 

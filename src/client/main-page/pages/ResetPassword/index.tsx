@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { ResetPasswordForm } from '../components'
-import { sendPasswordReset } from '../auth'
-import useAuth from '../hooks/useAuth'
-import useAlert from '../hooks/useAlert'
-import { ALERTS_TYPE_ENUM } from '../contexts/AlertContext'
-import BackButton from '../components/BackButton'
+import { sendPasswordReset } from '../../auth'
+import { useAlert, useAuth } from '../../hooks'
+import { ALERTS_TYPE_ENUM } from '../../contexts/AlertContext'
+
+import BackButton from '../../components/BackButton'
+import ResetPasswordForm from '../../components/ResetPasswordForm'
 
 function ResetPassword() {
     const [email, setEmail] = useState('')
@@ -20,6 +20,9 @@ function ResetPassword() {
 
     const handleSubmit = async () => {
         try {
+            if (!email) {
+                throw new Error('Please, fill in the "Email" field')
+            }
             await sendPasswordReset(email)
             openAlert({
                 title: 'Success!',
