@@ -6,8 +6,8 @@ const twitterProvider = new TwitterAuthProvider()
 
 export async function signInWithTwitter() {
     try {
-        const res = await signInWithPopup(auth, twitterProvider)
-        const user = res.user
+        const response = await signInWithPopup(auth, twitterProvider)
+        const user = response.user
         const q = query(collection(db, 'users'), where('uid', '==', user.uid))
         const docs = await getDocs(q)
         if (docs.docs.length === 0) {

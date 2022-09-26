@@ -3,7 +3,7 @@ import { fireEvent, waitFor, act } from '@testing-library/react'
 
 import { customRender, getMockedUser } from '../../../test-helpers'
 import { MESSAGE_TIMEOUT } from '../../../const'
-import * as authTwitter from '../../../auth/signInWithTwitter'
+import * as authTwitter from '../../../auth/signInWithTwitterAccount'
 import * as authGoogle from '../../../auth/signInWithGoogle'
 import * as authEmailPassword from '../../../auth/logInWithEmailAndPassword'
 
