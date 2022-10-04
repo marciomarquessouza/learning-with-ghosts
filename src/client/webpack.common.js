@@ -1,3 +1,4 @@
+const webpack = require('webpack')
 const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -39,6 +40,10 @@ module.exports = {
                 use: ['raw-loader', 'glslify-loader'],
             },
             {
+                test: [/\.vert$/, /\.frag$/],
+                use: 'raw-loader',
+            },
+            {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
                 type: 'asset/resource',
             },
@@ -61,6 +66,10 @@ module.exports = {
         path: path.resolve(__dirname, '../../dist/client'),
     },
     plugins: [
+        new webpack.DefinePlugin({
+            CANVAS_RENDERER: JSON.stringify(true),
+            WEBGL_RENDERER: JSON.stringify(true),
+        }),
         new CopyWebpackPlugin({
             patterns: [{ from: 'src/client/assets' }],
         }),

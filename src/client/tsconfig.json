@@ -10,13 +10,10 @@
         "strict": true,
         "useDefineForClassFields": false,
         "allowSyntheticDefaultImports": true,
-        "jsx": "react"
+        "noImplicitAny": true,
+        "jsx": "react",
+        "esModuleInterop": true,
+        "emitDecoratorMetadata": true
     },
-    "include": ["**/*.ts", "**/*.tsx"],
-    "exclude": [
-        "node_modules",
-        "./node_modules",
-        "./node_modules/*",
-        "./node_modules/@types/node/index.d.ts"
-    ]
+    "include": ["**/*.ts", "**/*.tsx", "index.d.ts", "node_modules/phaser/types"]
 }

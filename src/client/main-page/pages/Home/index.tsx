@@ -38,7 +38,7 @@ function Home() {
                     )}
                 </nav>
             </section>
-            <section className="flex h-full flex-row justify-start items-center md:ml-4">
+            <section className="flex h-full flex-row justify-start items-center md:ml-20">
                 <Hero />
             </section>
         </main>

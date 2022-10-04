@@ -133,7 +133,7 @@ exports[`pages >> Home should fire the logout event when the Logout button is pr
       </nav>
     </section>
     <section
-      class="flex h-full flex-row justify-start items-center md:ml-4"
+      class="flex h-full flex-row justify-start items-center md:ml-20"
     >
       <article
         class="font-josefin text-white"
@@ -238,7 +238,7 @@ exports[`pages >> Home should render the Home page properly when loading: Home-l
       </nav>
     </section>
     <section
-      class="flex h-full flex-row justify-start items-center md:ml-4"
+      class="flex h-full flex-row justify-start items-center md:ml-20"
     >
       <article
         class="font-josefin text-white"
@@ -406,7 +406,7 @@ exports[`pages >> Home should render the Home page properly with user signed: Ho
       </nav>
     </section>
     <section
-      class="flex h-full flex-row justify-start items-center md:ml-4"
+      class="flex h-full flex-row justify-start items-center md:ml-20"
     >
       <article
         class="font-josefin text-white"
@@ -558,7 +558,7 @@ exports[`pages >> Home should render the Home page properly: Home-default 1`] = 
       </nav>
     </section>
     <section
-      class="flex h-full flex-row justify-start items-center md:ml-4"
+      class="flex h-full flex-row justify-start items-center md:ml-20"
     >
       <article
         class="font-josefin text-white"
