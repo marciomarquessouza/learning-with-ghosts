@@ -1,1 +1,1 @@
-export * from './lighthouse-challenge/main/scenes/scene-01'
+export * from './2D-phaser/main/scenes/scene-01'

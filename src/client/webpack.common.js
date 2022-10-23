@@ -57,9 +57,9 @@ module.exports = {
         extensions: ['.tsx', '.ts', '.js'],
     },
     entry: {
-        'main-page': './src/client/main-page/main-page.tsx',
-        'ghost-town': './src/client/ghost-town-map/ghost-town.ts',
-        lighthouse: './src/client/lighthouse-challenge/lighthouse.ts',
+        'main-page': './src/client/react-main-page/main-page.tsx',
+        'ghost-town': './src/client/3D-threejs/ghost-town.ts',
+        lighthouse: './src/client/2D-phaser/lighthouse.ts',
     },
     output: {
         filename: '[name].js',
@@ -75,22 +75,22 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            template: 'src/client/main-page/main-page.html',
+            template: 'src/client/react-main-page/main-page.html',
             chunks: ['main-page'],
         }),
         new HtmlWebpackPlugin({
             filename: 'terms-conditions.html',
-            template: 'src/client/main-page/terms-conditions-page.html',
-            chunks: ['main-page'],
+            template: 'src/client/react-main-page/terms-conditions-page.html',
+            chunks: ['terms-conditions'],
         }),
         new HtmlWebpackPlugin({
             filename: 'ghost-town.html',
-            template: 'src/client/ghost-town-map/ghost-town.html',
+            template: 'src/client/3D-threejs/ghost-town.html',
             chunks: ['ghost-town'],
         }),
         new HtmlWebpackPlugin({
             filename: 'lighthouse.html',
-            template: 'src/client/lighthouse-challenge/lighthouse.html',
+            template: 'src/client/2D-phaser/lighthouse.html',
             chunks: ['lighthouse'],
         }),
     ],
