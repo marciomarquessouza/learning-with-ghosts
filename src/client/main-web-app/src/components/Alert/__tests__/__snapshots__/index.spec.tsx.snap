@@ -1,0 +1,179 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components >> Alert should render all types of Alerts properly: Alert-error 1`] = `
+<div>
+  <div
+    aria-live="assertive"
+    class="pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6"
+  >
+    <div
+      class="flex w-full flex-col items-center space-y-4 sm:items-end"
+    >
+      <div
+        class="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5"
+      >
+        <div
+          class="p-4"
+        >
+          <div
+            class="flex items-start"
+          >
+            <div
+              class="flex-shrink-0"
+            >
+              <svg
+                height="20"
+                viewBox="0 0 20 20"
+                width="20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <title>
+                  error
+                </title>
+                <path
+                  d="M13.728 1H6.272L1 6.272v7.456L6.272 19h7.456L19 13.728V6.272zM11 15H9v-2h2zm0-4H9V5h2z"
+                  fill="#d33"
+                />
+              </svg>
+            </div>
+            <div
+              class="ml-3 w-0 flex-1 pt-0.5"
+            >
+              <p
+                class="text-sm font-semibold text-primary-light"
+              >
+                _MOCK_TITLE_
+              </p>
+              <p
+                class="mt-1 text-sm text-gray-500"
+              >
+                _MOCK_MESSAGE_
+              </p>
+            </div>
+            <div
+              class="ml-4 flex flex-shrink-0"
+            >
+              <button
+                class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                type="button"
+              >
+                <span
+                  class="sr-only"
+                >
+                  Close
+                </span>
+                <svg
+                  height="24"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g
+                    id="close"
+                  >
+                    <path
+                      d="M18.717 6.697l-1.414-1.414-5.303 5.303-5.303-5.303-1.414 1.414 5.303 5.303-5.303 5.303 1.414 1.414 5.303-5.303 5.303 5.303 1.414-1.414-5.303-5.303z"
+                      id="x"
+                    />
+                  </g>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`components >> Alert should render all types of Alerts properly: Alert-success 1`] = `
+<div>
+  <div
+    aria-live="assertive"
+    class="pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6"
+  >
+    <div
+      class="flex w-full flex-col items-center space-y-4 sm:items-end"
+    >
+      <div
+        class="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5"
+      >
+        <div
+          class="p-4"
+        >
+          <div
+            class="flex items-start"
+          >
+            <div
+              class="flex-shrink-0"
+            >
+              <svg
+                fill="none"
+                height="15"
+                viewBox="0 0 15 15"
+                width="15"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="7.5"
+                  cy="7.5"
+                  fill="#34A26E"
+                  r="7.5"
+                />
+                <path
+                  d="M5.49686 9.92188L2.89061 7.31563L2.00311 8.19688L5.49686 11.6906L12.9969 4.19063L12.1156 3.30938L5.49686 9.92188Z"
+                  fill="white"
+                />
+              </svg>
+            </div>
+            <div
+              class="ml-3 w-0 flex-1 pt-0.5"
+            >
+              <p
+                class="text-sm font-semibold text-primary-light"
+              >
+                _MOCK_TITLE_
+              </p>
+              <p
+                class="mt-1 text-sm text-gray-500"
+              >
+                _MOCK_MESSAGE_
+              </p>
+            </div>
+            <div
+              class="ml-4 flex flex-shrink-0"
+            >
+              <button
+                class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                type="button"
+              >
+                <span
+                  class="sr-only"
+                >
+                  Close
+                </span>
+                <svg
+                  height="24"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g
+                    id="close"
+                  >
+                    <path
+                      d="M18.717 6.697l-1.414-1.414-5.303 5.303-5.303-5.303-1.414 1.414 5.303 5.303-5.303 5.303 1.414 1.414 5.303-5.303 5.303 5.303 1.414-1.414-5.303-5.303z"
+                      id="x"
+                    />
+                  </g>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
