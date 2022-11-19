@@ -114,7 +114,7 @@ function LoginForm({
                     {loading ? <Spinner /> : 'Login'}
                 </button>
                 <p className="text-lg text-white font-semibold mt-4 pt-1 mb-0">
-                    Don't have an account?{' '}
+                    {`Don't have an account?`}
                     <a
                         onClick={handleRegister}
                         href="#"

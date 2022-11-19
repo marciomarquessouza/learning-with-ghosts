@@ -63,7 +63,7 @@ function ResetPasswordForm({
                     {loading ? <Spinner /> : 'Send'}
                 </button>
                 <p className="text-lg text-white font-semibold mt-2 pt-1 mb-0">
-                    Don't have an account?{' '}
+                    {`Don't have an account?`}
                     <a
                         onClick={handleRegister}
                         href="#"
