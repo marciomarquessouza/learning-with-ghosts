@@ -1,4 +1,4 @@
-import { InfoMenuProps } from '../elements/InfoMenu'
+import { InfoMenuProps } from '../components/InfoMenu'
 
 export enum CHARACTER {
     GHOST = 'ghost',

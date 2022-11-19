@@ -6,13 +6,13 @@ import {
     GhostTownGUIContext,
     InfoMenuContext,
     LiveMenuContext,
-} from 'contexts/GhostTownGUIContext/GhostTownGUIContext'
+} from 'modules/GhostTown/contexts/GhostTownGUIContext/GhostTownGUIContext'
 import {
     InfoMenuProps,
     ChapterTitleProps,
     LiveMenuProps,
     DialogMenuProps,
-} from 'modules/GhostTown/elements'
+} from 'modules/GhostTown/components'
 
 export type GUIData = {
     chapterTitle: ChapterTitleContext
@@ -36,23 +36,18 @@ export type GUIActions = {
 }
 
 export interface ScreenGUI {
-    data: GUIData
     actions: GUIActions
 }
 
 export function useScreenGUI(): ScreenGUI {
     const {
-        chapterTitle,
         openChapterTitle,
         closeChapterTitle,
-        infoMenu,
         openInfoMenu,
         closeInfoMenu,
-        liveMenu,
         openLiveMenu,
         closeLiveMenu,
         setLives,
-        dialogMenu,
         openDialogMenu,
         closeDialogMenu,
         openMainMenu,
@@ -60,12 +55,6 @@ export function useScreenGUI(): ScreenGUI {
     } = useContext(GhostTownGUIContext)
 
     return {
-        data: {
-            chapterTitle,
-            infoMenu,
-            liveMenu,
-            dialogMenu,
-        },
         actions: {
             openChapterTitle,
             closeChapterTitle,

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { config } from './main/config'
 import { getPhaser } from './api'
 import { scene01 } from './main/scenes/scene-01'
-import GhostLoading from 'components/GhostLoading'
+import GhostLoading from 'common/components/GhostLoading'
 
 export default function Lighthouse() {
     const [loading, setLoading] = useState(true)

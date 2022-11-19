@@ -4,11 +4,11 @@ import Image from 'next/image'
 
 import { sendPasswordReset } from 'auth'
 import { useAlert, useAuth } from 'hooks'
-import { ALERTS_TYPE_ENUM } from 'contexts/AlertContext'
+import { ALERTS_TYPE_ENUM } from 'common/contexts/AlertContext'
 import LoginLogoImg from 'images/login-logo.png'
 
-import BackButton from 'components/BackButton'
-import ResetPasswordForm from 'components/ResetPasswordForm'
+import BackButton from 'common/components/BackButton'
+import ResetPasswordForm from 'common/components/ResetPasswordForm'
 
 function ResetPassword() {
     const [email, setEmail] = useState('')

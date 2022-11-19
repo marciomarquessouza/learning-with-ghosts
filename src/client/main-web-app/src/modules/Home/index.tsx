@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { Popover } from '@headlessui/react'
 
 import { logout } from '../../auth'
-import { Hero, LogoHeader, NavigationMenu, Spinner } from '../../components'
+import { Hero, LogoHeader, NavigationMenu, Spinner } from '../../common/components'
 import { useAuth } from '../../hooks'
 
 const BACKGROUND_IMAGE = "url('img/background_main_page.png')"

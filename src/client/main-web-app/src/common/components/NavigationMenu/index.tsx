@@ -4,7 +4,7 @@ import { User } from 'firebase/auth'
 import DropdownMenuAvatar from '../DropdownMenuAvatar'
 import DropdownMenuMobile from '../DropdownMenuMobile'
 
-import { GITHUB_URL } from '../../const'
+import { GITHUB_URL } from '../../../const'
 
 export interface NavigationMenuProps {
     user?: User | null

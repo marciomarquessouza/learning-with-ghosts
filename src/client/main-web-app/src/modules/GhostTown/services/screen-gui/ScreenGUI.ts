@@ -1,13 +1,13 @@
-import { ChapterTitleProps } from '../../elements/ChapterTitle'
-import { InfoMenuProps } from '../../elements/InfoMenu'
-import { LiveMenuProps } from '../../elements/LiveMenu'
-import { DialogMenuProps } from '../../elements/DialogMenu'
+import { ChapterTitleProps } from '../../components/ChapterTitle'
+import { InfoMenuProps } from '../../components/InfoMenu'
+import { LiveMenuProps } from '../../components/LiveMenu'
+import { DialogMenuProps } from '../../components/DialogMenu'
 import { PARAMS } from '../../const'
-import { GUIActions, GUIData } from 'hooks/useScreenGUI'
+import { GUIActions } from 'hooks/useScreenGUI'
 import { menuObserver } from 'modules/GhostTown/observers'
 
 export class ScreenGUI {
-    constructor(private guiData: GUIData, private guiActions: GUIActions) {}
+    constructor(private guiActions: GUIActions) {}
 
     public showChapterTitle({ mainTitle, subtitle, chapterNumber }: ChapterTitleProps) {
         this.guiActions.openChapterTitle({ mainTitle, subtitle, chapterNumber })
@@ -19,7 +19,11 @@ export class ScreenGUI {
     }
 
     public showInfoMenu(props: InfoMenuProps) {
-        this.guiActions.openInfoMenu(props)
+        const infoMenu = menuObserver.getInfoMenuState()
+        const isOpen = infoMenu.isOpen
+        if (!isOpen) {
+            this.guiActions.openInfoMenu(props)
+        }
     }
 
     public closeInfoMenu() {

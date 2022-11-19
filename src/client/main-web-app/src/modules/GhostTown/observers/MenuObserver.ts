@@ -3,7 +3,7 @@ import {
     dialogMenuDefault,
     InfoMenuContext,
     infoMenuDefault,
-} from 'contexts/GhostTownGUIContext/GhostTownGUIContext'
+} from 'modules/GhostTown/contexts/GhostTownGUIContext/GhostTownGUIContext'
 
 export interface Observer {
     updateInfoMenu(infoMenu: InfoMenuContext): void

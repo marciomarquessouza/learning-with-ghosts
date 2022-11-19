@@ -5,7 +5,7 @@ import { NextRouter } from 'next/router'
 import { render, RenderOptions } from '@testing-library/react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { signOut, User } from 'firebase/auth'
-import AlertProvider from '../src/contexts/AlertContext'
+import AlertProvider from '../src/common/contexts/AlertContext'
 
 export function createMockRouter(router: Partial<NextRouter>): NextRouter {
     return {

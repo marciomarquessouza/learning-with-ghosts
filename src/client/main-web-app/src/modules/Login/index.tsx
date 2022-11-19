@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
-import { LoginForm } from '../../components'
+import { LoginForm } from '../../common/components'
 import { logInWithEmailAndPassword, signInWithGoogle, signInWithTwitter } from '../../auth'
 import { useAlert, useAuth } from '../../hooks'
-import { ALERTS_TYPE_ENUM } from '../../contexts/AlertContext'
+import { ALERTS_TYPE_ENUM } from '../../common/contexts/AlertContext'
 import LoginLogoImg from '../../../public/img/login-logo.png'
 
-import BackButton from '../../components/BackButton'
+import BackButton from '../../common/components/BackButton'
 
 function Login() {
     const router = useRouter()

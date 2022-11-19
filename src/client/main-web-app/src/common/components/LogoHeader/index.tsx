@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-import LogoImg from '../../../public/img/logo.png'
+import LogoImg from 'images/logo.png'
 
 export interface LogoHeaderProps {
     url?: string

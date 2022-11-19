@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import * as THREE from 'three'
 
 import { createMainScene } from 'modules/GhostTown/scenes/main-scene'
-import GhostLoading from 'components/GhostLoading'
+import GhostLoading from 'common/components/GhostLoading'
 import { useScreenGUI } from 'hooks/useScreenGUI'
 
 export default function GhostTown() {

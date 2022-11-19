@@ -1,7 +1,7 @@
 import {
     DialogMenuContext,
     InfoMenuContext,
-} from 'contexts/GhostTownGUIContext/GhostTownGUIContext'
+} from 'modules/GhostTown/contexts/GhostTownGUIContext/GhostTownGUIContext'
 import MenuObserver from './MenuObserver'
 
 export interface Subject {

@@ -3,12 +3,12 @@ import { useRouter } from 'next/router'
 import Image from 'next/image'
 
 import { registerWithEmailAndPassword } from '../../auth'
-import { RegisterForm } from '../../components'
-import { ALERTS_TYPE_ENUM } from '../../contexts/AlertContext'
+import { RegisterForm } from '../../common/components'
+import { ALERTS_TYPE_ENUM } from '../../common/contexts/AlertContext'
 import { useAlert, useAuth } from '../../hooks'
 import LoginLogoImg from '../../../public/img/login-logo.png'
 
-import BackButton from '../../components/BackButton'
+import BackButton from '../../common/components/BackButton'
 
 function Register() {
     const [email, setEmail] = useState('')

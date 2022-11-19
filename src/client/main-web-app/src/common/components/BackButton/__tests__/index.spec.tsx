@@ -2,7 +2,7 @@ import React from 'react'
 import { render, fireEvent, act } from '@testing-library/react'
 
 import BackButton from '..'
-import { customRender } from '../../../../test-helpers'
+import { customRender } from '../../../../../test-helpers'
 
 describe('components >> BackButton', () => {
     it('should render the component BackButton properly', () => {

@@ -1,9 +1,9 @@
 import { createContext } from 'react'
 
-import { ChapterTitleProps } from 'modules/GhostTown/elements/ChapterTitle'
-import { InfoMenuProps } from 'modules/GhostTown/elements/InfoMenu'
-import { DialogMenuProps } from 'modules/GhostTown/elements/DialogMenu'
-import { LiveMenuProps } from 'modules/GhostTown/elements/LiveMenu'
+import { ChapterTitleProps } from 'modules/GhostTown/components/ChapterTitle'
+import { InfoMenuProps } from 'modules/GhostTown/components/InfoMenu'
+import { DialogMenuProps } from 'modules/GhostTown/components/DialogMenu'
+import { LiveMenuProps } from 'modules/GhostTown/components/LiveMenu'
 
 interface ModalProps {
     isOpen: boolean

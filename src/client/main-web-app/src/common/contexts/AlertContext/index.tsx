@@ -1,6 +1,6 @@
 import React, { useState, createContext } from 'react'
 
-import { MESSAGE_TIMEOUT } from '../../const'
+import { MESSAGE_TIMEOUT } from '../../../const'
 
 import Alert from '../../components/Alert'
 

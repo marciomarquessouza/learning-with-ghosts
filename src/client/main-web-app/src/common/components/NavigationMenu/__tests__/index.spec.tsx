@@ -3,8 +3,8 @@ import { User } from 'firebase/auth'
 import { fireEvent } from '@testing-library/react'
 
 import NavigationMenu from '..'
-import { GITHUB_URL } from '../../../const'
-import { customRender } from '../../../../test-helpers'
+import { GITHUB_URL } from '../../../../const'
+import { customRender } from '../../../../../test-helpers'
 
 describe('components >> NavigationMenu', () => {
     const defaultMockedProps = {

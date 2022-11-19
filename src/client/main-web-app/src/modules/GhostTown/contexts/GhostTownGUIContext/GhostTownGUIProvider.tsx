@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 
-import ChapterTitle, { ChapterTitleProps } from 'modules/GhostTown/elements/ChapterTitle'
-import InfoMenu, { InfoMenuProps } from 'modules/GhostTown/elements/InfoMenu'
-import DialogMenu, { DialogMenuProps } from 'modules/GhostTown/elements/DialogMenu'
-import LiveMenu, { LiveMenuProps } from 'modules/GhostTown/elements/LiveMenu'
-import MainMenu from 'modules/GhostTown/elements/MainMenu'
+import ChapterTitle, { ChapterTitleProps } from 'modules/GhostTown/components/ChapterTitle'
+import InfoMenu, { InfoMenuProps } from 'modules/GhostTown/components/InfoMenu'
+import DialogMenu, { DialogMenuProps } from 'modules/GhostTown/components/DialogMenu'
+import LiveMenu, { LiveMenuProps } from 'modules/GhostTown/components/LiveMenu'
+import MainMenu from 'modules/GhostTown/components/MainMenu'
 import {
     chapterTitleDefault,
     dialogMenuDefault,
