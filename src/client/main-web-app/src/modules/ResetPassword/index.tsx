@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import Image from 'next/image'
 
 import { sendPasswordReset } from 'auth'
-import { useAlert, useAuth } from 'hooks'
+import { useAlert, useAuth } from 'common/hooks'
 import { ALERTS_TYPE_ENUM } from 'common/contexts/AlertContext'
 import LoginLogoImg from 'images/login-logo.png'
 

@@ -1,25 +1,13 @@
 import { useContext } from 'react'
 
-import {
-    ChapterTitleContext,
-    DialogMenuContext,
-    GhostTownGUIContext,
-    InfoMenuContext,
-    LiveMenuContext,
-} from 'modules/GhostTown/contexts/GhostTownGUIContext/GhostTownGUIContext'
+import { GhostTownGUIContext } from 'modules/GhostTown/contexts/GhostTownGUIContext/Context'
 import {
     InfoMenuProps,
     ChapterTitleProps,
     LiveMenuProps,
     DialogMenuProps,
 } from 'modules/GhostTown/components'
-
-export type GUIData = {
-    chapterTitle: ChapterTitleContext
-    infoMenu: InfoMenuContext
-    liveMenu: LiveMenuContext
-    dialogMenu: DialogMenuContext
-}
+import { CHARACTER } from '../const'
 
 export type GUIActions = {
     openChapterTitle: (props: ChapterTitleProps) => void
@@ -33,6 +21,7 @@ export type GUIActions = {
     closeDialogMenu: () => void
     openMainMenu: () => void
     closeMainMenu: () => void
+    callChallenge: (character?: CHARACTER) => void
 }
 
 export interface ScreenGUI {
@@ -52,6 +41,7 @@ export function useScreenGUI(): ScreenGUI {
         closeDialogMenu,
         openMainMenu,
         closeMainMenu,
+        callChallenge,
     } = useContext(GhostTownGUIContext)
 
     return {
@@ -67,6 +57,7 @@ export function useScreenGUI(): ScreenGUI {
             closeDialogMenu,
             openMainMenu,
             closeMainMenu,
+            callChallenge,
         },
     }
 }

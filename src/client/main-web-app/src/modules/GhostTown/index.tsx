@@ -3,11 +3,13 @@ import * as THREE from 'three'
 
 import { createMainScene } from 'modules/GhostTown/scenes/main-scene'
 import GhostLoading from 'common/components/GhostLoading'
-import { useScreenGUI } from 'hooks/useScreenGUI'
+import { useScreenGUI } from 'modules/GhostTown/hooks/useScreenGUI'
 
 export default function GhostTown() {
     const refContainer = useRef<HTMLDivElement>(null)
     const [loading, setLoading] = useState(true)
+    const [rendererState, setRenderer] = useState<THREE.WebGLRenderer>()
+    const [cancelAnimation, setCancelAnimation] = useState({ exec: () => {} })
     const screenGUI = useScreenGUI()
 
     useEffect(() => {
@@ -23,18 +25,23 @@ export default function GhostTown() {
         renderer.outputEncoding = THREE.sRGBEncoding
 
         if (container) {
-            createMainScene(renderer, container, screenGUI).then((scene) => {
-                if (scene && container.childNodes.length === 0) {
-                    container.appendChild(scene)
+            createMainScene(renderer, container, screenGUI).then((sceneData) => {
+                if (sceneData && container.childNodes.length === 0) {
+                    container.appendChild(sceneData.sceneDomElement)
+                    setRenderer(renderer)
+                    setCancelAnimation({ exec: sceneData.cancelAnimation })
                     setLoading(false)
                 }
             })
         }
-
-        return () => {
-            renderer.dispose()
-        }
     }, [loading, screenGUI])
+
+    useEffect(() => {
+        return () => {
+            rendererState?.dispose()
+            cancelAnimation.exec()
+        }
+    }, [rendererState, cancelAnimation])
 
     return (
         <>

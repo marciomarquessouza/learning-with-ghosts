@@ -1,4 +1,4 @@
-import { ScreenGUI as ScreenDataAction } from 'hooks/useScreenGUI'
+import { ScreenGUI as ScreenDataAction } from 'modules/GhostTown/hooks/useScreenGUI'
 import { ScreenGUI } from './ScreenGUI'
 
 function createScreenGUI({ actions }: ScreenDataAction) {

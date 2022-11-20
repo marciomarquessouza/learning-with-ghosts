@@ -4,6 +4,7 @@ import { ChapterTitleProps } from 'modules/GhostTown/components/ChapterTitle'
 import { InfoMenuProps } from 'modules/GhostTown/components/InfoMenu'
 import { DialogMenuProps } from 'modules/GhostTown/components/DialogMenu'
 import { LiveMenuProps } from 'modules/GhostTown/components/LiveMenu'
+import { CHARACTER } from 'modules/GhostTown/const'
 
 interface ModalProps {
     isOpen: boolean
@@ -17,7 +18,7 @@ export const chapterTitleDefault: ChapterTitleProps = {
 export type ChapterTitleContext = ChapterTitleProps & ModalProps
 
 export const infoMenuDefault: InfoMenuProps = {
-    character: null,
+    character: undefined,
     avatar: '',
     title: '',
     onTalk: () => {},
@@ -53,4 +54,5 @@ export const GhostTownGUIContext = createContext({
     closeDialogMenu: () => {},
     openMainMenu: () => {},
     closeMainMenu: () => {},
+    callChallenge: (character?: CHARACTER) => {},
 })

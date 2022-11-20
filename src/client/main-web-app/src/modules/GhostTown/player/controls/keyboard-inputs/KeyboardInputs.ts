@@ -33,6 +33,9 @@ export class KeyboardInputs {
             case 'KeyI':
                 this._iPressed = keyPressed
                 break
+            case 'KeyM':
+                this._mPressed = keyPressed
+                break
             case 'Space':
                 this._spacePressed = keyPressed
                 break

@@ -82,6 +82,14 @@ export class PlayerControls extends KeyboardInputs {
             this._pressed = true
         }
 
+        if (this._mPressed && !this._pressed) {
+            const infoMenu = this.services.screenGUI.isInfoMenuOpenWith()
+            if (infoMenu.isOpen) {
+                this.services.screenGUI.callChallenge(infoMenu.openedWith)
+                this._pressed = true
+            }
+        }
+
         if (this._spacePressed && !this._pressed) {
             const infoMenu = this.services.screenGUI.isInfoMenuOpenWith()
 

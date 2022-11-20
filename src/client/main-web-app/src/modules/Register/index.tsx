@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { registerWithEmailAndPassword } from '../../auth'
 import { RegisterForm } from '../../common/components'
 import { ALERTS_TYPE_ENUM } from '../../common/contexts/AlertContext'
-import { useAlert, useAuth } from '../../hooks'
+import { useAlert, useAuth } from '../../common/hooks'
 import LoginLogoImg from '../../../public/img/login-logo.png'
 
 import BackButton from '../../common/components/BackButton'

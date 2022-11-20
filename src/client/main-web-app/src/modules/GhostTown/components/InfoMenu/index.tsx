@@ -5,7 +5,7 @@ import getInfoMenuStylesByCharacter from './utils/getInfoMenuStylesByCharacter'
 import { CHARACTER } from '../../const'
 
 export interface InfoMenuProps {
-    character: CHARACTER | null
+    character?: CHARACTER
     avatar: string
     title: string
     onTalk?: (character: CHARACTER) => void

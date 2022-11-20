@@ -2,8 +2,8 @@ import { ChapterTitleProps } from '../../components/ChapterTitle'
 import { InfoMenuProps } from '../../components/InfoMenu'
 import { LiveMenuProps } from '../../components/LiveMenu'
 import { DialogMenuProps } from '../../components/DialogMenu'
-import { PARAMS } from '../../const'
-import { GUIActions } from 'hooks/useScreenGUI'
+import { CHARACTER, PARAMS } from '../../const'
+import { GUIActions } from 'modules/GhostTown/hooks/useScreenGUI'
 import { menuObserver } from 'modules/GhostTown/observers'
 
 export class ScreenGUI {
@@ -64,5 +64,9 @@ export class ScreenGUI {
     public closeActiveMenus() {
         this.guiActions.closeInfoMenu()
         this.guiActions.closeDialogMenu()
+    }
+
+    public callChallenge(character?: CHARACTER) {
+        this.guiActions.callChallenge(character)
     }
 }

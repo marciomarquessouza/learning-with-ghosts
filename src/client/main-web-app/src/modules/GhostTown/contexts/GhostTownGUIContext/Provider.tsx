@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useRouter } from 'next/router'
 
 import ChapterTitle, { ChapterTitleProps } from 'modules/GhostTown/components/ChapterTitle'
 import InfoMenu, { InfoMenuProps } from 'modules/GhostTown/components/InfoMenu'
@@ -11,14 +12,16 @@ import {
     GhostTownGUIContext,
     infoMenuDefault,
     liveMenuDefault,
-} from './GhostTownGUIContext'
+} from './Context'
 import { menuSubject } from 'modules/GhostTown/observers'
+import { CHARACTER } from 'modules/GhostTown/const'
 
 export interface GhostTownGUIProviderProps {
     children: React.ReactNode
 }
 
 function GhostTownGUIProvider({ children }: GhostTownGUIProviderProps) {
+    const router = useRouter()
     const [openChapterTitleVisible, setOpenChapterTitleVisible] = useState(false)
     const [chapterTitle, setChapterTitle] = useState<ChapterTitleProps>(chapterTitleDefault)
 
@@ -90,6 +93,11 @@ function GhostTownGUIProvider({ children }: GhostTownGUIProviderProps) {
         setMainMenuVisible(false)
     }
 
+    const handleCallChallenge = (character?: CHARACTER) => {
+        console.log(character)
+        router.push('/lighthouse')
+    }
+
     return (
         <GhostTownGUIContext.Provider
             value={{
@@ -104,6 +112,7 @@ function GhostTownGUIProvider({ children }: GhostTownGUIProviderProps) {
                 closeDialogMenu: handleCloseDialogMenu,
                 openMainMenu: handleOpenMainMenu,
                 closeMainMenu: handleCloseMainMenu,
+                callChallenge: handleCallChallenge,
             }}
         >
             {openChapterTitleVisible && <ChapterTitle {...chapterTitle} />}

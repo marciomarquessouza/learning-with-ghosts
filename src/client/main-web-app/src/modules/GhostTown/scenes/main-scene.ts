@@ -9,7 +9,7 @@ import { createSceneComponents } from './factory/sceneComponentsFactory'
 import { createServices } from '../services/factory/servicesFactory'
 import { createUtils } from '../utils/factory/utilsFactory'
 import { createPlayer } from '../player'
-import { ScreenGUI } from 'hooks/useScreenGUI'
+import { ScreenGUI } from 'modules/GhostTown/hooks/useScreenGUI'
 
 export async function createMainScene(
     renderer: THREE.WebGLRenderer,
@@ -17,7 +17,9 @@ export async function createMainScene(
     screenGUI: ScreenGUI
 ) {
     if (container.childNodes.length > 0) return
+
     let mixer: THREE.AnimationMixer
+    let requestedAnimationFrame = 0
 
     const scene = new THREE.Scene()
     const clock = new THREE.Clock()
@@ -58,15 +60,22 @@ export async function createMainScene(
 
     function animateScene() {
         const delta = Math.min(clock.getDelta(), 0.1)
-        requestAnimationFrame(animateScene)
+        requestedAnimationFrame = requestAnimationFrame(animateScene)
         sceneComponents.controls.update()
         mixer.update(delta)
         render()
         utils.sceneStats.update()
         update(delta)
     }
+
+    function cancelAnimation() {
+        cancelAnimationFrame(requestedAnimationFrame)
+    }
+
     player.reset()
+
     const animationMixer = await loadScene(scene, models)
+
     if (animationMixer) {
         mixer = animationMixer
         mixer.addEventListener('finished', createEndAnimationsTrigger(models))
@@ -77,5 +86,5 @@ export async function createMainScene(
         animateScene()
     }
 
-    return renderer.domElement
+    return { sceneDomElement: renderer.domElement, cancelAnimation }
 }
