@@ -1,4 +1,5 @@
 import React from 'react'
+import SocialMediaLogin from '../SocialMediaLogin'
 import Spinner from '../Spinner'
 
 export interface RegisterFormProps {
@@ -9,6 +10,8 @@ export interface RegisterFormProps {
     onChangeEmail: (email: string) => void
     onChangePassword: (password: string) => void
     onChangeName: (name: string) => void
+    onClickTwitterLogin: () => void
+    onClickGoogleLogin: () => void
     onSubmit: () => void
 }
 
@@ -20,6 +23,8 @@ function RegisterForm({
     onChangeEmail,
     onChangePassword,
     onChangeName,
+    onClickTwitterLogin,
+    onClickGoogleLogin,
     onSubmit,
 }: RegisterFormProps) {
     const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -40,6 +45,17 @@ function RegisterForm({
         }
     }
 
+    const handleSocialMediaClick = (target: string) => {
+        switch (target) {
+            case 'twitter':
+                onClickTwitterLogin()
+                break
+            case 'google':
+                onClickGoogleLogin()
+                break
+        }
+    }
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         onSubmit()
@@ -48,7 +64,14 @@ function RegisterForm({
     return (
         <form onSubmit={handleSubmit}>
             <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
-                <p className="text-3xl text-white mb-0 mr-4">Registratioooon:</p>
+                <p className="text-3xl text-white mb-0 mx-4">Registratioooon</p>
+            </div>
+            <div>
+                <span className="text-xl text-white mb-2 mr-4">Access using:</span>
+                <SocialMediaLogin onClick={handleSocialMediaClick} />
+            </div>
+            <div className="flex items-center justify-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
+                <p className="text-white text-center font-semibold mx-4 mb-0">Or</p>
             </div>
 
             <div className="mb-6">

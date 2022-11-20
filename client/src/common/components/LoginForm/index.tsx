@@ -72,7 +72,7 @@ function LoginForm({
 
     return (
         <form onSubmit={handleSubmit}>
-            <p className="text-3xl text-white mb-0 mr-4">Looogin</p>
+            <p className="text-3xl text-white mb-2 mr-4">Looogin</p>
             <SocialMediaLogin onClick={handleSocialMediaClick} />
             <div className="flex items-center justify-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
                 <p className="text-white text-center font-semibold mx-4 mb-0">Or</p>
@@ -114,13 +114,13 @@ function LoginForm({
                     {loading ? <Spinner /> : 'Login'}
                 </button>
                 <p className="text-lg text-white font-semibold mt-4 pt-1 mb-0">
-                    {`Don't have an account?`}
+                    {`Don't have an account? `}
                     <a
                         onClick={handleRegister}
                         href="#"
                         className="text-primary-light hover:text-primary-dark focus:text-primary transition duration-200 ease-in-out"
                     >
-                        Register
+                        {` Register Here =)`}
                     </a>
                 </p>
             </div>

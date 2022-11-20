@@ -21,7 +21,7 @@ function Home() {
     }
 
     return (
-        <div className="relative overflow-hidden ">
+        <div className="relative overflow-hidden">
             <div
                 className="bg-background h-screen bg-cover bg-no-repeat bg-center pt-4"
                 style={{

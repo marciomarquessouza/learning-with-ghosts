@@ -41,7 +41,7 @@ function ResetPasswordForm({
     return (
         <form onSubmit={handleSubmit}>
             <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
-                <p className="text-3xl text-white mb-0 mr-4">Reset Passwoooord:</p>
+                <p className="text-3xl text-white mb-0 mx-4">Reset Passwoooord:</p>
             </div>
 
             <div className="mb-6">
@@ -62,14 +62,14 @@ function ResetPasswordForm({
                 >
                     {loading ? <Spinner /> : 'Send'}
                 </button>
-                <p className="text-lg text-white font-semibold mt-2 pt-1 mb-0">
-                    {`Don't have an account?`}
+                <p className="text-lg text-white font-semibold mt-4 pt-1 mb-0">
+                    {`Don't have an account? `}
                     <a
                         onClick={handleRegister}
                         href="#"
                         className="text-primary-light hover:text-primary-dark focus:text-primary transition duration-200 ease-in-out"
                     >
-                        Register
+                        {` Register Here =)`}
                     </a>
                 </p>
             </div>

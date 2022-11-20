@@ -11,7 +11,7 @@ function SocialMediaLogin({ onClick }: SocialMediaLoginProps) {
     }
 
     return (
-        <div className="flex flex-row items-center justify-center lg:justify-start">
+        <>
             <button
                 type="button"
                 name="twitter"
@@ -45,7 +45,7 @@ function SocialMediaLogin({ onClick }: SocialMediaLoginProps) {
                     />
                 </svg>
             </button>
-        </div>
+        </>
     )
 }
 
