@@ -3,13 +3,14 @@ import * as THREE from 'three'
 import { loadScene } from './helpers/loaders'
 import { createModels } from '../models'
 import { createEndAnimationsTrigger } from './helpers/animations/trigger-end-animations'
-import { PARAMS } from '../const'
 import { sceneInitiation } from './helpers/scene-initiation/sceneInitiation'
 import { createSceneComponents } from './factory/sceneComponentsFactory'
 import { createServices } from '../services/factory/servicesFactory'
 import { createUtils } from '../utils/factory/utilsFactory'
 import { createPlayer } from '../player'
 import { ScreenGUI } from 'modules/GhostTown/hooks/useScreenGUI'
+
+import { PARAMS } from '../const'
 
 export async function createMainScene(
     renderer: THREE.WebGLRenderer,

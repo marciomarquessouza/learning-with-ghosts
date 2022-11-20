@@ -20,7 +20,6 @@ export async function sceneInitiation({
 
     const chapter = '01'
     const currentChapterData = await levels.fetchChapter(chapter)
-    console.log('currentChapterData', currentChapterData)
     const { title, subtitle, shortTitle: chapterName } = currentChapterData
     services.interactions.loadChapterDialogs(currentChapterData)
     train.startArrivalAnimation()
