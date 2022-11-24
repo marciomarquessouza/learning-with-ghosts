@@ -13,7 +13,7 @@ function Avatar({ name, photoUrl }: AvatarProps) {
         <div>
             {photoUrl ? (
                 <Image
-                    className="inline-block h-12 w-12 rounded-full"
+                    className="inline-block h-12 w-12 rounded-full border-4 border-primary-light"
                     referrerPolicy={'no-referrer'}
                     src={photoUrl}
                     alt="User Avatar"

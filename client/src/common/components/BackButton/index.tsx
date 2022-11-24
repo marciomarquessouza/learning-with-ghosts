@@ -3,13 +3,18 @@ import { useRouter } from 'next/router'
 
 export interface BackButtonProps {
     label?: string
+    path?: string
 }
 
-function BackButton({ label = 'Return' }: BackButtonProps) {
+function BackButton({ label = 'Return', path }: BackButtonProps) {
     const router = useRouter()
     const handleOnPress = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault()
-        router.back()
+        if (path) {
+            router.push(path)
+        } else {
+            router.back()
+        }
     }
 
     return (

@@ -112,7 +112,7 @@ function RegisterForm({
                     type="submit"
                     className="inline-block px-7 py-3 bg-primary-light text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-primary-dark hover:shadow-lg focus:bg-primary focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                 >
-                    {loading ? <Spinner /> : 'Register'}
+                    {loading ? <Spinner size="sm" /> : 'START'}
                 </button>
             </div>
         </form>

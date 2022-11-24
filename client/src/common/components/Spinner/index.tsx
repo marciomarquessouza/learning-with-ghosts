@@ -1,15 +1,24 @@
 import React from 'react'
+import classnames from 'classnames'
 
 interface SpinnerProps {
     label?: string
+    size?: 'sm' | 'md' | 'lg'
 }
 
-function Spinner({ label = 'Loading...' }: SpinnerProps) {
+function Spinner({ label, size = 'md' }: SpinnerProps) {
     return (
-        <div role="status">
+        <span role="status">
             <svg
                 aria-hidden="true"
-                className="mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                className={classnames(
+                    {
+                        'w-4 h-4': size === 'sm',
+                        'w-8 h-8': size === 'md',
+                        'w-12 h-12': size === 'lg',
+                    },
+                    'mx-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600'
+                )}
                 viewBox="0 0 100 101"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -24,7 +33,7 @@ function Spinner({ label = 'Loading...' }: SpinnerProps) {
                 />
             </svg>
             <span className="sr-only">{label}</span>
-        </div>
+        </span>
     )
 }
 

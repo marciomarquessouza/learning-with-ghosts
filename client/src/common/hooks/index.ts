@@ -1,2 +1,2 @@
-export * from './useAuth'
+export * from '../../modules/Auth/hooks/useAuth'
 export * from './useAlert'

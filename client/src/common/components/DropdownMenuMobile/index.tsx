@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
-import { User } from 'firebase/auth'
+import { User } from 'modules/Auth/types/User'
 
 export interface DropdownMenuMobileProps {
     user?: User | null

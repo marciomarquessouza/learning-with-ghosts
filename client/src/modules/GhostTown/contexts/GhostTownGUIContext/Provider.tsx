@@ -94,7 +94,6 @@ function GhostTownGUIProvider({ children }: GhostTownGUIProviderProps) {
     }
 
     const handleCallChallenge = (character?: CHARACTER) => {
-        console.log(character)
         router.push('/lighthouse')
     }
 

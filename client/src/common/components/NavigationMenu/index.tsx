@@ -1,10 +1,9 @@
 import React from 'react'
-import { User } from 'firebase/auth'
+import { User } from 'modules/Auth/types/User'
 
+import { GITHUB_URL } from 'const'
 import DropdownMenuAvatar from '../DropdownMenuAvatar'
 import DropdownMenuMobile from '../DropdownMenuMobile'
-
-import { GITHUB_URL } from '../../../const'
 
 export interface NavigationMenuProps {
     user?: User | null
@@ -42,7 +41,7 @@ function NavigationMenu({ user, onLogout, onLogin }: NavigationMenuProps) {
                 <div className="mx-4">
                     {user ? (
                         <DropdownMenuAvatar
-                            name={user.displayName || 'User'}
+                            name={user.name || 'User'}
                             email={user.email}
                             photoUrl={user.photoURL}
                             onLogout={onLogout}

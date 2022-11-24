@@ -5,3 +5,13 @@ export const MESSAGE_TIMEOUT = 5000
 export const COLLECTIONS = {
     USERS: 'users',
 }
+export const PAGES_ROUTERS = {
+    HOME: '/',
+    LOGIN: '/auth/login',
+    REGISTER: '/auth/register',
+    RESET: '/auth/reset',
+    GHOST_TOWN: '/ghost-town',
+    LIGHTHOUSE: '/lighthouse',
+}
+
+export const DEFAULT_AVATAR = '/img/avatar.png'

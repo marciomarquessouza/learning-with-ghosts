@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import { User } from 'modules/Auth/types/User'
 
 import { loadScene } from './helpers/loaders'
 import { createModels } from '../models'
@@ -12,11 +13,14 @@ import { ScreenGUI } from 'modules/GhostTown/hooks/useScreenGUI'
 
 import { PARAMS } from '../const'
 
-export async function createMainScene(
-    renderer: THREE.WebGLRenderer,
-    container: HTMLDivElement,
+interface CreateMainSceneProps {
+    renderer: THREE.WebGLRenderer
+    container: HTMLDivElement
     screenGUI: ScreenGUI
-) {
+    user: User
+}
+
+export async function createMainScene({ renderer, container, screenGUI }: CreateMainSceneProps) {
     if (container.childNodes.length > 0) return
 
     let mixer: THREE.AnimationMixer

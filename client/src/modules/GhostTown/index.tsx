@@ -1,11 +1,16 @@
 import { useState, useEffect, useRef } from 'react'
 import * as THREE from 'three'
+import { User } from 'modules/Auth/types/User'
 
 import { createMainScene } from 'modules/GhostTown/scenes/main-scene'
 import GhostLoading from 'common/components/GhostLoading'
 import { useScreenGUI } from 'modules/GhostTown/hooks/useScreenGUI'
 
-export default function GhostTown() {
+interface GhostTownProps {
+    user: User
+}
+
+export default function GhostTown({ user }: GhostTownProps) {
     const refContainer = useRef<HTMLDivElement>(null)
     const [loading, setLoading] = useState(true)
     const [rendererState, setRenderer] = useState<THREE.WebGLRenderer>()
@@ -25,7 +30,7 @@ export default function GhostTown() {
         renderer.outputEncoding = THREE.sRGBEncoding
 
         if (container) {
-            createMainScene(renderer, container, screenGUI).then((sceneData) => {
+            createMainScene({ renderer, container, screenGUI, user }).then((sceneData) => {
                 if (sceneData && container.childNodes.length === 0) {
                     container.appendChild(sceneData.sceneDomElement)
                     setRenderer(renderer)
@@ -34,7 +39,7 @@ export default function GhostTown() {
                 }
             })
         }
-    }, [loading, screenGUI])
+    }, [loading, screenGUI, user])
 
     useEffect(() => {
         return () => {
