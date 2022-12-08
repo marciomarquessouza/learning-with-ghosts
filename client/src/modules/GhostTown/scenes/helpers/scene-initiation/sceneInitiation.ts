@@ -2,6 +2,7 @@ import { LANGUAGES, PARAMS } from '../../../const'
 import { Models } from '../../../models/types'
 import { Services } from '../../../services/types'
 import { Utils } from '../../../utils/types'
+import { useGameInteraction } from 'modules/GhostTown/hooks/useGameInteractions'
 
 export interface SceneInitiationProps {
     models: Models
@@ -9,14 +10,9 @@ export interface SceneInitiationProps {
     utils: Utils
 }
 
-export async function sceneInitiation({
-    models,
-    services,
-    utils,
-}: SceneInitiationProps): Promise<void> {
+export async function sceneInitiation({ models, services }: SceneInitiationProps): Promise<void> {
     const { train, lighthouse, princess } = models
     const { screenGUI, levels } = services
-    const { storage } = utils
 
     const chapter = '01'
     const currentChapterData = await levels.fetchChapter(chapter)
@@ -37,9 +33,4 @@ export async function sceneInitiation({
         chapterName,
     })
     screenGUI.showMainMenu()
-    storage.chapter = chapter
-    storage.day = 1
-    storage.step = 1
-    storage.language = LANGUAGES.GERMAN
-    storage.lives = PARAMS.INITIAL_LIVES
 }

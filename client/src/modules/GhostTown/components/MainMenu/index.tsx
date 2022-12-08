@@ -1,14 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
-import { GITHUB_ABOUT, GITHUB_HELP } from 'const'
+import { useRouter } from 'next/router'
+import { GITHUB_ABOUT, GITHUB_HELP, PAGES_ROUTERS } from 'const'
 
 export default function MainMenu({}) {
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const router = useRouter()
 
     const toggleModal = () => {
         setIsModalOpen(!isModalOpen)
     }
+
+    const handleQuit = useCallback(async () => {
+        router.push(PAGES_ROUTERS.HOME)
+    }, [router])
 
     return (
         <div className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-40 md:inset-0 h-modal md:h-full">
@@ -91,14 +96,14 @@ export default function MainMenu({}) {
                                         ABOUT
                                     </span>
                                 </a>
-                                <Link
-                                    href="/"
-                                    className="flex w-full focus:outline-none active:outline-none"
+                                <a
+                                    onClick={handleQuit}
+                                    className="cursor-pointer flex w-full focus:outline-none active:outline-none"
                                 >
                                     <span className="w-full flex justify-start font-josefin font-light text-white text-2xl hover:bg-primary-light focus:outline-none active:outline-none p-2">
                                         QUIT GAME
                                     </span>
-                                </Link>
+                                </a>
                             </section>
                         </div>
                         <div className="flex items-center p-6 space-x-2 rounded-b border-t border-white"></div>

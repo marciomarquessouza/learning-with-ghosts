@@ -1,5 +1,5 @@
 import React from 'react'
-import { User } from 'modules/Auth/types/User'
+import { User } from 'types/User'
 
 import { GITHUB_URL } from 'const'
 import DropdownMenuAvatar from '../DropdownMenuAvatar'

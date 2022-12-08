@@ -23,5 +23,6 @@ export class SceneStats {
 
     close() {
         this.stats.end()
+        this.stats.domElement.remove()
     }
 }

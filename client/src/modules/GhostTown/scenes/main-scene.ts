@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { User } from 'modules/Auth/types/User'
+import { User } from 'types/User'
 
 import { loadScene } from './helpers/loaders'
 import { createModels } from '../models'
@@ -73,8 +73,13 @@ export async function createMainScene({ renderer, container, screenGUI }: Create
         update(delta)
     }
 
-    function cancelAnimation() {
+    function removeScene() {
         cancelAnimationFrame(requestedAnimationFrame)
+        utils.sceneStats.close()
+        for (var i = scene.children.length - 1; i >= 0; i--) {
+            const obj = scene.children[i]
+            scene.remove(obj)
+        }
     }
 
     player.reset()
@@ -91,5 +96,5 @@ export async function createMainScene({ renderer, container, screenGUI }: Create
         animateScene()
     }
 
-    return { sceneDomElement: renderer.domElement, cancelAnimation }
+    return { sceneDomElement: renderer.domElement, removeScene }
 }

@@ -1,23 +1,21 @@
 import { useCallback } from 'react'
 import { doc, getDoc, setDoc, deleteDoc, DocumentData, WithFieldValue } from 'firebase/firestore'
 import { db } from 'config/firebase'
+import { COLLECTIONS } from 'const'
 
-export function useDocument(collection: string) {
-    const getDocRef = useCallback(
-        (uid: string) => {
-            if (!collection || !uid) return null
-            return doc(db, collection, uid)
-        },
-        [collection]
-    )
+export function useDocument() {
+    const getDocRef = useCallback((collection: COLLECTIONS, uid: string) => {
+        if (!collection || !uid) return null
+        return doc(db, collection, uid)
+    }, [])
 
     const getDocument = useCallback(
-        async (uid: string) => {
-            const docRef = getDocRef(uid)
+        async function <T>(collection: COLLECTIONS, uid: string): Promise<T | null> {
+            const docRef = getDocRef(collection, uid)
             if (!docRef) return null
             try {
                 const returnedValue = await getDoc(docRef)
-                return returnedValue.data()
+                return returnedValue.data() as T
             } catch (error: any) {
                 throw new Error(error?.message)
             }
@@ -26,12 +24,16 @@ export function useDocument(collection: string) {
     )
 
     const setDocument = useCallback(
-        async (uid: string, updateData: WithFieldValue<DocumentData>) => {
-            const docRef = getDocRef(uid)
+        async function <T>(
+            collection: COLLECTIONS,
+            uid: string,
+            updateData: WithFieldValue<DocumentData>
+        ): Promise<T | null> {
+            const docRef = getDocRef(collection, uid)
             if (!docRef) return null
             try {
                 await setDoc(docRef, updateData)
-                return await getDocument(uid)
+                return await getDocument<T>(collection, uid)
             } catch (error: any) {
                 throw new Error(error?.message)
             }
@@ -40,11 +42,11 @@ export function useDocument(collection: string) {
     )
 
     const removeDocument = useCallback(
-        async (uid: string) => {
-            const docRef = getDocRef(uid)
+        async function <T>(collection: COLLECTIONS, uid: string): Promise<T | null> {
+            const docRef = getDocRef(collection, uid)
             if (!docRef) return null
             try {
-                return await deleteDoc(docRef)
+                return (await deleteDoc(docRef)) as T
             } catch (error: any) {
                 throw new Error(error?.message)
             }

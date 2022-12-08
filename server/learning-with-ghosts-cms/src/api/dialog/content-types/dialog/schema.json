@@ -1,0 +1,69 @@
+{
+  "kind": "collectionType",
+  "collectionName": "dialogs",
+  "info": {
+    "singularName": "dialog",
+    "pluralName": "dialogs",
+    "displayName": "Dialog",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "dialog"
+      ],
+      "default": "dialog"
+    },
+    "from": {
+      "type": "enumeration",
+      "enum": [
+        "ghost",
+        "princess",
+        "death",
+        "krampus"
+      ]
+    },
+    "text": {
+      "type": "string"
+    },
+    "expression": {
+      "type": "enumeration",
+      "enum": [
+        "happiness",
+        "normal",
+        "anger",
+        "sadness",
+        "surprise",
+        "fear"
+      ]
+    },
+    "order": {
+      "type": "integer",
+      "unique": false,
+      "required": true
+    },
+    "character": {
+      "type": "enumeration",
+      "enum": [
+        "ghost",
+        "princess",
+        "death",
+        "krampus"
+      ]
+    },
+    "step": {
+      "type": "integer"
+    },
+    "day": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::day.day",
+      "inversedBy": "dialogs"
+    }
+  }
+}

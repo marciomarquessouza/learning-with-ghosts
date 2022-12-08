@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import { registerWithEmailAndPassword, signInWithGoogle, signInWithTwitter } from './services'
-import { RegisterForm } from '../../common/components'
-import { ALERTS_TYPE_ENUM } from '../../common/contexts/AlertContext'
-import { useAlert } from '../../common/hooks'
+import { RegisterForm } from 'common/components'
+import { useAlert } from 'common/hooks/useAlert'
 import { useUser } from './hooks/useUser'
-
-import BackButton from '../../common/components/BackButton'
 import { PAGES_ROUTERS } from 'const'
+import { ALERTS_TYPE_ENUM } from 'common/contexts/AlertContext'
+
+import BackButton from 'common/components/BackButton'
 import SideHero from 'common/components/SideHero'
 
 function Register() {

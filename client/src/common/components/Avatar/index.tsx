@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 
-import { getInitials } from '../../../utils'
+import { getInitials } from 'common/utils/getInitials'
 
 interface AvatarProps {
     name: string

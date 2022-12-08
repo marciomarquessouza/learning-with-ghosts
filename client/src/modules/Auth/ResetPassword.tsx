@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import { sendPasswordReset } from './services'
-import { useAlert } from 'common/hooks'
+import { useAlert } from 'common/hooks/useAlert'
 import { useAuth } from './hooks/useAuth'
 import { ALERTS_TYPE_ENUM } from 'common/contexts/AlertContext'
 

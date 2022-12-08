@@ -1,21 +1,26 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import { LoginForm } from 'common/components'
-import { logInWithEmailAndPassword, signInWithGoogle, signInWithTwitter } from './services'
-import { useAlert, useAuth } from 'common/hooks'
+import {
+    logInWithEmailAndPassword,
+    signInWithGoogle,
+    signInWithTwitter,
+} from 'modules/Auth/services'
+import { useAlert } from 'common/hooks/useAlert'
+import { useUser } from 'modules/Auth/hooks/useUser'
 import { ALERTS_TYPE_ENUM } from 'common/contexts/AlertContext'
 import { PAGES_ROUTERS } from 'const'
 
 import BackButton from 'common/components/BackButton'
 import SideHero from 'common/components/SideHero'
+import LoginForm from 'common/components/LoginForm'
 
 function Login() {
     const router = useRouter()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
-    const { user } = useAuth()
+    const { user } = useUser()
     const { openAlert } = useAlert()
 
     const handleChangeEmail = (email: string) => {

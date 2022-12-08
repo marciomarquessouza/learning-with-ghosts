@@ -1,11 +1,9 @@
 import React, { createContext, useEffect, useState, useCallback } from 'react'
-import { onAuthStateChanged } from 'firebase/auth'
 
-import { User } from 'modules/Auth/types/User'
+import { User } from 'types/User'
 import { useDocument } from 'common/hooks/useDocument'
-import { auth } from 'config/firebase'
 import { COLLECTIONS } from 'const'
-import { useAuth } from 'common/hooks'
+import { useAuth } from 'modules/Auth/hooks/useAuth'
 
 export interface AuthContextType {
     user?: User | null
@@ -26,19 +24,19 @@ export const AuthContext = createContext<AuthContextType>({
 })
 
 function AuthProvider({ children }: AuthProviderProps) {
-    const { user: authUser } = useAuth()
+    const { user: authUser, loading: authUserLoading } = useAuth()
     const [user, setUser] = useState<User | null>()
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
-    const { getDocument, setDocument } = useDocument(COLLECTIONS.USERS)
+    const { getDocument, setDocument } = useDocument()
 
     const handleSetChapter = useCallback(
         async (chapter: number) => {
             if (!user) return null
             setLoading(true)
-            setDocument(user.uid, { chapter })
-                .then((value) => {
-                    setUser(value as User)
+            setDocument<User>(COLLECTIONS.USERS, user.uid, { chapter })
+                .then((updatedUser) => {
+                    setUser(updatedUser)
                 })
                 .catch((reason) => {
                     setError(reason)
@@ -51,17 +49,21 @@ function AuthProvider({ children }: AuthProviderProps) {
     )
 
     useEffect(() => {
+        if (authUserLoading) return
         if (authUser) {
-            getDocument(authUser.uid)
+            getDocument<User>(COLLECTIONS.USERS, authUser.uid)
                 .then((userData) => {
-                    setUser(userData as User)
+                    setUser(userData)
                     setLoading(false)
                 })
                 .catch((reason) => {
                     setError(reason)
                 })
+        } else {
+            setUser(null)
+            setLoading(false)
         }
-    }, [getDocument, authUser])
+    }, [getDocument, authUser, authUserLoading])
 
     return (
         <AuthContext.Provider

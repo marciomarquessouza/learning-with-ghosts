@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import * as THREE from 'three'
-import { User } from 'modules/Auth/types/User'
+import { User } from 'types/User'
 
 import { createMainScene } from 'modules/GhostTown/scenes/main-scene'
 import GhostLoading from 'common/components/GhostLoading'
@@ -14,7 +14,8 @@ export default function GhostTown({ user }: GhostTownProps) {
     const refContainer = useRef<HTMLDivElement>(null)
     const [loading, setLoading] = useState(true)
     const [rendererState, setRenderer] = useState<THREE.WebGLRenderer>()
-    const [cancelAnimation, setCancelAnimation] = useState({ exec: () => {} })
+    const [removeScene, setRemoveScene] = useState({ exec: () => {} })
+
     const screenGUI = useScreenGUI()
 
     useEffect(() => {
@@ -34,7 +35,7 @@ export default function GhostTown({ user }: GhostTownProps) {
                 if (sceneData && container.childNodes.length === 0) {
                     container.appendChild(sceneData.sceneDomElement)
                     setRenderer(renderer)
-                    setCancelAnimation({ exec: sceneData.cancelAnimation })
+                    setRemoveScene({ exec: sceneData.removeScene })
                     setLoading(false)
                 }
             })
@@ -44,9 +45,9 @@ export default function GhostTown({ user }: GhostTownProps) {
     useEffect(() => {
         return () => {
             rendererState?.dispose()
-            cancelAnimation.exec()
+            removeScene.exec()
         }
-    }, [rendererState, cancelAnimation])
+    }, [rendererState, removeScene])
 
     return (
         <>

@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useMemo } from 'react'
 import { useRouter } from 'next/router'
-import { User } from 'modules/Auth/types/User'
+import { User } from 'types/User'
 
 import { PAGES_ROUTERS } from 'const'
 import Spinner from '../Spinner'

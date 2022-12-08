@@ -2,18 +2,19 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import { Popover } from '@headlessui/react'
 
-import { logout } from 'modules/Auth/services'
-import { Hero, LogoHeader, NavigationMenu, Spinner } from 'common/components'
 import { useUser } from 'modules/Auth/hooks/useUser'
-import { useAlert } from 'common/hooks'
+import { useAlert } from 'common/hooks/useAlert'
+import { logout } from 'modules/Auth/services'
+import { Hero, LogoHeader, NavigationMenu } from 'common/components'
 import { PAGES_ROUTERS } from 'const'
 import { ALERTS_TYPE_ENUM } from 'common/contexts/AlertContext'
+import GhostLoading from 'common/components/GhostLoading'
 
 const BACKGROUND_IMAGE = "url('img/background_main_page.png')"
 
 function Home() {
     const router = useRouter()
-    const { user, loading, error } = useUser()
+    const { user, loading: loadingUser, error } = useUser()
     const { openAlert } = useAlert()
 
     const handleLogin = () => {
@@ -24,7 +25,11 @@ function Home() {
         logout()
     }
 
-    if (error && !loading) {
+    if (loadingUser) {
+        return <GhostLoading />
+    }
+
+    if (error && !loadingUser) {
         openAlert({
             title: 'Error',
             message: 'Error loading the content. Please, try later',
@@ -49,15 +54,11 @@ function Home() {
                             <LogoHeader />
                         </div>
                         <div className="md:flex md:items-center md:space-x-6">
-                            {loading ? (
-                                <Spinner />
-                            ) : (
-                                <NavigationMenu
-                                    user={user}
-                                    onLogin={handleLogin}
-                                    onLogout={handleLogout}
-                                />
-                            )}
+                            <NavigationMenu
+                                user={user}
+                                onLogin={handleLogin}
+                                onLogout={handleLogout}
+                            />
                         </div>
                     </nav>
                 </Popover>
