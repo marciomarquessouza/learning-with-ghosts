@@ -1,36 +1,39 @@
-import { LANGUAGES, PARAMS } from '../../../const'
+import { PARAMS } from '../../../const'
 import { Models } from '../../../models/types'
 import { Services } from '../../../services/types'
-import { Utils } from '../../../utils/types'
-import { useGameInteraction } from 'modules/GhostTown/hooks/useGameInteractions'
+import { Chapter, User } from 'types'
 
 export interface SceneInitiationProps {
     models: Models
     services: Services
-    utils: Utils
+    user: User
+    chapter: Chapter
 }
 
-export async function sceneInitiation({ models, services }: SceneInitiationProps): Promise<void> {
+export async function sceneInitiation({
+    models,
+    services,
+    user,
+    chapter,
+}: SceneInitiationProps): Promise<void> {
     const { train, lighthouse, princess } = models
-    const { screenGUI, levels } = services
+    const { screenGUI } = services
 
-    const chapter = '01'
-    const currentChapterData = await levels.fetchChapter(chapter)
-    const { title, subtitle, shortTitle: chapterName } = currentChapterData
-    services.interactions.loadChapterDialogs(currentChapterData)
+    const { title, subtitle, chapterNumber } = chapter
+    services.interactions.loadChapterDialogs(chapter)
     train.startArrivalAnimation()
     lighthouse.startBulbAnimation()
     princess.startLevitationAnimation()
     screenGUI.showChapterTitle({
         mainTitle: title,
         subtitle,
-        chapterNumber: chapter,
+        chapterNumber,
     })
     screenGUI.showLiveMenu({
-        lives: PARAMS.INITIAL_LIVES,
-        day: 1,
-        chapterNumber: 1,
-        chapterName,
+        lives: user.lives,
+        day: user.day,
+        chapterNumber,
+        chapterName: title,
     })
     screenGUI.showMainMenu()
 }

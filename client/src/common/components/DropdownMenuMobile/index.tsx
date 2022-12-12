@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
-import { User } from 'types/User'
+import { User } from 'types'
 
 export interface DropdownMenuMobileProps {
     user?: User | null

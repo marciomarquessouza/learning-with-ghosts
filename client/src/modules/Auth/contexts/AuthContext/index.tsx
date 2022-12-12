@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState, useCallback } from 'react'
 
-import { User } from 'types/User'
+import { User } from 'types'
 import { useDocument } from 'common/hooks/useDocument'
 import { COLLECTIONS } from 'const'
 import { useAuth } from 'modules/Auth/hooks/useAuth'

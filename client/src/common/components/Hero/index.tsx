@@ -1,15 +1,16 @@
 import React, { useState, useCallback, useMemo } from 'react'
 import { useRouter } from 'next/router'
-import { User } from 'types/User'
+import { User, Chapter } from 'types'
 
 import { PAGES_ROUTERS } from 'const'
 import Spinner from '../Spinner'
 
 export interface HeroProps {
     user?: User | null
+    chapter?: Chapter | null
 }
 
-function Hero({ user }: HeroProps) {
+function Hero({ user, chapter }: HeroProps) {
     const [loading, setLoading] = useState(false)
     const router = useRouter()
     const isAuthenticated = useMemo(() => !!user, [user])
@@ -38,8 +39,8 @@ function Hero({ user }: HeroProps) {
                                 {user ? `Your Level: ` : `Ghost Town `}
                             </span>
                             <span className="font-light">
-                                {user
-                                    ? `Chapter 01 - Greeting`
+                                {chapter
+                                    ? `Chapter ${chapter.chapterNumber} - ${chapter.title}`
                                     : `is a new way to gamify education using the full power of WebGL`}
                             </span>
                         </p>

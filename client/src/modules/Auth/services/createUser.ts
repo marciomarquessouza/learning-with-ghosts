@@ -24,6 +24,7 @@ export async function createUser({
         uid,
         chapter: 1,
         day: 1,
+        lives: 5,
         photoURL,
     })
 }

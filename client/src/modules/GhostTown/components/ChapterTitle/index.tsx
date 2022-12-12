@@ -4,7 +4,7 @@ import LogoImg from 'images/logo.png'
 export interface ChapterTitleProps {
     mainTitle: string
     subtitle: string
-    chapterNumber: string
+    chapterNumber: number
 }
 
 export default function ChapterTitle({ mainTitle, subtitle, chapterNumber }: ChapterTitleProps) {

@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import { User } from 'types'
 
 import { CHARACTER, PARAMS } from '../const'
 import { Models } from '../models/types'
@@ -14,7 +15,8 @@ export class Player extends PlayerControls {
         services: Services,
         sceneComponents: SceneComponents,
         private models: Models,
-        private helpers = Helpers
+        private helpers = Helpers,
+        private user: User
     ) {
         const playerMesh = models.ghost
         super(services, sceneComponents, playerMesh)
@@ -45,6 +47,7 @@ export class Player extends PlayerControls {
     }
 
     startInteraction(character: CHARACTER): void {
+        const { day } = this.user
         this._isInInteraction = true
         this.services.screenGUI.closeInfoMenu()
         this.sceneComponents.camera.zoomIn()

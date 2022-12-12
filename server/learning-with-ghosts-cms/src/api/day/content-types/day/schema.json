@@ -29,6 +29,9 @@
       "relation": "manyToOne",
       "target": "api::chapter.chapter",
       "inversedBy": "days"
+    },
+    "day": {
+      "type": "integer"
     }
   }
 }

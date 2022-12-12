@@ -1,1 +1,5 @@
-export interface Interaction {}
+import { Chapter } from './'
+
+export interface Interaction {
+    chapters: Chapter[]
+}

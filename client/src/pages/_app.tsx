@@ -6,10 +6,20 @@ import { ReactQueryDevtools } from 'react-query/devtools'
 
 import AlertProvider from 'common/contexts/AlertContext'
 import AuthProvider from 'modules/Auth/contexts/AuthContext'
+import InteractionProvider from 'modules/GhostTown/contexts/InteractionContext'
 import '../styles/globals.css'
 
 export default function App({ Component, pageProps }: AppProps) {
-    const [queryClient] = useState(() => new QueryClient())
+    const [queryClient] = useState(
+        () =>
+            new QueryClient({
+                defaultOptions: {
+                    queries: {
+                        staleTime: 10 * 60 * 1000,
+                    },
+                },
+            })
+    )
 
     return (
         <QueryClientProvider client={queryClient}>
@@ -19,9 +29,11 @@ export default function App({ Component, pageProps }: AppProps) {
                     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                 </Head>
                 <AuthProvider>
-                    <AlertProvider>
-                        <Component {...pageProps} />
-                    </AlertProvider>
+                    <InteractionProvider>
+                        <AlertProvider>
+                            <Component {...pageProps} />
+                        </AlertProvider>
+                    </InteractionProvider>
                 </AuthProvider>
                 <ReactQueryDevtools initialIsOpen={false} />
             </Hydrate>

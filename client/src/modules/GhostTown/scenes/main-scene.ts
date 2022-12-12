@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { User } from 'types/User'
+import { Chapter, User } from 'types'
 
 import { loadScene } from './helpers/loaders'
 import { createModels } from '../models'
@@ -18,9 +18,16 @@ interface CreateMainSceneProps {
     container: HTMLDivElement
     screenGUI: ScreenGUI
     user: User
+    chapter: Chapter
 }
 
-export async function createMainScene({ renderer, container, screenGUI }: CreateMainSceneProps) {
+export async function createMainScene({
+    renderer,
+    container,
+    screenGUI,
+    user,
+    chapter,
+}: CreateMainSceneProps) {
     if (container.childNodes.length > 0) return
 
     let mixer: THREE.AnimationMixer
@@ -92,7 +99,7 @@ export async function createMainScene({ renderer, container, screenGUI }: Create
         window.addEventListener('keydown', handleKeyDown, false)
         window.addEventListener('keyup', handleKeyUp, false)
         window.addEventListener('resize', onWindowResize, false)
-        await sceneInitiation({ models, services, utils })
+        await sceneInitiation({ models, services, user, chapter })
         animateScene()
     }
 

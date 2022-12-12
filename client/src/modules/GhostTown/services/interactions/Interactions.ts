@@ -1,63 +1,32 @@
 import { CHARACTER } from '../../const'
-import { Utils } from '../../utils/types'
-import { ChapterData } from '../levels/types'
-import { InteractionType } from './types'
+import { Chapter, Dialog } from 'types'
 
 export class Interactions {
-    private _currentChapterData: ChapterData | null = null
+    private chapter: Chapter | null = null
 
-    constructor(private utils: Utils) {}
-
-    public loadChapterDialogs(data: ChapterData) {
-        this._currentChapterData = data
+    public loadChapterDialogs(chapter: Chapter) {
+        this.chapter = chapter
     }
 
-    private _getInteractionsData(
-        day: number,
-        step: number,
-        character: CHARACTER
-    ): InteractionType[] {
-        if (!this._currentChapterData) {
+    private _getInteractionsData(day: number, step: number, character: CHARACTER): Dialog[] {
+        if (!this.chapter) {
             throw new Error('error to load the Current Chapter Data')
         }
 
-        const { chapterNumber } = this._currentChapterData
-        const currentChapterInteractions = this._currentChapterData
-
-        if (!currentChapterInteractions) {
-            throw new Error(`error to load CHAPTER in chapter_${chapterNumber}`)
-        }
-
-        const dayInteractions = currentChapterInteractions.days.find(
+        const dayInteractions = this.chapter.days.find(
             ({ day: interactionDay }) => interactionDay === day
         )
         if (!dayInteractions) {
-            throw new Error(`error to load DAY in chapter_${chapterNumber}-day-${day}`)
+            throw new Error(`error to load DAY in chapter_${this.chapter.chapterNumber}-day-${day}`)
         }
-        const stepInteractions = dayInteractions.steps.find(
+        const dialogs = dayInteractions.dialogs.filter(
             ({ step: interactionStep }) => interactionStep === step
         )
-        if (!stepInteractions) {
-            throw new Error(
-                `error to load STEP in chapter_${chapterNumber}-day-${day}-step-${step}`
-            )
-        }
-        const characterInteractions = stepInteractions.characterInteractions.find(
-            ({ character: interactionCharacter }) => interactionCharacter === character
-        )
-        if (!characterInteractions) {
-            throw new Error(
-                `error to load CHARACTER in chapter_${chapterNumber}-day-${day}-step-${step}-character-${character}`
-            )
-        }
 
-        return characterInteractions.interactions
+        return dialogs
     }
 
-    getInteractions(character: CHARACTER) {
-        const storage = this.utils.storage
-        const day = storage.day
-        const step = storage.step
+    getInteractions(day: number, step: number, character: CHARACTER) {
         const interactions = this._getInteractionsData(day, step, character)
 
         function* createInteractionsGenerator() {
