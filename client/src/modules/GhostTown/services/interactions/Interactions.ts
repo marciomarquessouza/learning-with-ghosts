@@ -20,7 +20,8 @@ export class Interactions {
             throw new Error(`error to load DAY in chapter_${this.chapter.chapterNumber}-day-${day}`)
         }
         const dialogs = dayInteractions.dialogs.filter(
-            ({ step: interactionStep }) => interactionStep === step
+            ({ step: interactionStep, character: interactionCharacter }) =>
+                interactionStep === step && interactionCharacter === character
         )
 
         return dialogs

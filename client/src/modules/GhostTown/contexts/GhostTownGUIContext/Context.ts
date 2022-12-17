@@ -13,7 +13,7 @@ interface ModalProps {
 export const chapterTitleDefault: ChapterTitleProps = {
     mainTitle: '',
     subtitle: '',
-    chapterNumber: '',
+    chapterNumber: 0,
 }
 export type ChapterTitleContext = ChapterTitleProps & ModalProps
 

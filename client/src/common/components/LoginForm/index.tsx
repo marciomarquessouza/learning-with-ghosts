@@ -114,13 +114,13 @@ function LoginForm({
                     {loading ? <Spinner size="sm" /> : 'Login'}
                 </button>
                 <p className="text-lg text-white font-semibold mt-4 pt-1 mb-0">
-                    {`Don't have an account? `}
+                    {`No account? `}
                     <a
                         onClick={handleRegister}
                         href="#"
                         className="text-primary-light hover:text-primary-dark focus:text-primary transition duration-200 ease-in-out"
                     >
-                        {` Register Here =)`}
+                        {` Create One =)`}
                     </a>
                 </p>
             </div>

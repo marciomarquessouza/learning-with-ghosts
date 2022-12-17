@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
+import { useRouter } from 'next/router'
 import * as THREE from 'three'
-import { User, Chapter } from 'types'
 
+import { User, Chapter } from 'types'
+import { PAGES_ROUTERS } from 'const'
 import { createMainScene } from 'modules/GhostTown/scenes/main-scene'
 import { useScreenGUI } from 'modules/GhostTown/hooks/useScreenGUI'
 
@@ -13,6 +15,7 @@ interface GhostTownProps {
 }
 
 export default function GhostTown({ user, chapter }: GhostTownProps) {
+    const router = useRouter()
     const refContainer = useRef<HTMLDivElement>(null)
     const [loading, setLoading] = useState(true)
     const [rendererState, setRenderer] = useState<THREE.WebGLRenderer>()
@@ -52,6 +55,10 @@ export default function GhostTown({ user, chapter }: GhostTownProps) {
             removeScene.exec()
         }
     }, [rendererState, removeScene])
+
+    if (!user) {
+        router.push(PAGES_ROUTERS.REGISTER)
+    }
 
     return (
         <>

@@ -1,25 +1,30 @@
 import * as THREE from 'three'
-import { User } from 'types'
+import { Dialog, User } from 'types'
 
 import { CHARACTER, PARAMS } from '../const'
 import { Models } from '../models/types'
 import { SceneComponents } from '../scenes/types'
-import { InteractionType } from '../services/interactions/types'
 import { Services } from '../services/types'
 import { PlayerControls } from './controls'
-import Helpers from './helpers'
+import { checkContact } from './helpers'
 
 export class Player extends PlayerControls {
-    private _interactionGenerator: Generator<InteractionType, void, unknown> | null = null
+    public lives = 5
+    public chapter = 1
+    public day = 1
+    public step = 1
+    private _interactionGenerator: Generator<Dialog, void, unknown> | null = null
     constructor(
         services: Services,
         sceneComponents: SceneComponents,
-        private models: Models,
-        private helpers = Helpers,
-        private user: User
+        user: User,
+        private models: Models
     ) {
         const playerMesh = models.ghost
         super(services, sceneComponents, playerMesh)
+        this.chapter = user.chapter
+        this.day = user.day
+        this.lives = user.lives
     }
 
     reset() {
@@ -47,17 +52,20 @@ export class Player extends PlayerControls {
     }
 
     startInteraction(character: CHARACTER): void {
-        const { day } = this.user
         this._isInInteraction = true
         this.services.screenGUI.closeInfoMenu()
         this.sceneComponents.camera.zoomIn()
         this.playerMesh.isLocked = true
-        this._interactionGenerator = this.services.interactions.getInteractions(character)
+        this._interactionGenerator = this.services.interactions.getInteractions(
+            this.day,
+            this.step,
+            character
+        )
         this.nextInteraction()
     }
 
     handleCollision(vector: THREE.Vector3, delta: number): boolean {
-        const { hasCollision } = this.helpers.checkContact({
+        const { hasCollision } = checkContact({
             vector,
             delta,
             characterMesh: this.playerMesh.characterMesh,

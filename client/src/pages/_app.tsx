@@ -10,16 +10,10 @@ import InteractionProvider from 'modules/GhostTown/contexts/InteractionContext'
 import '../styles/globals.css'
 
 export default function App({ Component, pageProps }: AppProps) {
-    const [queryClient] = useState(
-        () =>
-            new QueryClient({
-                defaultOptions: {
-                    queries: {
-                        staleTime: 10 * 60 * 1000,
-                    },
-                },
-            })
-    )
+    const queryDefaultOptions = {
+        defaultOptions: { queries: { staleTime: 6 * 1000 } },
+    }
+    const [queryClient] = useState(() => new QueryClient(queryDefaultOptions))
 
     return (
         <QueryClientProvider client={queryClient}>

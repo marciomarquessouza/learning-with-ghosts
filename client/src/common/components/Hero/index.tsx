@@ -17,11 +17,9 @@ function Hero({ user, chapter }: HeroProps) {
 
     const handleGameStart = useCallback(() => {
         setLoading(true)
-        const route = isAuthenticated
-            ? `${PAGES_ROUTERS.GHOST_TOWN}/${user?.chapter}`
-            : PAGES_ROUTERS.REGISTER
+        const route = isAuthenticated ? PAGES_ROUTERS.GHOST_TOWN : PAGES_ROUTERS.REGISTER
         router.push(route)
-    }, [router, isAuthenticated, user])
+    }, [router, isAuthenticated])
 
     return (
         <div className="">

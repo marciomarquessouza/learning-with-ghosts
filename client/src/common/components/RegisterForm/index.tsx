@@ -12,6 +12,7 @@ export interface RegisterFormProps {
     onChangeName: (name: string) => void
     onClickTwitterLogin: () => void
     onClickGoogleLogin: () => void
+    onClickLogin: () => void
     onSubmit: () => void
 }
 
@@ -25,6 +26,7 @@ function RegisterForm({
     onChangeName,
     onClickTwitterLogin,
     onClickGoogleLogin,
+    onClickLogin,
     onSubmit,
 }: RegisterFormProps) {
     const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -61,15 +63,15 @@ function RegisterForm({
         onSubmit()
     }
 
+    const handleOnClickLogin = (e: React.MouseEvent<HTMLElement>) => {
+        e.preventDefault()
+        onClickLogin()
+    }
+
     return (
         <form onSubmit={handleSubmit}>
-            <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
-                <p className="text-3xl text-white mb-0 mx-4">Registratioooon</p>
-            </div>
-            <div>
-                <span className="text-xl text-white mb-2 mr-4">Access using:</span>
-                <SocialMediaLogin onClick={handleSocialMediaClick} />
-            </div>
+            <p className="text-3xl text-white mb-2 mr-4">Create Accooooount</p>
+            <SocialMediaLogin onClick={handleSocialMediaClick} />
             <div className="flex items-center justify-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
                 <p className="text-white text-center font-semibold mx-4 mb-0">Or</p>
             </div>
@@ -107,7 +109,18 @@ function RegisterForm({
                 />
             </div>
 
-            <div className="text-center lg:text-left">
+            <p className="text-lg text-white font-semibold mt-4 pt-1">
+                {`Already have an account? `}
+                <a
+                    onClick={handleOnClickLogin}
+                    href="#"
+                    className="text-primary-light hover:text-primary-dark focus:text-primary transition duration-200 ease-in-out"
+                >
+                    {` Log In`}
+                </a>
+            </p>
+
+            <div className="text-center lg:text-left mt-4">
                 <button
                     type="submit"
                     className="inline-block px-7 py-3 bg-primary-light text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-primary-dark hover:shadow-lg focus:bg-primary focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"

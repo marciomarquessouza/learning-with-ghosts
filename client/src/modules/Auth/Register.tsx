@@ -12,12 +12,12 @@ import BackButton from 'common/components/BackButton'
 import SideHero from 'common/components/SideHero'
 
 function Register() {
+    const router = useRouter()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [loading, setLoading] = useState(false)
     const [name, setName] = useState('')
+    const [loading, setLoading] = useState(false)
     const { user } = useUser()
-    const router = useRouter()
     const { openAlert } = useAlert()
 
     const handleChangeEmail = (email: string) => {
@@ -80,9 +80,13 @@ function Register() {
         }
     }
 
+    const handleOnLogin = () => {
+        router.push(PAGES_ROUTERS.LOGIN)
+    }
+
     useEffect(() => {
         if (user) {
-            router.push(`${PAGES_ROUTERS.GHOST_TOWN}/${user.chapter}`)
+            router.push(`${PAGES_ROUTERS.GHOST_TOWN}`)
         }
     }, [user, router])
 
@@ -106,6 +110,7 @@ function Register() {
                                 onChangeName={handleChangeName}
                                 onClickTwitterLogin={handleTwitterLogin}
                                 onClickGoogleLogin={handleGoogleLogin}
+                                onClickLogin={handleOnLogin}
                                 onSubmit={handleSubmit}
                             />
                         </div>

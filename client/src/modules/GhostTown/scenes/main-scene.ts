@@ -41,7 +41,7 @@ export async function createMainScene({
     const services = createServices(utils, screenGUI)
     const sceneComponents = createSceneComponents(renderer)
 
-    const player = createPlayer({ services, sceneComponents, models })
+    const player = createPlayer({ services, sceneComponents, user, models })
 
     function render() {
         renderer.render(scene, sceneComponents.camera.perspectiveCamera)

@@ -1,9 +1,2 @@
-import checkContact from './checkContact'
-import toggleInfoMenu from './toggleInfoMenu'
-
-const sensor = {
-    checkContact,
-    toggleInfoMenu,
-}
-
-export default sensor
+export { default as checkContact } from './checkContact'
+export { default as toggleInfoMenu } from './toggleInfoMenu'
