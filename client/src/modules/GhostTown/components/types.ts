@@ -1,5 +1,6 @@
 export interface MenuStyles {
     pattern: string
-    color: string
-    fillColor: string
+    bgColor: string
+    textColor: string
+    border: string
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react'
 import Image from 'next/image'
+import classnames from 'classnames'
 import { Transition } from '@headlessui/react'
 
 import getInfoMenuStylesByCharacter from './utils/getInfoMenuStylesByCharacter'
@@ -15,12 +16,38 @@ export interface InfoMenuProps {
 
 export default function InfoMenu({ isShowing, character, avatar, title, onTalk }: InfoMenuProps) {
     const [currentCharacter, setCurrentCharacter] = useState(character)
+    const [selectedIndex, setSelectedIndex] = useState(0)
     const styles = useMemo(() => getInfoMenuStylesByCharacter(currentCharacter), [currentCharacter])
+    const ctaList = [
+        { name: 'talk', label: 'TALK [SPACE]' },
+        { name: 'missions', label: 'MISSIONS [M]' },
+        { name: 'info', label: 'INFO [I]' },
+    ]
+
     const handleTalk = useCallback(() => {
         if (character && onTalk) {
             onTalk(character)
         }
     }, [onTalk, character])
+
+    const handleOnMouseOver = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault()
+        const buttonName = event.currentTarget.name
+        switch (buttonName) {
+            case 'talk':
+                setSelectedIndex(0)
+                break
+            case 'missions':
+                setSelectedIndex(1)
+                break
+            case 'info':
+                setSelectedIndex(2)
+                break
+            default:
+                setSelectedIndex(0)
+                break
+        }
+    }, [])
 
     useEffect(() => {
         if (character) {
@@ -54,41 +81,52 @@ export default function InfoMenu({ isShowing, character, avatar, title, onTalk }
                                 />
                             </div>
                             <div className="flex-1 min-w-0">
-                                <p className="font-josefin font-normal text-lg text-cherry uppercase">
+                                <p className="font-josefin font-bold text-lg text-cherry uppercase">
                                     {title}
                                 </p>
                                 <div className="flex flex-row mt-1">
-                                    <div className="flex flex-row items-center mr-4">
-                                        <svg width="15" height="15">
-                                            <rect width="15" height="15" fill="#CB214A" />
-                                        </svg>
+                                    {ctaList.map(({ name, label }, index) => (
                                         <button
+                                            key={`${index}`}
+                                            name={name}
+                                            onMouseOver={handleOnMouseOver}
                                             onClick={handleTalk}
-                                            className="font-josefin text-sm text-cherry ml-1 mt-1 bg-transparent hover:text-cherry focus:outline-none  active:outline-none"
+                                            className={`ml-1 mt-1 bg-transparent hover:${styles.textColor} focus:outline-none active:outline-none`}
                                         >
-                                            TALK [SPACE]
+                                            <div className="flex flex-row items-center justify-center mr-4">
+                                                <span className="h-4 w-4">
+                                                    <span
+                                                        className={classnames(
+                                                            {
+                                                                'animate-ping':
+                                                                    selectedIndex === index,
+                                                                hidden: selectedIndex !== index,
+                                                            },
+                                                            'absolute inline-flex h-5 w-5 opacity-75',
+                                                            styles.bgColor
+                                                        )}
+                                                    ></span>
+                                                    <span
+                                                        className={classnames(
+                                                            'relative inline-flex h-4 w-4',
+                                                            styles.bgColor
+                                                        )}
+                                                    ></span>
+                                                </span>
+                                                <span
+                                                    className={classnames(
+                                                        selectedIndex === index
+                                                            ? 'font-bold'
+                                                            : 'font-thin',
+                                                        'leading-none font-josefin text-sm pt-2 pl-1',
+                                                        styles.textColor
+                                                    )}
+                                                >
+                                                    {label}
+                                                </span>
+                                            </div>
                                         </button>
-                                    </div>
-                                    <div className="flex flex-row items-center mr-4">
-                                        <svg width="15" height="15">
-                                            <rect
-                                                width="15"
-                                                height="15"
-                                                fill={`${styles.fillColor}`}
-                                            />
-                                        </svg>
-                                        <p className="font-josefin text-sm text-cherry ml-1 mt-1">
-                                            MISSIONS [M]
-                                        </p>
-                                    </div>
-                                    <div className="flex flex-row items-center mr-4">
-                                        <svg width="15" height="15">
-                                            <rect width="15" height="15" fill="#CB214A" />
-                                        </svg>
-                                        <button className="font-josefin text-sm text-cherry ml-1 mt-1 bg-transparent hover:text-cherry focus:outline-none  active:outline-none">
-                                            INFO [I]
-                                        </button>
-                                    </div>
+                                    ))}
                                 </div>
                             </div>
                             <div></div>

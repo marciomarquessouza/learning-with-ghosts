@@ -9,8 +9,9 @@ export default function getInfoMenuStylesByCharacter(character?: CHARACTER | nul
         default:
             return {
                 pattern: 'bg-white',
-                color: 'cherry',
-                fillColor: '#CB214A',
+                textColor: 'text-cherry',
+                bgColor: 'bg-cherry',
+                border: 'border-4 border-cherry',
             }
     }
 }
