@@ -1,12 +1,10 @@
 import * as THREE from 'three'
-import { Dialog, User } from 'types'
+import { Dialog, PlayerData } from 'types'
+import { PlayerDependencies } from '.'
 
 import { CHARACTER, PARAMS } from '../const'
-import { Models } from '../models/types'
-import { SceneComponents } from '../scenes/types'
-import { Services } from '../services/types'
 import { PlayerControls } from './controls'
-import { checkContact } from './helpers'
+import { checkContact, toggleInfoMenu } from './helpers'
 
 export class Player extends PlayerControls {
     public lives = 5
@@ -14,22 +12,41 @@ export class Player extends PlayerControls {
     public day = 1
     public step = 1
     private _interactionGenerator: Generator<Dialog, void, unknown> | null = null
-    constructor(
-        services: Services,
-        sceneComponents: SceneComponents,
-        user: User,
-        private models: Models
-    ) {
+
+    constructor(private dependencies: PlayerDependencies, playerData: PlayerData) {
+        const { models, services, sceneComponents } = dependencies
         const playerMesh = models.ghost
-        super(services, sceneComponents, playerMesh)
-        this.chapter = user.chapter
-        this.day = user.day
-        this.lives = user.lives
+        super(services, sceneComponents, models, playerMesh)
+        this.lives = playerData.lives
+        this.chapter = playerData.chapter
+        this.day = playerData.day
     }
 
     reset() {
         this._characterVelocity.set(0, 0, 0)
         this.sceneComponents.controls.target.copy(this.playerMesh.characterArmature.position)
+    }
+
+    checkInteraction(playerPosition: THREE.Vector3) {
+        toggleInfoMenu({
+            playerPosition,
+            scene: this.dependencies.scene,
+            screenGUI: this.services.screenGUI,
+            startInteraction: this.startInteraction.bind(this),
+        })
+    }
+
+    startInteraction(character: CHARACTER): void {
+        this._isInInteraction = true
+        this.services.screenGUI.closeInfoMenu()
+        this.sceneComponents.camera.zoomIn()
+        this.playerMesh.isLocked = true
+        this._interactionGenerator = this.services.interactions.getInteractions(
+            this.day,
+            this.step,
+            character
+        )
+        this.nextInteraction()
     }
 
     nextInteraction() {
@@ -51,30 +68,20 @@ export class Player extends PlayerControls {
         })
     }
 
-    startInteraction(character: CHARACTER): void {
-        this._isInInteraction = true
-        this.services.screenGUI.closeInfoMenu()
-        this.sceneComponents.camera.zoomIn()
-        this.playerMesh.isLocked = true
-        this._interactionGenerator = this.services.interactions.getInteractions(
-            this.day,
-            this.step,
-            character
-        )
-        this.nextInteraction()
+    stopInteraction() {
+        this.services.screenGUI.closeActiveMenus()
+        this.sceneComponents.camera.zoomOut()
+        this.playerMesh.isLocked = false
+        this._isInInteraction = false
     }
 
-    handleCollision(vector: THREE.Vector3, delta: number): boolean {
-        const { hasCollision } = checkContact({
+    checkCollision(vector: THREE.Vector3, delta: number): boolean {
+        return checkContact({
             vector,
             delta,
             characterMesh: this.playerMesh.characterMesh,
             scenario: this.models.scenario,
-            screenGUI: this.services.screenGUI,
-            onTalk: this.startInteraction.bind(this),
         })
-
-        return hasCollision
     }
 
     setPosition(vector: THREE.Vector3, quaternion: THREE.Quaternion, delta: number): void {
@@ -82,19 +89,20 @@ export class Player extends PlayerControls {
             throw new Error('Error to load Ghost Model')
         }
 
-        if (!this.playerMesh.isLocked) {
-            const characterQuaternion = this.playerMesh.characterMesh.quaternion.clone()
-            const hasCollisions = this.handleCollision(vector, delta)
+        if (this.playerMesh.isLocked) return
 
-            if (!hasCollisions) {
-                characterQuaternion.slerp(quaternion, delta * PARAMS.GHOST_SPEED)
-                this.playerMesh.characterMesh.quaternion.copy(characterQuaternion)
-                this.playerMesh.characterMesh.position.addScaledVector(
-                    vector,
-                    delta * PARAMS.GHOST_SPEED
-                )
-                this.playerMesh.characterArmature.copy(this.playerMesh.characterMesh)
-            }
+        const characterQuaternion = this.playerMesh.characterMesh.quaternion.clone()
+        this.checkInteraction(this.playerMesh.characterMesh.position)
+        const hasCollisions = this.checkCollision(vector, delta)
+
+        if (!hasCollisions) {
+            characterQuaternion.slerp(quaternion, delta * PARAMS.GHOST_SPEED)
+            this.playerMesh.characterMesh.quaternion.copy(characterQuaternion)
+            this.playerMesh.characterMesh.position.addScaledVector(
+                vector,
+                delta * PARAMS.GHOST_SPEED
+            )
+            this.playerMesh.characterArmature.copy(this.playerMesh.characterMesh)
         }
     }
 }

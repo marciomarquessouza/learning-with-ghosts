@@ -8,6 +8,8 @@ export enum CHARACTER {
     KRAMPUS = 'krampus',
 }
 
+export const NPC_LIST = [CHARACTER.PRINCESS]
+
 export const INFO_MENU: { [key: string]: InfoMenuProps } = {
     [CHARACTER.PRINCESS]: {
         character: CHARACTER.PRINCESS,

@@ -4,7 +4,7 @@ import { CHARACTER } from '../../../const'
 import { Services } from '../../../services/types'
 import { SceneComponents } from '../../../scenes/types'
 import { KeyboardInputs } from '../keyboard-inputs/KeyboardInputs'
-import { PlayerMesh } from '../../../models/types'
+import { Models, PlayerMesh } from '../../../models/types'
 
 export class PlayerControls extends KeyboardInputs {
     protected _characterVelocity = new THREE.Vector3()
@@ -13,9 +13,30 @@ export class PlayerControls extends KeyboardInputs {
     constructor(
         protected services: Services,
         protected sceneComponents: SceneComponents,
+        protected models: Models,
         public playerMesh: PlayerMesh
     ) {
         super()
+    }
+
+    checkInteraction(playerPosition: THREE.Vector3) {
+        throw new Error('You need to implement the startInteraction method')
+    }
+
+    startInteraction(character: CHARACTER) {
+        throw new Error('You need to implement the startInteraction method')
+    }
+
+    nextInteraction() {
+        throw new Error('You need to implement the nexInteraction method')
+    }
+
+    stopInteraction() {
+        throw new Error('You need to implement the stopInteraction method')
+    }
+
+    checkCollision(vector: THREE.Vector3, delta: number): boolean {
+        throw new Error('You need to implement the checkCollision method')
     }
 
     protected setPosition(
@@ -24,25 +45,6 @@ export class PlayerControls extends KeyboardInputs {
         delta: number
     ): void {
         throw new Error('You need to implement the _setPosition method')
-    }
-
-    handleCollision(vector: THREE.Vector3, delta: number): boolean {
-        throw new Error('You need to implement the _setPosition method')
-    }
-
-    nextInteraction() {
-        throw new Error('You need to implement the nexInteraction method')
-    }
-
-    startInteraction(character: CHARACTER) {
-        throw new Error('You need to implement the startInteraction method')
-    }
-
-    stopInteraction() {
-        this.services.screenGUI.closeActiveMenus()
-        this.sceneComponents.camera.zoomOut()
-        this.playerMesh.isLocked = false
-        this._isInInteraction = false
     }
 
     updateControls(delta: number): void {

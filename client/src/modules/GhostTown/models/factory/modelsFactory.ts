@@ -6,7 +6,7 @@ import { createScenario } from '../scenario'
 import { createTrain } from '../train'
 import { Models } from '../types'
 
-export function createModels(scene: Scene): Models {
+export function createModels(): Models {
     return {
         ghost: createGhost(),
         lighthouse: createLighthouse(),

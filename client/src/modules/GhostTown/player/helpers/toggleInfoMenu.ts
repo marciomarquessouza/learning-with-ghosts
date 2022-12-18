@@ -1,33 +1,39 @@
 import * as THREE from 'three'
-import { CHARACTER, INFO_MENU } from '../../const'
+import { CHARACTER, INFO_MENU, NPC_LIST } from '../../const'
 import { ScreenGUI } from '../../services'
+import { menuObserver } from 'modules/GhostTown/observers'
 
 export interface ToggleInfoMenuProps {
-    contacts: THREE.Intersection<THREE.Object3D<THREE.Event>>[]
-    directionVector: THREE.Vector3
+    scene: THREE.Scene
+    playerPosition: THREE.Vector3
     screenGUI: ScreenGUI
-    character: CHARACTER
-    isInfoMenuOpen: boolean
-    onTalk?: (character: CHARACTER) => void
+    startInteraction?: (character: CHARACTER) => void
 }
 
 export default function toggleInfoMenu({
-    contacts,
-    directionVector,
+    scene,
+    playerPosition,
     screenGUI,
-    character,
-    isInfoMenuOpen,
-    onTalk,
-}: ToggleInfoMenuProps): boolean {
-    if (contacts.length > 0 && contacts[0].distance < directionVector.length()) {
-        if (!isInfoMenuOpen) {
-            screenGUI.showInfoMenu({ ...INFO_MENU[character], onTalk })
+    startInteraction,
+}: ToggleInfoMenuProps): void {
+    let hasContactWith: string = ''
+    const infoMenu = menuObserver.getInfoMenuState()
+
+    for (let index = 0; index <= NPC_LIST.length - 1; index++) {
+        const npc = scene.getObjectByName(NPC_LIST[index])
+        if (npc) {
+            const distance = playerPosition.distanceTo(npc.position)
+            hasContactWith = distance <= 10 ? npc.name : ''
         }
-        return true
+    }
+
+    if (hasContactWith) {
+        if (!infoMenu.isOpen) {
+            screenGUI.showInfoMenu({ ...INFO_MENU[hasContactWith], onTalk: startInteraction })
+        }
     } else {
-        if (isInfoMenuOpen) {
+        if (infoMenu.isOpen) {
             screenGUI.closeInfoMenu()
         }
-        return false
     }
 }

@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { Chapter, User } from 'types'
+import { Chapter, PlayerData, User } from 'types'
 
 import { loadScene } from './helpers/loaders'
 import { createModels } from '../models'
@@ -8,7 +8,7 @@ import { sceneInitiation } from './helpers/scene-initiation/sceneInitiation'
 import { createSceneComponents } from './factory/sceneComponentsFactory'
 import { createServices } from '../services/factory/servicesFactory'
 import { createUtils } from '../utils/factory/utilsFactory'
-import { createPlayer } from '../player'
+import { createPlayer, PlayerDependencies } from '../player'
 import { ScreenGUI } from 'modules/GhostTown/hooks/useScreenGUI'
 
 import { PARAMS } from '../const'
@@ -37,11 +37,22 @@ export async function createMainScene({
     const clock = new THREE.Clock()
 
     const utils = createUtils()
-    const models = createModels(scene)
+    const models = createModels()
     const services = createServices(utils, screenGUI)
     const sceneComponents = createSceneComponents(renderer)
-
-    const player = createPlayer({ services, sceneComponents, user, models })
+    const playerData: PlayerData = {
+        chapter: user.chapter,
+        day: user.day,
+        lives: user.lives,
+        name: user.name,
+    }
+    const playerDependencies: PlayerDependencies = {
+        scene,
+        services,
+        sceneComponents,
+        models,
+    }
+    const player = createPlayer(playerDependencies, playerData)
 
     function render() {
         renderer.render(scene, sceneComponents.camera.perspectiveCamera)

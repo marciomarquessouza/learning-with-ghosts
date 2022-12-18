@@ -22,11 +22,7 @@ export async function loadScene(scene: THREE.Scene, models: Models): Promise<THR
                         }
 
                         if (mesh.name.includes(MESHES.PRINCESS)) {
-                            if (mesh.name.includes(MESHES.PRINCESS_DIALOG)) {
-                                scenario.addPrincessDialogBox(mesh)
-                            } else {
-                                princess.addMesh(mesh)
-                            }
+                            princess.addMesh(mesh)
                         }
 
                         if (mesh.name.includes(MESHES.SCENARIO_COLLISION)) {
@@ -72,6 +68,7 @@ export async function loadScene(scene: THREE.Scene, models: Models): Promise<THR
                 })
 
                 ghost.init(scene)
+                princess.init(scene)
                 scene.add(gltf.scene)
                 resolve(animationMixer)
             },
