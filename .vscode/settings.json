@@ -10,7 +10,8 @@
         "Looooading",
         "Marcio",
         "Raycaster",
-        "wireframe"
+        "wireframe",
+        "headlessui"
     ],
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",

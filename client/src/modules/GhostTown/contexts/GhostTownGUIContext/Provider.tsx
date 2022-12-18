@@ -53,7 +53,6 @@ function GhostTownGUIProvider({ children }: GhostTownGUIProviderProps) {
     }
 
     const handleCloseInfoMenu = () => {
-        setInfoMenu(infoMenuDefault)
         menuSubject.notifyInfoMenu({ ...infoMenuDefault, isOpen: false })
         setInfoMenuVisible(false)
     }
@@ -118,7 +117,10 @@ function GhostTownGUIProvider({ children }: GhostTownGUIProviderProps) {
             {dialogMenuVisible && (
                 <DialogMenu {...{ ...dialogMenu, onClose: handleCloseDialogMenu }} />
             )}
-            {infoMenuVisible && <InfoMenu {...{ ...infoMenu, onClose: handleCloseInfoMenu }} />}
+            <InfoMenu
+                {...{ ...infoMenu, isShowing: infoMenuVisible, onClose: handleCloseInfoMenu }}
+            />
+
             {liveMenuVisible && <LiveMenu {...liveMenu} />}
             {mainMenuVisible && <MainMenu />}
             {children}

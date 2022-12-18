@@ -10,12 +10,11 @@ export enum CHARACTER {
 
 export const NPC_LIST = [CHARACTER.PRINCESS]
 
-export const INFO_MENU: { [key: string]: InfoMenuProps } = {
+export const INFO_MENU: { [key: string]: Omit<InfoMenuProps, 'isShowing'> } = {
     [CHARACTER.PRINCESS]: {
         character: CHARACTER.PRINCESS,
         avatar: '/img/princess/info-menu.png',
         title: 'Lighthouse Princess',
-        onClose: () => {},
     },
 }
 

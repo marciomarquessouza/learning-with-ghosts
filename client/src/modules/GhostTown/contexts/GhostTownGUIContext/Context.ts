@@ -18,11 +18,11 @@ export const chapterTitleDefault: ChapterTitleProps = {
 export type ChapterTitleContext = ChapterTitleProps & ModalProps
 
 export const infoMenuDefault: InfoMenuProps = {
+    isShowing: false,
     character: undefined,
     avatar: '',
     title: '',
     onTalk: () => {},
-    onClose: () => {},
 }
 export type InfoMenuContext = InfoMenuProps & ModalProps
 

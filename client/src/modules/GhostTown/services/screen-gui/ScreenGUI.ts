@@ -62,7 +62,6 @@ export class ScreenGUI {
     }
 
     public closeActiveMenus() {
-        this.guiActions.closeInfoMenu()
         this.guiActions.closeDialogMenu()
     }
 
