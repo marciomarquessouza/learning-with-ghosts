@@ -7,14 +7,20 @@ import getInfoMenuStylesByCharacter from './utils/getInfoMenuStylesByCharacter'
 import { CHARACTER } from '../../const'
 
 export interface InfoMenuProps {
-    isShowing: boolean
+    isInfoMenuOpen?: boolean
     character?: CHARACTER
     avatar: string
     title: string
     onTalk?: (character: CHARACTER) => void
 }
 
-export default function InfoMenu({ isShowing, character, avatar, title, onTalk }: InfoMenuProps) {
+export default function InfoMenu({
+    isInfoMenuOpen,
+    character,
+    avatar,
+    title,
+    onTalk,
+}: InfoMenuProps) {
     const [currentCharacter, setCurrentCharacter] = useState(character)
     const [selectedIndex, setSelectedIndex] = useState(0)
     const styles = useMemo(() => getInfoMenuStylesByCharacter(currentCharacter), [currentCharacter])
@@ -61,7 +67,7 @@ export default function InfoMenu({ isShowing, character, avatar, title, onTalk }
                 <Transition
                     appear={true}
                     className="w-3/5 max-w-4xl h-24 rounded-xl m-10 bg-white"
-                    show={isShowing}
+                    show={isInfoMenuOpen}
                     enter="transition ease-in-out duration-300 transform"
                     enterFrom="translate-y-40"
                     enterTo="translate-y-0"

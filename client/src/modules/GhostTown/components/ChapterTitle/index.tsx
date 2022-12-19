@@ -2,12 +2,22 @@ import Image from 'next/image'
 import LogoImg from 'images/logo.png'
 
 export interface ChapterTitleProps {
+    isChapterTitleOpen?: boolean
     mainTitle: string
     subtitle: string
     chapterNumber: number
 }
 
-export default function ChapterTitle({ mainTitle, subtitle, chapterNumber }: ChapterTitleProps) {
+export default function ChapterTitle({
+    mainTitle,
+    subtitle,
+    chapterNumber,
+    isChapterTitleOpen,
+}: ChapterTitleProps) {
+    if (!isChapterTitleOpen) {
+        return null
+    }
+
     return (
         <div className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full animate-chapter-title-out opacity-0">
             <div className="flex h-full">

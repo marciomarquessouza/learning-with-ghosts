@@ -1,14 +1,14 @@
+import { GhostTownGuiContextType } from 'types/GhostTownGui'
 import { Utils } from '../../utils/types'
 import { createInteractions } from '../interactions'
 import { createLevels } from '../levels'
 import { createScreenGUI } from '../screen-gui'
 import { Services } from '../types'
-import { ScreenGUI } from 'modules/GhostTown/hooks/useScreenGUI'
 
-export function createServices(utils: Utils, screenDataActions: ScreenGUI): Services {
+export function createServices(utils: Utils, screenGuiContext: GhostTownGuiContextType): Services {
     const levels = createLevels()
     const interactions = createInteractions({ utils })
-    const screenGUI = createScreenGUI(screenDataActions)
+    const screenGUI = createScreenGUI(screenGuiContext)
 
     return {
         levels,

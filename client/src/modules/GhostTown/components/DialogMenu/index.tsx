@@ -4,6 +4,7 @@ import { CHARACTER, DIALOG_MENU, EXPRESSION } from '../../const'
 import getDialogMenuStylesByCharacter from './utils/getDialogMenuStylesByCharacter'
 
 export interface DialogMenuProps {
+    isDialogMenuOpen?: boolean
     character?: CHARACTER
     expression?: EXPRESSION
     title?: string
@@ -13,6 +14,7 @@ export interface DialogMenuProps {
 }
 
 export default function DialogMenu({
+    isDialogMenuOpen = false,
     character,
     expression,
     title,
@@ -33,7 +35,7 @@ export default function DialogMenu({
         [character, title]
     )
 
-    if (!character) {
+    if (!character || !isDialogMenuOpen) {
         return null
     }
 
@@ -44,7 +46,7 @@ export default function DialogMenu({
                     <div className="flex flex-1 pb-1">
                         <button
                             onClick={onClose}
-                            className={`items-start font-josefin font-normal text-sm text-white bg-transparent hover:text-${styles.color} focus:outline-none  active:outline-none`}
+                            className={`items-start font-josefin font-normal text-sm text-white bg-transparent hover:${styles.textColor} focus:outline-none  active:outline-none`}
                         >
                             CLOSE [ESC]
                         </button>
@@ -55,7 +57,7 @@ export default function DialogMenu({
                                 {expressionImg && (
                                     <Image
                                         src={expressionImg}
-                                        className={`rounded-full h-28 w-28 border-4 border-${styles.color}`}
+                                        className={`rounded-full h-28 w-28 ${styles.border}`}
                                         alt="Character Expression"
                                         width={120}
                                         height={120}
@@ -64,13 +66,13 @@ export default function DialogMenu({
                             </div>
                             <div className="flex-1 min-w-0">
                                 <p
-                                    className={`font-josefin font-bold text-lg text-${styles.color} uppercase`}
+                                    className={`font-josefin font-bold text-lg ${styles.textColor} uppercase`}
                                 >
                                     {dialogTitle}
                                 </p>
                                 <div className="w-full h-16 overflow-hidden animate-typing-slow will-change-transform">
                                     <p
-                                        className={`${styles.font} text-5xl text-${styles.textColor} ml-1 mt-1 text-clip whitespace-nowrap`}
+                                        className={`${styles.font} text-5xl ${styles.textColor} ml-1 mt-1 text-clip whitespace-nowrap`}
                                     >
                                         {text}
                                     </p>
@@ -79,7 +81,7 @@ export default function DialogMenu({
                             <div className="mb-16">
                                 <button
                                     onClick={onNext}
-                                    className={`items-start font-josefin font-normal text-sm text-${styles.nextColor} bg-transparent hover:text-${styles.nextColor} focus:outline-none  active:outline-none`}
+                                    className={`items-start font-josefin font-normal text-sm ${styles.nextColor} bg-transparent hover:${styles.nextColor} focus:outline-none  active:outline-none`}
                                 >
                                     NEXT [SPACE]
                                 </button>

@@ -3,7 +3,11 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { GITHUB_ABOUT, GITHUB_HELP, PAGES_ROUTERS } from 'const'
 
-export default function MainMenu({}) {
+export interface MainMenuProps {
+    isMainMenuOpen?: boolean
+}
+
+export default function MainMenu({ isMainMenuOpen }: MainMenuProps) {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const router = useRouter()
 
@@ -14,6 +18,10 @@ export default function MainMenu({}) {
     const handleQuit = useCallback(async () => {
         router.push(PAGES_ROUTERS.HOME)
     }, [router])
+
+    if (!isMainMenuOpen) {
+        return null
+    }
 
     return (
         <div className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-40 md:inset-0 h-modal md:h-full">

@@ -9,14 +9,13 @@ import { createSceneComponents } from './factory/sceneComponentsFactory'
 import { createServices } from '../services/factory/servicesFactory'
 import { createUtils } from '../utils/factory/utilsFactory'
 import { createPlayer, PlayerDependencies } from '../player'
-import { ScreenGUI } from 'modules/GhostTown/hooks/useScreenGUI'
-
 import { PARAMS } from '../const'
+import { GhostTownGuiContextType } from 'types/GhostTownGui'
 
 interface CreateMainSceneProps {
     renderer: THREE.WebGLRenderer
     container: HTMLDivElement
-    screenGUI: ScreenGUI
+    screenGUI: GhostTownGuiContextType
     user: User
     chapter: Chapter
 }

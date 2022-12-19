@@ -1,14 +1,11 @@
-import {
-    DialogMenuContext,
-    InfoMenuContext,
-} from 'modules/GhostTown/contexts/GhostTownGUIContext/Context'
+import { DialogMenuProps, InfoMenuProps } from '../components'
 import MenuObserver from './MenuObserver'
 
 export interface Subject {
     subscribe(observer: MenuObserver): void
     unsubscribe(observer: MenuObserver): void
-    notifyDialogMenu(dialogMenu: DialogMenuContext): void
-    notifyInfoMenu(infoMenu: InfoMenuContext): void
+    notifyDialogMenu(dialogMenu: DialogMenuProps, isOpen: boolean): void
+    notifyInfoMenu(infoMenu: InfoMenuProps, isOpen: boolean): void
 }
 
 class MenuSubject implements Subject {
@@ -22,12 +19,12 @@ class MenuSubject implements Subject {
         this.observers = this.observers.filter(({ name }) => name !== observer.name)
     }
 
-    notifyDialogMenu(dialogMenu: DialogMenuContext): void {
-        this.observers.forEach((observer) => observer.updateDialogMenu(dialogMenu))
+    notifyDialogMenu(dialogMenu: DialogMenuProps, isOpen: boolean): void {
+        this.observers.forEach((observer) => observer.updateDialogMenu(dialogMenu, isOpen))
     }
 
-    notifyInfoMenu(infoMenu: InfoMenuContext): void {
-        this.observers.forEach((observer) => observer.updateInfoMenu(infoMenu))
+    notifyInfoMenu(infoMenu: InfoMenuProps, isOpen: boolean): void {
+        this.observers.forEach((observer) => observer.updateInfoMenu(infoMenu, isOpen))
     }
 }
 

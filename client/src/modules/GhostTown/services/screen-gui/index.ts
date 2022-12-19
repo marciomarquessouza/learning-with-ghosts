@@ -1,8 +1,8 @@
-import { ScreenGUI as ScreenDataAction } from 'modules/GhostTown/hooks/useScreenGUI'
+import { GhostTownGuiContextType } from 'types/GhostTownGui'
 import { ScreenGUI } from './ScreenGUI'
 
-function createScreenGUI({ actions }: ScreenDataAction) {
-    return new ScreenGUI(actions)
+function createScreenGUI(context: GhostTownGuiContextType) {
+    return new ScreenGUI(context)
 }
 
 export { createScreenGUI, ScreenGUI }

@@ -3,31 +3,31 @@ import { InfoMenuProps } from '../../components/InfoMenu'
 import { LiveMenuProps } from '../../components/LiveMenu'
 import { DialogMenuProps } from '../../components/DialogMenu'
 import { CHARACTER, PARAMS } from '../../const'
-import { GUIActions } from 'modules/GhostTown/hooks/useScreenGUI'
+import { GhostTownGuiContextType, MENUS } from 'types/GhostTownGui'
 import { menuObserver } from 'modules/GhostTown/observers'
 
 export class ScreenGUI {
-    constructor(private guiActions: GUIActions) {}
+    constructor(private context: GhostTownGuiContextType) {}
 
-    public showChapterTitle({ mainTitle, subtitle, chapterNumber }: ChapterTitleProps) {
-        this.guiActions.openChapterTitle({ mainTitle, subtitle, chapterNumber })
+    public showChapterTitle(props: ChapterTitleProps) {
+        this.context.openMenu({ menu: MENUS.CHAPTER_TITLE, value: props })
         setTimeout(() => this.closeChapterTitle(), PARAMS.CHAPTER_TITLE_FADE_OUT)
     }
 
     public closeChapterTitle() {
-        this.guiActions.closeChapterTitle()
+        this.context.closeMenu(MENUS.CHAPTER_TITLE)
     }
 
     public showInfoMenu(props: InfoMenuProps) {
         const infoMenu = menuObserver.getInfoMenuState()
         const isOpen = infoMenu.isOpen
         if (!isOpen) {
-            this.guiActions.openInfoMenu(props)
+            this.context.openMenu({ menu: MENUS.INFO_MENU, value: props })
         }
     }
 
     public closeInfoMenu() {
-        this.guiActions.closeInfoMenu()
+        this.context.closeMenu(MENUS.INFO_MENU)
     }
 
     public isInfoMenuOpenWith() {
@@ -38,34 +38,34 @@ export class ScreenGUI {
     }
 
     public showLiveMenu(props: LiveMenuProps) {
-        this.guiActions.openLiveMenu(props)
+        this.context.openMenu({ menu: MENUS.LIVE_MENU, value: props })
     }
 
     public setLives(lives: number) {
-        this.guiActions.setLives(lives)
+        this.context.setLives(lives)
     }
 
     public showDialogMenu(props: DialogMenuProps) {
-        this.guiActions.openDialogMenu(props)
+        this.context.openMenu({ menu: MENUS.DIALOG_MENU, value: props })
     }
 
     public closeDialogMenu() {
-        this.guiActions.closeDialogMenu()
+        this.context.closeMenu(MENUS.DIALOG_MENU)
     }
 
     public showMainMenu() {
-        this.guiActions.openMainMenu()
+        this.context.openMenu({ menu: MENUS.MAIN_MENU })
     }
 
     public closeMainMenu() {
-        this.guiActions.closeMainMenu()
+        this.context.closeMenu(MENUS.MAIN_MENU)
     }
 
     public closeActiveMenus() {
-        this.guiActions.closeDialogMenu()
+        this.context.closeMenu(MENUS.DIALOG_MENU)
     }
 
     public callChallenge(character?: CHARACTER) {
-        this.guiActions.callChallenge(character)
+        this.context.callChallenge(character)
     }
 }

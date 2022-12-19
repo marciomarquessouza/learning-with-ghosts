@@ -1,6 +1,7 @@
 import Image from 'next/image'
 
 export interface LiveMenuProps {
+    isLiveMenuOpen?: boolean
     lives: number
     chapterNumber: number
     chapterName: string
@@ -14,7 +15,17 @@ export const LIVE_MENU_DEFAULT: LiveMenuProps = {
     day: 1,
 }
 
-export default function LiveMenu({ lives, chapterNumber, chapterName, day }: LiveMenuProps) {
+export default function LiveMenu({
+    lives,
+    chapterNumber,
+    chapterName,
+    day,
+    isLiveMenuOpen = false,
+}: LiveMenuProps) {
+    if (!isLiveMenuOpen) {
+        return null
+    }
+
     return (
         <div className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-40 w-full md:inset-0 h-modal md:h-full">
             <div className="flex flex-col flex-auto items-end justify-start py-4 pr-6">

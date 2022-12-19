@@ -1,7 +1,6 @@
 import * as THREE from 'three'
 import { CHARACTER, INFO_MENU, NPC_LIST } from '../../const'
 import { ScreenGUI } from '../../services'
-import { menuObserver } from 'modules/GhostTown/observers'
 
 export interface ToggleInfoMenuProps {
     scene: THREE.Scene
@@ -17,7 +16,7 @@ export default function toggleInfoMenu({
     startInteraction,
 }: ToggleInfoMenuProps): void {
     let hasContactWith: string = ''
-    const infoMenu = menuObserver.getInfoMenuState()
+    const infoMenu = screenGUI.isInfoMenuOpenWith()
 
     for (let index = 0; index <= NPC_LIST.length - 1; index++) {
         const npc = scene.getObjectByName(NPC_LIST[index])

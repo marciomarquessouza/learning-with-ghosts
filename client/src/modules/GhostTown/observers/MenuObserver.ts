@@ -1,27 +1,26 @@
+import { DialogMenuProps, InfoMenuProps } from '../components'
 import {
-    DialogMenuContext,
     dialogMenuDefault,
-    InfoMenuContext,
     infoMenuDefault,
-} from 'modules/GhostTown/contexts/GhostTownGUIContext/Context'
+} from '../contexts/GhostTownGUIContext/reducers/ghostTownGuiInitialState'
 
 export interface Observer {
-    updateInfoMenu(infoMenu: InfoMenuContext): void
-    updateDialogMenu(dialogMenu: DialogMenuContext): void
+    updateInfoMenu(infoMenu: InfoMenuProps, isOpen: boolean): void
+    updateDialogMenu(dialogMenu: DialogMenuProps, isOpen: boolean): void
 }
 
 class MenuObserver implements Observer {
     constructor(public readonly name: string) {}
 
-    private infoMenu: InfoMenuContext = { ...infoMenuDefault, isOpen: false }
-    private dialogMenu: DialogMenuContext = { ...dialogMenuDefault, isOpen: false }
+    private infoMenu = { ...infoMenuDefault, isOpen: false }
+    private dialogMenu = { ...dialogMenuDefault, isOpen: false }
 
-    updateInfoMenu(infoMenu: InfoMenuContext): void {
-        this.infoMenu = infoMenu
+    updateInfoMenu(infoMenu: InfoMenuProps, isOpen: boolean): void {
+        this.infoMenu = { ...infoMenu, isOpen }
     }
 
-    updateDialogMenu(dialogMenu: DialogMenuContext): void {
-        this.dialogMenu = dialogMenu
+    updateDialogMenu(dialogMenu: DialogMenuProps, isOpen: boolean): void {
+        this.dialogMenu = { ...dialogMenu, isOpen }
     }
 
     getInfoMenuState() {

@@ -13,20 +13,20 @@ export default function getDialogMenuStylesByCharacter(character?: CHARACTER): D
         default:
             return {
                 pattern: 'bg-white',
-                color: 'cherry',
-                textColor: 'cherry',
-                nextColor: 'cherry',
-                fillColor: '#CB214A',
+                bgColor: 'bg-cherry',
+                textColor: 'text-cherry',
+                nextColor: 'text-cherry',
                 font: 'font-princess',
+                border: 'border-4 border-cherry',
             }
         case CHARACTER.GHOST:
             return {
                 pattern: 'bg-black',
-                color: 'primary-light',
-                textColor: 'white',
-                nextColor: 'white',
-                fillColor: '#6C63FF',
+                bgColor: 'primary-light',
+                textColor: 'text-white',
+                nextColor: 'text-white',
                 font: 'font-ghost',
+                border: 'border-4 border-white',
             }
     }
 }
