@@ -66,7 +66,7 @@ export default function InfoMenu({
             <div className="flex flex-col flex-auto items-center justify-end h-full pr-6">
                 <Transition
                     appear={true}
-                    className="w-3/5 max-w-4xl h-24 rounded-xl m-10 bg-white"
+                    className={styles.container}
                     show={isInfoMenuOpen}
                     enter="transition ease-in-out duration-300 transform"
                     enterFrom="translate-y-40"
@@ -75,7 +75,7 @@ export default function InfoMenu({
                     leaveFrom="translate-y-0"
                     leaveTo="translate-y-40"
                 >
-                    <div className="">
+                    <div>
                         <div className="flex items-center space-x-4">
                             <div className="flex-shrink-0 mt-4 ml-4">
                                 <Image
@@ -135,7 +135,6 @@ export default function InfoMenu({
                                     ))}
                                 </div>
                             </div>
-                            <div></div>
                         </div>
                     </div>
                 </Transition>
