@@ -1,10 +1,9 @@
 import React, { createContext } from 'react'
 import { useQuery } from 'react-query'
 
-import cmsApi from 'config/cms'
 import { Chapter } from 'types'
 import { useUser } from 'modules/Auth/hooks/useUser'
-import { parseInteractions, RawInteractionData } from '../utils/parseInteractions'
+import { fetchGameInteractions } from './fetchGameInteractions'
 
 export interface InteractionContextType {
     chapter?: Chapter | null
@@ -21,14 +20,6 @@ export const InteractionContext = createContext<InteractionContextType>({
     statusInteraction: 'idle',
     errorInteraction: false,
 })
-
-async function fetchGameInteractions(chapterNumber?: number) {
-    if (!chapterNumber) return null
-    const data = await cmsApi(
-        `chapters?populate[days][populate][0]=dialogs&filters[chapterNumber]=${chapterNumber}`
-    ).json()
-    return parseInteractions(data as RawInteractionData)
-}
 
 function InteractionProvider({ children }: InteractionProviderProps) {
     const { user } = useUser()
