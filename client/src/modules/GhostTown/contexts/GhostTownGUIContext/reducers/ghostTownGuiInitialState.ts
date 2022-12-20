@@ -4,6 +4,7 @@ import {
     InfoMenuProps,
     LiveMenuProps,
 } from 'modules/GhostTown/components'
+import { GameKeysInputs, GAME_KEYS } from 'modules/GhostTown/player/controls'
 import { GhostTownGuiState } from 'types/GhostTownGui'
 
 export const chapterTitleDefault: ChapterTitleProps = {
@@ -33,6 +34,17 @@ export const dialogMenuDefault: DialogMenuProps = {
     onNext: () => {},
 }
 
+export const gameKeysInputsDefault: GameKeysInputs = {
+    [GAME_KEYS.FWD_KEY]: false,
+    [GAME_KEYS.BKD_KEY]: false,
+    [GAME_KEYS.LFT_KEY]: false,
+    [GAME_KEYS.RGT_KEY]: false,
+    [GAME_KEYS.ESC_KEY]: false,
+    [GAME_KEYS.SPACE_KEY]: false,
+    [GAME_KEYS.I_KEY]: false,
+    [GAME_KEYS.M_KEY]: false,
+}
+
 export const ghostTownGuiInitialState: GhostTownGuiState = {
     isChapterTitleOpen: false,
     isLiveMenuOpen: false,
@@ -43,4 +55,5 @@ export const ghostTownGuiInitialState: GhostTownGuiState = {
     liveMenu: liveMenuDefault,
     infoMenu: infoMenuDefault,
     dialogMenu: dialogMenuDefault,
+    gameKeysInputs: gameKeysInputsDefault,
 }

@@ -3,7 +3,7 @@ import * as THREE from 'three'
 import { CHARACTER } from '../../../const'
 import { Services } from '../../../services/types'
 import { SceneComponents } from '../../../scenes/types'
-import { KeyboardInputs } from '../keyboard-inputs/KeyboardInputs'
+import { GAME_KEYS, KeyboardInputs } from '../keyboard-inputs/KeyboardInputs'
 import { Models, PlayerMesh } from '../../../models/types'
 
 export class PlayerControls extends KeyboardInputs {
@@ -55,47 +55,54 @@ export class PlayerControls extends KeyboardInputs {
         const quaternion = new THREE.Quaternion()
         this.playerMesh.characterMesh.position.addScaledVector(this._characterVelocity, delta)
 
-        if (this._fwdPressed) {
+        if (this.gameKeysInputs.fwdPressed) {
             quaternion.setFromAxisAngle(new THREE.Vector3(0, 1, 0), Math.PI)
             this.setPosition(new THREE.Vector3(1, 0, 0), quaternion, delta)
         }
 
-        if (this._bkdPressed) {
+        if (this.gameKeysInputs.bkdPressed) {
             quaternion.setFromAxisAngle(new THREE.Vector3(0, 1, 0), 0)
             this.setPosition(new THREE.Vector3(-1, 0, 0), quaternion, delta)
         }
 
-        if (this._lftPressed) {
+        if (this.gameKeysInputs.lftPressed) {
             quaternion.setFromAxisAngle(new THREE.Vector3(0, 1, 0), -Math.PI / 2)
             this.setPosition(new THREE.Vector3(0, 0, -1), quaternion, delta)
         }
 
-        if (this._rgtPressed) {
+        if (this.gameKeysInputs.rgtPressed) {
             quaternion.setFromAxisAngle(new THREE.Vector3(0, 1, 0), Math.PI / 2)
             this.setPosition(new THREE.Vector3(0, 0, 1), quaternion, delta)
         }
 
-        if (this._escPressed && !this._pressed) {
+        if (this.gameKeysInputs.escPressed && !this._pressed) {
             this.stopInteraction()
             this._pressed = true
         }
 
-        if (this._iPressed && !this._pressed) {
-            this._pressed = true
-        }
-
-        if (this._mPressed && !this._pressed) {
+        if (this.gameKeysInputs.iPressed && !this._pressed) {
             const infoMenu = this.services.screenGUI.isInfoMenuOpenWith()
             if (infoMenu.isOpen) {
-                this.services.screenGUI.callChallenge(infoMenu.openedWith)
+                this.services.screenGUI.onKeyDown(GAME_KEYS.I_KEY)
+                // this.services.screenGUI.callChallenge(infoMenu.openedWith)
                 this._pressed = true
             }
         }
 
-        if (this._spacePressed && !this._pressed) {
+        if (this.gameKeysInputs.mPressed && !this._pressed) {
+            const infoMenu = this.services.screenGUI.isInfoMenuOpenWith()
+            if (infoMenu.isOpen) {
+                this.services.screenGUI.onKeyDown(GAME_KEYS.M_KEY)
+                // this.services.screenGUI.callChallenge(infoMenu.openedWith)
+                this._pressed = true
+            }
+        }
+
+        if (this.gameKeysInputs.spacePressed && !this._pressed) {
             const infoMenu = this.services.screenGUI.isInfoMenuOpenWith()
 
             if (infoMenu.isOpen && infoMenu.openedWith && !this._isInInteraction) {
+                this.services.screenGUI.onKeyDown(GAME_KEYS.SPACE_KEY)
                 this.startInteraction(infoMenu.openedWith)
             }
 

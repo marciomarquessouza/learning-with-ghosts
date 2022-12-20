@@ -1,5 +1,6 @@
 import { ACTIONS, GhostTownGuiActions, GhostTownGuiState } from 'types/GhostTownGui'
 import getStateKeyByMenu from '../utils/getStateKeyByMenu'
+import { gameKeysInputsDefault } from './ghostTownGuiInitialState'
 
 export function ghostTownGuiReducer(
     state: GhostTownGuiState,
@@ -16,7 +17,12 @@ export function ghostTownGuiReducer(
         }
         case ACTIONS.OPEN_INFO_MENU: {
             const props = action.value
-            return { ...state, isInfoMenuOpen: true, infoMenu: props }
+            return {
+                ...state,
+                isInfoMenuOpen: true,
+                gameKeysInputs: gameKeysInputsDefault,
+                infoMenu: props,
+            }
         }
         case ACTIONS.OPEN_LIVE_MENU: {
             const props = action.value
@@ -34,6 +40,11 @@ export function ghostTownGuiReducer(
             const lives = action.lives
             const liveMenuState = state.liveMenu
             return { ...state, liveMenu: { ...liveMenuState, lives } }
+        }
+        case ACTIONS.UPDATE_KEYS_INPUTS: {
+            const newKeyInput = action.value
+            const updateGameKeyInput = { ...gameKeysInputsDefault, [newKeyInput]: true }
+            return { ...state, gameKeysInputs: updateGameKeyInput }
         }
         default:
             return state

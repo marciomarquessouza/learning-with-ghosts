@@ -9,9 +9,18 @@ import { menuSubject } from 'modules/GhostTown/observers'
 import getActionByMenu from './utils/getActionByMenu'
 
 import MenusWrapper from 'modules/GhostTown/components/MenusWrapper'
+import { GAME_KEYS } from 'modules/GhostTown/player/controls'
 
 export interface GhostTownGUIProviderProps {
     children: React.ReactNode
+}
+
+export interface GhostTownGuiContextType {
+    openMenu: (menuProps: MenusProps) => void
+    closeMenu: (menu: MENUS) => void
+    setLives: (lives: number) => void
+    callChallenge: (character?: CHARACTER) => void
+    onKeyDown: (gameKeyInput: GAME_KEYS) => void
 }
 
 export const GhostTownGUIContext = createContext({
@@ -19,6 +28,7 @@ export const GhostTownGUIContext = createContext({
     closeMenu: (menu: MENUS) => {},
     setLives: (lives: number) => {},
     callChallenge: (character?: CHARACTER) => {},
+    onKeyDown: (gameKeyInput: GAME_KEYS) => {},
 })
 
 function GhostTownGUIProvider({ children }: GhostTownGUIProviderProps) {
@@ -42,11 +52,14 @@ function GhostTownGUIProvider({ children }: GhostTownGUIProviderProps) {
         router.push('/lighthouse')
     }
 
+    const handleOnKeyDown = (gameKeyInput: GAME_KEYS) => {
+        dispatch({ type: ACTIONS.UPDATE_KEYS_INPUTS, value: gameKeyInput })
+    }
+
     useEffect(() => {
-        const { dialogMenu, infoMenu, isDialogMenuOpen, isInfoMenuOpen } = state
-        menuSubject.notifyDialogMenu(dialogMenu, isDialogMenuOpen)
-        menuSubject.notifyInfoMenu(infoMenu, isInfoMenuOpen)
-    }, [state])
+        menuSubject.notifyDialogMenu(state.dialogMenu, state.isDialogMenuOpen)
+        menuSubject.notifyInfoMenu(state.infoMenu, state.isInfoMenuOpen)
+    }, [state.dialogMenu, state.infoMenu, state.isDialogMenuOpen, state.isInfoMenuOpen])
 
     return (
         <GhostTownGUIContext.Provider
@@ -55,6 +68,7 @@ function GhostTownGUIProvider({ children }: GhostTownGUIProviderProps) {
                 openMenu: handleOpenMenu,
                 closeMenu: handleCloseMenu,
                 callChallenge: handleCallChallenge,
+                onKeyDown: handleOnKeyDown,
             }}
         >
             <MenusWrapper guiState={state} onCloseMenu={handleCloseMenu} />

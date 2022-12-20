@@ -1,4 +1,4 @@
-import { GhostTownGuiContextType } from 'types/GhostTownGui'
+import { GhostTownGuiContextType } from 'modules/GhostTown/contexts/GhostTownGUIContext'
 import { Utils } from '../../utils/types'
 import { createInteractions } from '../interactions'
 import { createLevels } from '../levels'

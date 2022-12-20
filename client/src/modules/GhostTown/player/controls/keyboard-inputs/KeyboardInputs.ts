@@ -1,43 +1,67 @@
+export enum GAME_KEYS {
+    FWD_KEY = 'fwdPressed',
+    BKD_KEY = 'bkdPressed',
+    LFT_KEY = 'lftPressed',
+    RGT_KEY = 'rgtPressed',
+    ESC_KEY = 'escPressed',
+    SPACE_KEY = 'spacePressed',
+    I_KEY = 'iPressed',
+    M_KEY = 'mPressed',
+}
+
+export interface GameKeysInputs {
+    [GAME_KEYS.FWD_KEY]: boolean
+    [GAME_KEYS.BKD_KEY]: boolean
+    [GAME_KEYS.LFT_KEY]: boolean
+    [GAME_KEYS.RGT_KEY]: boolean
+    [GAME_KEYS.ESC_KEY]: boolean
+    [GAME_KEYS.SPACE_KEY]: boolean
+    [GAME_KEYS.I_KEY]: boolean
+    [GAME_KEYS.M_KEY]: boolean
+}
+
 export class KeyboardInputs {
-    protected _fwdPressed = false
-    protected _bkdPressed = false
-    protected _lftPressed = false
-    protected _rgtPressed = false
-    protected _escPressed = false
-    protected _spacePressed = false
-    protected _iPressed = false
-    protected _mPressed = false
     protected _pressed = false
+    public gameKeysInputs: GameKeysInputs = {
+        fwdPressed: false,
+        bkdPressed: false,
+        lftPressed: false,
+        rgtPressed: false,
+        escPressed: false,
+        spacePressed: false,
+        iPressed: false,
+        mPressed: false,
+    }
 
     protected _setKeyPressed(event: KeyboardEvent, keyPressed: boolean): void {
         switch (event.code) {
             case 'KeyW':
             case 'ArrowUp':
-                this._fwdPressed = keyPressed
+                this.gameKeysInputs.fwdPressed = keyPressed
                 break
             case 'KeyS':
             case 'ArrowDown':
-                this._bkdPressed = keyPressed
+                this.gameKeysInputs.bkdPressed = keyPressed
                 break
             case 'KeyD':
             case 'ArrowRight':
-                this._rgtPressed = keyPressed
+                this.gameKeysInputs.rgtPressed = keyPressed
                 break
             case 'KeyA':
             case 'ArrowLeft':
-                this._lftPressed = keyPressed
+                this.gameKeysInputs.lftPressed = keyPressed
                 break
             case 'Escape':
-                this._escPressed = keyPressed
+                this.gameKeysInputs.escPressed = keyPressed
                 break
             case 'KeyI':
-                this._iPressed = keyPressed
+                this.gameKeysInputs.iPressed = keyPressed
                 break
             case 'KeyM':
-                this._mPressed = keyPressed
+                this.gameKeysInputs.mPressed = keyPressed
                 break
             case 'Space':
-                this._spacePressed = keyPressed
+                this.gameKeysInputs.spacePressed = keyPressed
                 break
         }
     }

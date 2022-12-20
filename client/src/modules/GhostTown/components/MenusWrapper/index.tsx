@@ -35,6 +35,7 @@ export default function MenusWrapper({ guiState, onCloseMenu }: MenusWrapperProp
                 avatar={guiState.infoMenu.avatar}
                 title={guiState.infoMenu.title}
                 onTalk={guiState.infoMenu.onTalk}
+                gameKeysInputs={guiState.gameKeysInputs}
             />
             <LiveMenu
                 isLiveMenuOpen={guiState.isLiveMenuOpen}

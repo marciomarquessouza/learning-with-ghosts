@@ -5,12 +5,14 @@ import { Transition } from '@headlessui/react'
 
 import getInfoMenuStylesByCharacter from './utils/getInfoMenuStylesByCharacter'
 import { CHARACTER } from '../../const'
+import { GameKeysInputs } from 'modules/GhostTown/player/controls'
 
 export interface InfoMenuProps {
     isInfoMenuOpen?: boolean
     character?: CHARACTER
     avatar: string
     title: string
+    gameKeysInputs?: GameKeysInputs
     onTalk?: (character: CHARACTER) => void
 }
 
@@ -19,6 +21,7 @@ export default function InfoMenu({
     character,
     avatar,
     title,
+    gameKeysInputs,
     onTalk,
 }: InfoMenuProps) {
     const [currentCharacter, setCurrentCharacter] = useState(character)
@@ -60,6 +63,16 @@ export default function InfoMenu({
             setCurrentCharacter(character)
         }
     }, [character])
+
+    useEffect(() => {
+        if (gameKeysInputs?.mPressed) {
+            setSelectedIndex(1)
+        } else if (gameKeysInputs?.iPressed) {
+            setSelectedIndex(2)
+        } else {
+            setSelectedIndex(0)
+        }
+    }, [gameKeysInputs])
 
     return (
         <div className="overflow-y-hidden overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">

@@ -4,7 +4,7 @@ import {
     InfoMenuProps,
     LiveMenuProps,
 } from 'modules/GhostTown/components'
-import { CHARACTER } from 'modules/GhostTown/const'
+import { GameKeysInputs, GAME_KEYS } from 'modules/GhostTown/player/controls'
 
 export interface GhostTownGuiState {
     isChapterTitleOpen: boolean
@@ -16,6 +16,7 @@ export interface GhostTownGuiState {
     liveMenu: LiveMenuProps
     infoMenu: InfoMenuProps
     dialogMenu: DialogMenuProps
+    gameKeysInputs: GameKeysInputs
 }
 export enum ACTIONS {
     OPEN_CHAPTER_TITLE = 'openChapterTitle',
@@ -27,6 +28,7 @@ export enum ACTIONS {
     GET_MENU_STATE = 'getMenuState',
     SET_LIVES = 'setLives',
     CALL_CHALLENGE = 'callChallenge',
+    UPDATE_KEYS_INPUTS = 'updateKeysInputs',
 }
 export enum MENUS {
     CHAPTER_TITLE = 'chapterTitle',
@@ -44,6 +46,7 @@ export type GhostTownGuiActions =
     | { type: ACTIONS.CLOSE_MENU; menu: MENUS }
     | { type: ACTIONS.GET_MENU_STATE; menu: MENUS }
     | { type: ACTIONS.SET_LIVES; lives: number }
+    | { type: ACTIONS.UPDATE_KEYS_INPUTS; value: GAME_KEYS }
 
 export type MenusProps =
     | { menu: MENUS.CHAPTER_TITLE; value: ChapterTitleProps }
@@ -51,10 +54,3 @@ export type MenusProps =
     | { menu: MENUS.INFO_MENU; value: InfoMenuProps }
     | { menu: MENUS.DIALOG_MENU; value: DialogMenuProps }
     | { menu: MENUS.MAIN_MENU; value?: null }
-
-export interface GhostTownGuiContextType {
-    openMenu: (menuProps: MenusProps) => void
-    closeMenu: (menu: MENUS) => void
-    setLives: (lives: number) => void
-    callChallenge: (character?: CHARACTER) => void
-}

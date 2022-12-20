@@ -10,7 +10,7 @@ import { createServices } from '../services/factory/servicesFactory'
 import { createUtils } from '../utils/factory/utilsFactory'
 import { createPlayer, PlayerDependencies } from '../player'
 import { PARAMS } from '../const'
-import { GhostTownGuiContextType } from 'types/GhostTownGui'
+import { GhostTownGuiContextType } from '../contexts/GhostTownGUIContext'
 
 interface CreateMainSceneProps {
     renderer: THREE.WebGLRenderer

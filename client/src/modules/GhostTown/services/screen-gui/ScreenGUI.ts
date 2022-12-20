@@ -3,8 +3,10 @@ import { InfoMenuProps } from '../../components/InfoMenu'
 import { LiveMenuProps } from '../../components/LiveMenu'
 import { DialogMenuProps } from '../../components/DialogMenu'
 import { CHARACTER, PARAMS } from '../../const'
-import { GhostTownGuiContextType, MENUS } from 'types/GhostTownGui'
+import { MENUS } from 'types/GhostTownGui'
 import { menuObserver } from 'modules/GhostTown/observers'
+import { GAME_KEYS } from 'modules/GhostTown/player/controls'
+import { GhostTownGuiContextType } from 'modules/GhostTown/contexts/GhostTownGUIContext'
 
 export class ScreenGUI {
     constructor(private context: GhostTownGuiContextType) {}
@@ -67,5 +69,9 @@ export class ScreenGUI {
 
     public callChallenge(character?: CHARACTER) {
         this.context.callChallenge(character)
+    }
+
+    public onKeyDown(gameKeyInput: GAME_KEYS) {
+        this.context.onKeyDown(gameKeyInput)
     }
 }
