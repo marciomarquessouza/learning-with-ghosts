@@ -19,7 +19,10 @@ export default function ChapterTitle({
     }
 
     return (
-        <div className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full animate-chapter-title-out opacity-0">
+        <div
+            id="chapter-title"
+            className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full animate-chapter-title-out opacity-0"
+        >
             <div className="flex h-full">
                 <div className="flex flex-col flex-auto items-center justify-center">
                     <Image src={LogoImg} width="124" height="77" alt="Logo" />

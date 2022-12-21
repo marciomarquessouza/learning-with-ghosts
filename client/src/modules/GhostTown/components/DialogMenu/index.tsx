@@ -40,7 +40,10 @@ export default function DialogMenu({
     }
 
     return (
-        <div className="overflow-y-hidden overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+        <div
+            id="dialog-menu"
+            className="overflow-y-hidden overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full"
+        >
             <div className="flex flex-col flex-auto items-center justify-end h-full pr-6">
                 <div className="w-3/5 max-w-4xl h-32 animate-dialog-menu-in  mb-14">
                     <div className="flex flex-1 pb-1">
@@ -51,7 +54,7 @@ export default function DialogMenu({
                             CLOSE [ESC]
                         </button>
                     </div>
-                    <div className={`rounded-xl ${styles.pattern}`}>
+                    <div className={`rounded-xl ${styles.container}`}>
                         <div className="flex items-center space-x-4">
                             <div className="flex-shrink-0 m-2 px-2">
                                 {expressionImg && (
@@ -66,7 +69,7 @@ export default function DialogMenu({
                             </div>
                             <div className="flex-1 min-w-0">
                                 <p
-                                    className={`font-josefin font-bold text-lg ${styles.textColor} uppercase`}
+                                    className={`font-josefin font-bold text-lg ${styles.titleColor} uppercase`}
                                 >
                                     {dialogTitle}
                                 </p>

@@ -20,15 +20,6 @@ export default function MenusWrapper({ guiState, onCloseMenu }: MenusWrapperProp
                 subtitle={guiState.chapterTitle.subtitle}
                 chapterNumber={guiState.chapterTitle.chapterNumber}
             />
-            <DialogMenu
-                isDialogMenuOpen={guiState.isDialogMenuOpen}
-                character={guiState.dialogMenu.character}
-                expression={guiState.dialogMenu.expression}
-                title={guiState.dialogMenu.title}
-                text={guiState.dialogMenu.text}
-                onClose={() => onCloseMenu(MENUS.DIALOG_MENU)}
-                onNext={guiState.dialogMenu.onNext}
-            />
             <InfoMenu
                 isInfoMenuOpen={guiState.isInfoMenuOpen}
                 character={guiState.infoMenu.character}
@@ -36,6 +27,15 @@ export default function MenusWrapper({ guiState, onCloseMenu }: MenusWrapperProp
                 title={guiState.infoMenu.title}
                 onTalk={guiState.infoMenu.onTalk}
                 gameKeysInputs={guiState.gameKeysInputs}
+            />
+            <DialogMenu
+                isDialogMenuOpen={guiState.isDialogMenuOpen}
+                character={guiState.dialogMenu.character}
+                expression={guiState.dialogMenu.expression}
+                title={guiState.dialogMenu.title}
+                text={guiState.dialogMenu.text}
+                onClose={guiState.dialogMenu.onClose}
+                onNext={guiState.dialogMenu.onNext}
             />
             <LiveMenu
                 isLiveMenuOpen={guiState.isLiveMenuOpen}

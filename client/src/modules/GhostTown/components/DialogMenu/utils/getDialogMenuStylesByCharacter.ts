@@ -1,10 +1,12 @@
 import { CHARACTER } from '../../../const'
-import { MenuStyles } from '../../types'
 
-export interface DialogMenuStyles extends MenuStyles {
-    font: string
+export interface DialogMenuStyles {
+    container: string
+    titleColor: string
     textColor: string
     nextColor: string
+    font: string
+    border: string
 }
 
 export default function getDialogMenuStylesByCharacter(character?: CHARACTER): DialogMenuStyles {
@@ -12,8 +14,9 @@ export default function getDialogMenuStylesByCharacter(character?: CHARACTER): D
         case CHARACTER.PRINCESS:
         default:
             return {
-                pattern: 'bg-white',
-                bgColor: 'bg-cherry',
+                container:
+                    "bg-ivory border-2 border-cherry bg-[url('/img/princess/background-princess-banner.png')]",
+                titleColor: 'text-cherry',
                 textColor: 'text-cherry',
                 nextColor: 'text-cherry',
                 font: 'font-princess',
@@ -21,10 +24,11 @@ export default function getDialogMenuStylesByCharacter(character?: CHARACTER): D
             }
         case CHARACTER.GHOST:
             return {
-                pattern: 'bg-black',
-                bgColor: 'primary-light',
+                container:
+                    "bg-black border-2 border-white bg-[url('/img/ghost/background-ghost-banner.png')]",
+                titleColor: 'text-primary-light',
                 textColor: 'text-white',
-                nextColor: 'text-white',
+                nextColor: 'text-primary-light',
                 font: 'font-ghost',
                 border: 'border-4 border-white',
             }
