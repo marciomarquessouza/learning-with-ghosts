@@ -11,9 +11,9 @@ import { createUtils } from '../utils/factory/utilsFactory'
 import { createPlayer, PlayerDependencies } from '../player'
 import { PARAMS } from '../const'
 import { GhostTownGuiContextType } from '../contexts/GhostTownGUIContext'
+import { createRenderer } from './renderer'
 
 interface CreateMainSceneProps {
-    renderer: THREE.WebGLRenderer
     container: HTMLDivElement
     screenGUI: GhostTownGuiContextType
     user: User
@@ -21,7 +21,6 @@ interface CreateMainSceneProps {
 }
 
 export async function createMainScene({
-    renderer,
     container,
     screenGUI,
     user,
@@ -32,6 +31,7 @@ export async function createMainScene({
     let mixer: THREE.AnimationMixer
     let requestedAnimationFrame = 0
 
+    const renderer = createRenderer()
     const scene = new THREE.Scene()
     const clock = new THREE.Clock()
 
@@ -113,5 +113,5 @@ export async function createMainScene({
         animateScene()
     }
 
-    return { sceneDomElement: renderer.domElement, removeScene }
+    return { renderer, removeScene }
 }
