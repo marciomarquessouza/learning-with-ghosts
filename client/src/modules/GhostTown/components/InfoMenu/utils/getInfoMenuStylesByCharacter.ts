@@ -1,5 +1,4 @@
 import { CHARACTER } from '../../../const'
-import { MenuStyles } from '../../types'
 
 export interface InfoMenuStyles {
     container: string
@@ -14,7 +13,7 @@ export default function getInfoMenuStylesByCharacter(character?: CHARACTER | nul
         default:
             return {
                 container:
-                    "w-3/5 max-w-4xl h-24 rounded-xl m-10 bg-ivory border-2 border-cherry bg-[url('/img/princess/background-princess-banner.png')]",
+                    "w-2/5 max-w-4xl h-24 rounded-xl m-10 bg-ivory border-2 border-cherry bg-[url('/img/princess/background-princess-banner.png')]",
                 textColor: 'text-cherry',
                 bgColor: 'bg-cherry',
                 border: 'border-4 border-cherry',

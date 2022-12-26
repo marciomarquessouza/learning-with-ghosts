@@ -27,10 +27,7 @@ export default function LiveMenu({
     }
 
     return (
-        <div
-            id="live-menu"
-            className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-40 w-full md:inset-0 h-modal md:h-full"
-        >
+        <div id="live-menu" className="fixed top-0 right-0 z-40">
             <div className="flex flex-col flex-auto items-end justify-start py-4 pr-6">
                 <div className="flex flex-row">
                     {[...Array(lives)].map((_, index) => (

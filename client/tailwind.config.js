@@ -5,6 +5,7 @@ module.exports = {
         extend: {
             colors: {
                 ivory: {
+                    dark: '#F5E3C8',
                     DEFAULT: '#FFFAEF',
                 },
                 background: {
@@ -19,6 +20,7 @@ module.exports = {
                     DEFAULT: '#00A1A4',
                 },
                 cherry: {
+                    light: '#F18599',
                     DEFAULT: '#CB214A',
                 },
             },

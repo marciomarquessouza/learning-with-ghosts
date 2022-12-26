@@ -26,7 +26,7 @@ export default function MainMenu({ isMainMenuOpen }: MainMenuProps) {
     return (
         <div
             id="main-menu"
-            className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-40 md:inset-0 h-modal md:h-full"
+            className="overflow-y-auto overflow-x-hidden fixed bottom-0 left-0 z-40"
         >
             <div className="flex flex-col flex-auto items-start justify-end h-full pr-6">
                 <div className="m-8">

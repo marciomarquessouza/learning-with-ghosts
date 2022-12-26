@@ -1,5 +1,12 @@
+const withReactSvg = require('next-react-svg')
+const path = require('path')
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    include: [
+        path.resolve(__dirname, 'src/assets/svg'),
+        path.resolve(__dirname, 'src/assets/icons'),
+    ],
     reactStrictMode: false,
     swcMinify: true,
     images: {
@@ -7,4 +14,4 @@ const nextConfig = {
     },
 }
 
-module.exports = nextConfig
+module.exports = withReactSvg(nextConfig)

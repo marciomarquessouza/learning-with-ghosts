@@ -5,6 +5,7 @@ import DialogMenu from 'modules/GhostTown/components/DialogMenu'
 import InfoMenu from 'modules/GhostTown/components/InfoMenu'
 import LiveMenu from 'modules/GhostTown/components/LiveMenu'
 import MainMenu from 'modules/GhostTown/components/MainMenu'
+import ChallengeMenu from '../ChallengeMenu'
 
 export interface MenusWrapperProps {
     guiState: GhostTownGuiState
@@ -14,6 +15,7 @@ export interface MenusWrapperProps {
 export default function MenusWrapper({ guiState, onCloseMenu }: MenusWrapperProps) {
     return (
         <>
+            <ChallengeMenu isChallengeMenuOpen={false} />
             <ChapterTitle
                 isChapterTitleOpen={guiState.isChapterTitleOpen}
                 mainTitle={guiState.chapterTitle.mainTitle}

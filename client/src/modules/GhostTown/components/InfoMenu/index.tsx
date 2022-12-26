@@ -77,7 +77,7 @@ export default function InfoMenu({
     return (
         <div
             id="info-menu"
-            className="overflow-y-hidden overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full"
+            className="overflow-y-hidden overflow-x-hidden fixed bottom-0 right-0 left-0 z-50"
         >
             <div className="flex flex-col flex-auto items-center justify-end h-full pr-6">
                 <Transition
