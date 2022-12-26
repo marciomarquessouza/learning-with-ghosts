@@ -5,7 +5,7 @@ import { useUser } from 'modules/Auth/hooks/useUser'
 import { useGameInteraction } from 'modules/GhostTown/hooks/useGameInteractions'
 import { ALERTS_TYPE_ENUM } from 'common/contexts/AlertContext'
 import GhostLoading from 'common/components/GhostLoading'
-import GhostTownGUIProvider from 'modules/GhostTown/contexts/GhostTownGUIContext'
+import GameGuiProvider from 'modules/GhostTown/contexts/GameGuiContext'
 
 const DynamicComponentCSR = dynamic(() => import('modules/GhostTown'), { ssr: false })
 
@@ -29,9 +29,9 @@ export default function GhostTownPage() {
     return (
         <>
             {user && (
-                <GhostTownGUIProvider>
+                <GameGuiProvider>
                     <DynamicComponentCSR user={user} chapter={chapter} />
-                </GhostTownGUIProvider>
+                </GameGuiProvider>
             )}
         </>
     )

@@ -1,6 +1,6 @@
-import { ACTIONS, GhostTownGuiActions, MENUS, MenusProps } from 'types/GhostTownGui'
+import { ACTIONS, GameGuiActions, MENUS, MenusProps } from 'types/GameGui'
 
-export default function getActionByMenu({ menu, value }: MenusProps): GhostTownGuiActions {
+export default function getActionByMenu({ menu, value }: MenusProps): GameGuiActions {
     switch (menu) {
         case MENUS.CHAPTER_TITLE:
             return { type: ACTIONS.OPEN_CHAPTER_TITLE, value }

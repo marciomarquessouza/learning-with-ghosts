@@ -1,4 +1,4 @@
-import { MENUS } from 'types/GhostTownGui'
+import { MENUS } from 'types/GameGui'
 
 export default function getStateKeyByMenu(menu: MENUS): string {
     switch (menu) {

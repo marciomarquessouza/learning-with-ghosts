@@ -1,7 +1,7 @@
-import { GhostTownGuiContextType } from 'modules/GhostTown/contexts/GhostTownGUIContext'
+import { GameGuiContextType } from 'modules/GhostTown/contexts/GameGuiContext'
 import { ScreenGUI } from './ScreenGUI'
 
-function createScreenGUI(context: GhostTownGuiContextType) {
+function createScreenGUI(context: GameGuiContextType) {
     return new ScreenGUI(context)
 }
 

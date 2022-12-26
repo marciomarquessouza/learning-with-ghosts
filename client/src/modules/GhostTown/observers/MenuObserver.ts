@@ -2,7 +2,7 @@ import { DialogMenuProps, InfoMenuProps } from '../components'
 import {
     dialogMenuDefault,
     infoMenuDefault,
-} from '../contexts/GhostTownGUIContext/reducers/ghostTownGuiInitialState'
+} from '../contexts/GameGuiContext/reducers/gameGuiInitialState'
 
 export interface Observer {
     updateInfoMenu(infoMenu: InfoMenuProps, isOpen: boolean): void

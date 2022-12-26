@@ -5,7 +5,7 @@ import {
     LiveMenuProps,
 } from 'modules/GhostTown/components'
 import { GameKeysInputs, GAME_KEYS } from 'modules/GhostTown/player/controls'
-import { GhostTownGuiState } from 'types/GhostTownGui'
+import { GameGuiState } from 'types/GameGui'
 
 export const chapterTitleDefault: ChapterTitleProps = {
     mainTitle: '',
@@ -45,12 +45,13 @@ export const gameKeysInputsDefault: GameKeysInputs = {
     [GAME_KEYS.M_KEY]: false,
 }
 
-export const ghostTownGuiInitialState: GhostTownGuiState = {
+export const gameGuiInitialState: GameGuiState = {
     isChapterTitleOpen: false,
     isLiveMenuOpen: false,
     isInfoMenuOpen: false,
     isDialogMenuOpen: false,
     isMainMenuOpen: false,
+    isChallengeMenuOpen: false,
     chapterTitle: chapterTitleDefault,
     liveMenu: liveMenuDefault,
     infoMenu: infoMenuDefault,

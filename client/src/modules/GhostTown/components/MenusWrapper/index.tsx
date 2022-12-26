@@ -1,5 +1,5 @@
 import React from 'react'
-import { GhostTownGuiState, MENUS } from 'types/GhostTownGui'
+import { GameGuiState, MENUS } from 'types/GameGui'
 import ChapterTitle from 'modules/GhostTown/components/ChapterTitle'
 import DialogMenu from 'modules/GhostTown/components/DialogMenu'
 import InfoMenu from 'modules/GhostTown/components/InfoMenu'
@@ -8,7 +8,7 @@ import MainMenu from 'modules/GhostTown/components/MainMenu'
 import ChallengeMenu from '../ChallengeMenu'
 
 export interface MenusWrapperProps {
-    guiState: GhostTownGuiState
+    guiState: GameGuiState
     onCloseMenu(menu: MENUS): void
 }
 

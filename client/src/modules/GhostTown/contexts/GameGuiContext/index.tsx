@@ -2,20 +2,20 @@ import React, { createContext, useCallback, useReducer, useMemo, useEffect } fro
 import { useRouter } from 'next/router'
 
 import { CHARACTER } from 'modules/GhostTown/const'
-import { ghostTownGuiReducer } from './reducers/ghostTownGuiReducer'
-import { ghostTownGuiInitialState } from './reducers/ghostTownGuiInitialState'
-import { ACTIONS, MENUS, MenusProps } from 'types/GhostTownGui'
+import { gameGuiReducer } from './reducers/gameGuiReducer'
+import { gameGuiInitialState } from './reducers/gameGuiInitialState'
+import { ACTIONS, MENUS, MenusProps } from 'types/GameGui'
 import { menuSubject } from 'modules/GhostTown/observers'
 import getActionByMenu from './utils/getActionByMenu'
 
 import MenusWrapper from 'modules/GhostTown/components/MenusWrapper'
 import { GAME_KEYS } from 'modules/GhostTown/player/controls'
 
-export interface GhostTownGUIProviderProps {
+export interface GameGuiProviderProps {
     children: React.ReactNode
 }
 
-export interface GhostTownGuiContextType {
+export interface GameGuiContextType {
     openMenu: (menuProps: MenusProps) => void
     closeMenu: (menu: MENUS) => void
     setLives: (lives: number) => void
@@ -23,7 +23,7 @@ export interface GhostTownGuiContextType {
     onKeyDown: (gameKeyInput: GAME_KEYS) => void
 }
 
-export const GhostTownGUIContext = createContext({
+export const GameGuiContext = createContext({
     openMenu: (menuProps: MenusProps) => {},
     closeMenu: (menu: MENUS) => {},
     setLives: (lives: number) => {},
@@ -31,9 +31,9 @@ export const GhostTownGUIContext = createContext({
     onKeyDown: (gameKeyInput: GAME_KEYS) => {},
 })
 
-function GhostTownGUIProvider({ children }: GhostTownGUIProviderProps) {
+function GameGuiProvider({ children }: GameGuiProviderProps) {
     const router = useRouter()
-    const [state, dispatch] = useReducer(ghostTownGuiReducer, ghostTownGuiInitialState)
+    const [state, dispatch] = useReducer(gameGuiReducer, gameGuiInitialState)
 
     const setLives = (lives: number) => {
         dispatch({ type: ACTIONS.SET_LIVES, lives })
@@ -62,7 +62,7 @@ function GhostTownGUIProvider({ children }: GhostTownGUIProviderProps) {
     }, [state.dialogMenu, state.infoMenu, state.isDialogMenuOpen, state.isInfoMenuOpen])
 
     return (
-        <GhostTownGUIContext.Provider
+        <GameGuiContext.Provider
             value={{
                 setLives,
                 openMenu: handleOpenMenu,
@@ -73,8 +73,8 @@ function GhostTownGUIProvider({ children }: GhostTownGUIProviderProps) {
         >
             <MenusWrapper guiState={state} onCloseMenu={handleCloseMenu} />
             {children}
-        </GhostTownGUIContext.Provider>
+        </GameGuiContext.Provider>
     )
 }
 
-export default GhostTownGUIProvider
+export default GameGuiProvider

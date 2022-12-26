@@ -10,22 +10,17 @@ import { createServices } from '../services/factory/servicesFactory'
 import { createUtils } from '../utils/factory/utilsFactory'
 import { createPlayer, PlayerDependencies } from '../player'
 import { PARAMS } from '../const'
-import { GhostTownGuiContextType } from '../contexts/GhostTownGUIContext'
+import { GameGuiContextType } from '../contexts/GameGuiContext'
 import { createRenderer } from './renderer'
 
 interface CreateMainSceneProps {
     container: HTMLDivElement
-    screenGUI: GhostTownGuiContextType
+    gameGui: GameGuiContextType
     user: User
     chapter: Chapter
 }
 
-export async function createMainScene({
-    container,
-    screenGUI,
-    user,
-    chapter,
-}: CreateMainSceneProps) {
+export async function createMainScene({ container, gameGui, user, chapter }: CreateMainSceneProps) {
     if (container.childNodes.length > 0) return
 
     let mixer: THREE.AnimationMixer
@@ -37,7 +32,7 @@ export async function createMainScene({
 
     const utils = createUtils()
     const models = createModels()
-    const services = createServices(utils, screenGUI)
+    const services = createServices(utils, gameGui)
     const sceneComponents = createSceneComponents(renderer)
     const playerData: PlayerData = {
         chapter: user.chapter,

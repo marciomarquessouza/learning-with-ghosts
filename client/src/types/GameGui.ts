@@ -6,12 +6,13 @@ import {
 } from 'modules/GhostTown/components'
 import { GameKeysInputs, GAME_KEYS } from 'modules/GhostTown/player/controls'
 
-export interface GhostTownGuiState {
+export interface GameGuiState {
     isChapterTitleOpen: boolean
     isLiveMenuOpen: boolean
     isInfoMenuOpen: boolean
     isDialogMenuOpen: boolean
     isMainMenuOpen: boolean
+    isChallengeMenuOpen: boolean
     chapterTitle: ChapterTitleProps
     liveMenu: LiveMenuProps
     infoMenu: InfoMenuProps
@@ -37,7 +38,7 @@ export enum MENUS {
     DIALOG_MENU = 'dialogMenu',
     MAIN_MENU = 'mainMenu',
 }
-export type GhostTownGuiActions =
+export type GameGuiActions =
     | { type: ACTIONS.OPEN_DIALOG_MENU; value: DialogMenuProps }
     | { type: ACTIONS.OPEN_CHAPTER_TITLE; value: ChapterTitleProps }
     | { type: ACTIONS.OPEN_INFO_MENU; value: InfoMenuProps }

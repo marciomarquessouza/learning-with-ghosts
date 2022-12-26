@@ -3,13 +3,13 @@ import { InfoMenuProps } from '../../components/InfoMenu'
 import { LiveMenuProps } from '../../components/LiveMenu'
 import { DialogMenuProps } from '../../components/DialogMenu'
 import { CHARACTER, PARAMS } from '../../const'
-import { MENUS } from 'types/GhostTownGui'
+import { MENUS } from 'types/GameGui'
 import { menuObserver } from 'modules/GhostTown/observers'
 import { GAME_KEYS } from 'modules/GhostTown/player/controls'
-import { GhostTownGuiContextType } from 'modules/GhostTown/contexts/GhostTownGUIContext'
+import { GameGuiContextType } from 'modules/GhostTown/contexts/GameGuiContext'
 
 export class ScreenGUI {
-    constructor(private context: GhostTownGuiContextType) {}
+    constructor(private context: GameGuiContextType) {}
 
     public showChapterTitle(props: ChapterTitleProps) {
         this.context.openMenu({ menu: MENUS.CHAPTER_TITLE, value: props })

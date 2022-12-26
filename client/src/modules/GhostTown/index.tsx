@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import { User, Chapter } from 'types'
 import { PAGES_ROUTERS } from 'const'
 import { createMainScene } from 'modules/GhostTown/scenes/main-scene'
-import { useGhostTownGui } from 'modules/GhostTown/hooks/useGhostTownGui'
+import { useGameGui } from 'modules/GhostTown/hooks/useGameGui'
 
 import GhostLoading from 'common/components/GhostLoading'
 
@@ -17,7 +17,7 @@ interface GhostTownProps {
 export default function GhostTown({ user, chapter }: GhostTownProps) {
     const router = useRouter()
     const refContainer = useRef<HTMLDivElement>(null)
-    const screenGUI = useGhostTownGui()
+    const gameGui = useGameGui()
     const [loading, setLoading] = useState(true)
     const [rendererState, setRenderer] = useState<THREE.WebGLRenderer>()
     const [removeScene, setRemoveScene] = useState({ exec: () => {} })
@@ -28,7 +28,7 @@ export default function GhostTown({ user, chapter }: GhostTownProps) {
         if (!chapter) return
 
         if (container) {
-            createMainScene({ container, screenGUI, user, chapter }).then((sceneData) => {
+            createMainScene({ container, gameGui, user, chapter }).then((sceneData) => {
                 if (sceneData && container.childNodes.length === 0) {
                     const { renderer, removeScene } = sceneData
                     container.appendChild(renderer.domElement)
@@ -38,7 +38,7 @@ export default function GhostTown({ user, chapter }: GhostTownProps) {
                 }
             })
         }
-    }, [loading, screenGUI, user, chapter])
+    }, [loading, gameGui, user, chapter])
 
     useEffect(() => {
         return () => {

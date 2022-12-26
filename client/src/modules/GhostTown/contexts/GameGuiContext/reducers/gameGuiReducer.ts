@@ -1,11 +1,8 @@
-import { ACTIONS, GhostTownGuiActions, GhostTownGuiState } from 'types/GhostTownGui'
+import { ACTIONS, GameGuiActions, GameGuiState } from 'types/GameGui'
 import getStateKeyByMenu from '../utils/getStateKeyByMenu'
-import { gameKeysInputsDefault } from './ghostTownGuiInitialState'
+import { gameKeysInputsDefault } from './gameGuiInitialState'
 
-export function ghostTownGuiReducer(
-    state: GhostTownGuiState,
-    action: GhostTownGuiActions
-): GhostTownGuiState {
+export function gameGuiReducer(state: GameGuiState, action: GameGuiActions): GameGuiState {
     switch (action.type) {
         case ACTIONS.OPEN_DIALOG_MENU: {
             const props = action.value
