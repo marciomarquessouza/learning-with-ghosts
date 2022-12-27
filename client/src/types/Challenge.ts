@@ -1,5 +1,5 @@
 interface Challenge {
-    id: string
+    uid: string
     title: string
     description: string
     level: number

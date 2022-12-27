@@ -16,24 +16,22 @@ export async function sceneInitiation({
     user,
     chapter,
 }: SceneInitiationProps): Promise<void> {
-    const { train, lighthouse, princess } = models
-    const { screenGUI } = services
+    const { title: mainTitle, subtitle, chapterNumber } = chapter
 
-    const { title, subtitle, chapterNumber } = chapter
     services.interactions.loadChapterDialogs(chapter)
-    train.startArrivalAnimation()
-    lighthouse.startBulbAnimation()
-    princess.startLevitationAnimation()
-    screenGUI.showChapterTitle({
-        mainTitle: title,
+    models.train.startArrivalAnimation()
+    models.lighthouse.startBulbAnimation()
+    models.princess.startLevitationAnimation()
+    services.screenGUI.showChapterTitle({
+        mainTitle,
         subtitle,
         chapterNumber,
     })
-    screenGUI.showLiveMenu({
+    services.screenGUI.showLiveMenu({
         lives: user.lives,
         day: user.day,
         chapterNumber,
-        chapterName: title,
+        chapterName: mainTitle,
     })
-    screenGUI.showMainMenu()
+    services.screenGUI.showMainMenu()
 }

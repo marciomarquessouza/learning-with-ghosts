@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic'
 
 import { useAlert } from 'common/hooks/useAlert'
 import { useUser } from 'modules/Auth/hooks/useUser'
-import { useGameInteraction } from 'modules/GhostTown/hooks/useGameInteractions'
+import { useGameContent } from 'modules/GhostTown/hooks/useGameContent'
 import { ALERTS_TYPE_ENUM } from 'common/contexts/AlertContext'
 import GhostLoading from 'common/components/GhostLoading'
 import GameGuiProvider from 'modules/GhostTown/contexts/GameGuiContext'
@@ -12,7 +12,7 @@ const DynamicComponentCSR = dynamic(() => import('modules/GhostTown'), { ssr: fa
 export default function GhostTownPage() {
     const { openAlert } = useAlert()
     const { user, loading, error } = useUser()
-    const { chapter } = useGameInteraction()
+    const { chapter } = useGameContent()
 
     if (error && !loading) {
         openAlert({

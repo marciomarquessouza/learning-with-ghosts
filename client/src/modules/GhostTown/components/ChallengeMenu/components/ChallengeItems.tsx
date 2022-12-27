@@ -32,40 +32,40 @@ function ChallengeItems({
     )
 
     const handleOnMouseOver = useCallback(
-        (event: React.MouseEvent<HTMLDivElement>, id: string) => {
+        (event: React.MouseEvent<HTMLDivElement>, uid: string) => {
             event.stopPropagation()
-            setSelectedId(id)
-            onSelectCard(id)
+            setSelectedId(uid)
+            onSelectCard(uid)
         },
         [onSelectCard]
     )
 
     const handleOnClick = useCallback(
-        (id: string) => {
-            onCallChallenge(id)
+        (uid: string) => {
+            onCallChallenge(uid)
         },
         [onCallChallenge]
     )
 
     return (
         <div className="py-2 flex flex-row justify-center">
-            {challenges.map(({ id, title, completed, blocked }, index) => (
+            {challenges.map(({ uid, title, completed, blocked }, index) => (
                 <div
                     key={`${index}`}
-                    onMouseOver={(ev) => handleOnMouseOver(ev, id)}
+                    onMouseOver={(ev) => handleOnMouseOver(ev, uid)}
                     className={classNames({ 'cursor-not-allowed': blocked })}
                 >
                     <div className="mx-2 relative">
                         <ChallengeItemFlag {...{ completed, blocked }} />
                         <ChallengeItemButton
-                            challengeId={id}
-                            selected={id === selectedId}
+                            challengeId={uid}
+                            selected={uid === selectedId}
                             blocked={blocked}
                             onClick={handleOnClick}
                         />
                         <div
                             className={classNames(
-                                id === selectedId ? primaryColor : 'bg-neutral-600',
+                                uid === selectedId ? primaryColor : 'bg-neutral-600',
                                 'flex justify-center items-center h-6 w-full absolute top-28'
                             )}
                         >
@@ -75,7 +75,7 @@ function ChallengeItems({
                         </div>
                         <Image
                             src={
-                                blocked || id !== selectedId
+                                blocked || uid !== selectedId
                                     ? inactiveChallengeCardPath
                                     : activeChallengeCardPath
                             }

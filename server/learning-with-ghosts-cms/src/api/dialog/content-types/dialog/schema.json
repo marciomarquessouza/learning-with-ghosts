@@ -15,7 +15,10 @@
     "type": {
       "type": "enumeration",
       "enum": [
-        "dialog"
+        "dialog",
+        "challengeIntroduction",
+        "challengeCallback",
+        "challengeFinished"
       ],
       "default": "dialog"
     },
@@ -56,14 +59,19 @@
         "krampus"
       ]
     },
-    "step": {
-      "type": "integer"
-    },
     "day": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::day.day",
       "inversedBy": "dialogs"
+    },
+    "callChallengeAfter": {
+      "type": "boolean",
+      "default": false
+    },
+    "challengeId": {
+      "type": "string",
+      "required": true
     }
   }
 }

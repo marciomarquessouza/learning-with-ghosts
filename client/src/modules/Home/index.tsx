@@ -9,14 +9,14 @@ import { Hero, LogoHeader, NavigationMenu } from 'common/components'
 import { PAGES_ROUTERS } from 'const'
 import { ALERTS_TYPE_ENUM } from 'common/contexts/AlertContext'
 import GhostLoading from 'common/components/GhostLoading'
-import { useGameInteraction } from 'modules/GhostTown/hooks/useGameInteractions'
+import { useGameContent } from 'modules/GhostTown/hooks/useGameContent'
 
 const BACKGROUND_IMAGE = "url('img/background_main_page.png')"
 
 function Home() {
     const router = useRouter()
     const { user, loading: loadingUser, error } = useUser()
-    const { chapter, statusInteraction, errorInteraction } = useGameInteraction()
+    const { chapter, status, error: errorContent } = useGameContent()
     const { openAlert } = useAlert()
 
     const handleLogin = () => {
@@ -27,11 +27,11 @@ function Home() {
         logout()
     }
 
-    if (loadingUser || (user && statusInteraction !== 'success')) {
+    if (loadingUser || (user && status !== 'success')) {
         return <GhostLoading />
     }
 
-    if ((error && !loadingUser) || errorInteraction) {
+    if ((error && !loadingUser) || errorContent) {
         openAlert({
             title: 'Error',
             message: 'Error loading the content. Please, try later',

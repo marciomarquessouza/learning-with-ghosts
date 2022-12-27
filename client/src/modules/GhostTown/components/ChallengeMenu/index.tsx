@@ -25,12 +25,11 @@ function ChallengeMenu({
     onClose,
     onClickChallenge,
 }: ChallengeMenuProps) {
-    console.log('isChallengeMenuOpen', isChallengeMenuOpen)
     const character = CHARACTER.PRINCESS
     const MOCK_CHALLENGES: Challenge[] = useMemo(
         () => [
             {
-                id: 'first',
+                uid: 'first',
                 title: 'ONE',
                 description: 'learn to say good morning, good afternoon and good night.',
                 level: 1,
@@ -39,7 +38,7 @@ function ChallengeMenu({
                 blocked: false,
             },
             {
-                id: 'second',
+                uid: 'second',
                 title: 'TWO',
                 description: 'good work Marcio, vou can go to your bed now.',
                 level: 1,
@@ -48,7 +47,7 @@ function ChallengeMenu({
                 blocked: false,
             },
             {
-                id: 'third',
+                uid: 'third',
                 title: 'THREE',
                 description: 'yes, your are allowed to dream today.',
                 level: 1,
@@ -57,7 +56,7 @@ function ChallengeMenu({
                 blocked: true,
             },
             {
-                id: 'four',
+                uid: 'four',
                 title: 'FOUR',
                 description: 'So much.',
                 level: 1,
@@ -72,8 +71,8 @@ function ChallengeMenu({
     const { containerColor } = useMemo(() => getLayoutByCharacter(character), [character])
 
     const handleOnSelectCard = useCallback(
-        (id: string) => {
-            const selectedChallenge = MOCK_CHALLENGES.find((challenge) => challenge.id === id)
+        (uid: string) => {
+            const selectedChallenge = MOCK_CHALLENGES.find((challenge) => challenge.uid === uid)
             if (selectedChallenge) {
                 setChallenge(selectedChallenge)
             }
@@ -108,7 +107,7 @@ function ChallengeMenu({
                         <ChallengeItems
                             character={character}
                             challenges={MOCK_CHALLENGES}
-                            defaultSelectedId={MOCK_CHALLENGES[0].id}
+                            defaultSelectedId={MOCK_CHALLENGES[0].uid}
                             onSelectCard={handleOnSelectCard}
                             onCallChallenge={handleOnCallChallenge}
                         />

@@ -6,7 +6,7 @@ import { ReactQueryDevtools } from 'react-query/devtools'
 
 import AlertProvider from 'common/contexts/AlertContext'
 import AuthProvider from 'modules/Auth/contexts/AuthContext'
-import InteractionProvider from 'modules/GhostTown/contexts/InteractionContext'
+import GameContentProvider from 'modules/GhostTown/contexts/GameContentContext'
 import '../styles/globals.css'
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -23,11 +23,11 @@ export default function App({ Component, pageProps }: AppProps) {
                     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                 </Head>
                 <AuthProvider>
-                    <InteractionProvider>
+                    <GameContentProvider>
                         <AlertProvider>
                             <Component {...pageProps} />
                         </AlertProvider>
-                    </InteractionProvider>
+                    </GameContentProvider>
                 </AuthProvider>
                 <ReactQueryDevtools initialIsOpen={false} />
             </Hydrate>

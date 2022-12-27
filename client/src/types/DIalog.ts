@@ -7,7 +7,8 @@ interface Dialog {
     expression: EXPRESSION
     order: number
     character: CHARACTER
-    step: number
+    callChallengeAfter: boolean
+    challengeId: string
 }
 
 export default Dialog

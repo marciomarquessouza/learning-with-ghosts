@@ -1,7 +1,6 @@
-import { Chapter } from 'types'
-import { CHARACTER, EXPRESSION } from '../const'
+import { Challenge, Chapter, Dialog } from 'types'
 
-export interface RawInteractionData {
+export interface RawGameContentData {
     data: {
         attributes: {
             title: string
@@ -15,15 +14,12 @@ export interface RawInteractionData {
                         title: string
                         dialogs: {
                             data: {
-                                attributes: {
-                                    type: string
-                                    from: CHARACTER
-                                    text: string
-                                    expression: EXPRESSION
-                                    order: number
-                                    character: CHARACTER
-                                    step: number
-                                }
+                                attributes: Dialog
+                            }[]
+                        }
+                        challenges: {
+                            data: {
+                                attributes: Challenge
                             }[]
                         }
                     }
@@ -34,13 +30,15 @@ export interface RawInteractionData {
     meta: Object
 }
 
-export function parseInteractions(rawData: RawInteractionData): Chapter {
+export function parseGameContent(rawData: RawGameContentData): Chapter {
     const rawChapter = rawData.data[0].attributes
     const { days: chapterDays, ...chapterHeader } = rawChapter
     const days = chapterDays.data.map(({ attributes }) => {
-        const { dialogs: rawDialogs, ...dayHeader } = attributes
+        const { dialogs: rawDialogs, challenges: rawChallenges, ...dayHeader } = attributes
         const dialogs = rawDialogs.data.map(({ attributes }) => attributes)
-        return { ...dayHeader, dialogs }
+        const challenges = rawChallenges.data.map(({ attributes }) => attributes)
+
+        return { ...dayHeader, dialogs, challenges }
     })
     return { ...chapterHeader, days }
 }

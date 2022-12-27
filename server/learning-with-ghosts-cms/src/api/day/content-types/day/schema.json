@@ -32,6 +32,12 @@
     },
     "day": {
       "type": "integer"
+    },
+    "challenges": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::challenge.challenge",
+      "mappedBy": "day"
     }
   }
 }

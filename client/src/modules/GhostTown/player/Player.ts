@@ -10,7 +10,6 @@ export class Player extends PlayerControls {
     public lives = 5
     public chapter = 1
     public day = 1
-    public step = 1
     private _interactionGenerator: Generator<Dialog, void, unknown> | null = null
 
     constructor(private dependencies: PlayerDependencies, playerData: PlayerData) {
@@ -41,11 +40,7 @@ export class Player extends PlayerControls {
         this.services.screenGUI.closeInfoMenu()
         this.sceneComponents.camera.zoomIn()
         this.playerMesh.isLocked = true
-        this._interactionGenerator = this.services.interactions.getInteractions(
-            this.day,
-            this.step,
-            character
-        )
+        this._interactionGenerator = this.services.interactions.getInteractions(this.day, character)
         this.nextInteraction()
     }
 

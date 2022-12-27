@@ -1,2 +1,2 @@
 export * from './GameGuiContext'
-export * from './InteractionContext'
+export * from './GameContentContext'

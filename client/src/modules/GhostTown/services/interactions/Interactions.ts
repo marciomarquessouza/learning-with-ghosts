@@ -8,7 +8,7 @@ export class Interactions {
         this.chapter = chapter
     }
 
-    private _getInteractionsData(day: number, step: number, character: CHARACTER): Dialog[] {
+    private _getInteractionsData(day: number, character: CHARACTER): Dialog[] {
         if (!this.chapter) {
             throw new Error('error to load the Current Chapter Data')
         }
@@ -20,15 +20,14 @@ export class Interactions {
             throw new Error(`error to load DAY in chapter_${this.chapter.chapterNumber}-day-${day}`)
         }
         const dialogs = dayInteractions.dialogs.filter(
-            ({ step: interactionStep, character: interactionCharacter }) =>
-                interactionStep === step && interactionCharacter === character
+            ({ character: interactionCharacter }) => interactionCharacter === character
         )
 
         return dialogs
     }
 
-    getInteractions(day: number, step: number, character: CHARACTER) {
-        const interactions = this._getInteractionsData(day, step, character)
+    getInteractions(day: number, character: CHARACTER) {
+        const interactions = this._getInteractionsData(day, character)
 
         function* createInteractionsGenerator() {
             for (let index = 0; index < interactions.length; index++) {
