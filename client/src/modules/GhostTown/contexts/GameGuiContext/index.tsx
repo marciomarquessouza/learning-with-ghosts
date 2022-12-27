@@ -71,7 +71,11 @@ function GameGuiProvider({ children }: GameGuiProviderProps) {
                 onKeyDown: handleOnKeyDown,
             }}
         >
-            <MenusWrapper guiState={state} onCloseMenu={handleCloseMenu} />
+            <MenusWrapper
+                guiState={state}
+                onOpenMenu={handleOpenMenu}
+                onCloseMenu={handleCloseMenu}
+            />
             {children}
         </GameGuiContext.Provider>
     )

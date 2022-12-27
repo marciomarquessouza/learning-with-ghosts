@@ -25,6 +25,7 @@ function ChallengeMenu({
     onClose,
     onClickChallenge,
 }: ChallengeMenuProps) {
+    console.log('isChallengeMenuOpen', isChallengeMenuOpen)
     const character = CHARACTER.PRINCESS
     const MOCK_CHALLENGES: Challenge[] = useMemo(
         () => [
@@ -95,11 +96,11 @@ function ChallengeMenu({
                     appear={true}
                     show={isChallengeMenuOpen}
                     enter="transition ease-in-out duration-300 transform"
-                    enterFrom="translate-y-40"
+                    enterFrom="-translate-y-full"
                     enterTo="translate-y-18"
                     leave="transition ease-in-out duration-300 transform"
-                    leaveFrom="translate-y-0"
-                    leaveTo="translate-y-40"
+                    leaveFrom="translate-y-18"
+                    leaveTo="-translate-y-full"
                 >
                     <div className={classNames(containerColor, 'p-4 mt-10 relative')}>
                         <ChallengeMenuCloseButton onClick={handleOnClose} />

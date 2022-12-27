@@ -1,21 +1,26 @@
 import React from 'react'
-import { GameGuiState, MENUS } from 'types/GameGui'
+import { GameGuiState, MENUS, MenusProps } from 'types/GameGui'
 import ChapterTitle from 'modules/GhostTown/components/ChapterTitle'
 import DialogMenu from 'modules/GhostTown/components/DialogMenu'
 import InfoMenu from 'modules/GhostTown/components/InfoMenu'
 import LiveMenu from 'modules/GhostTown/components/LiveMenu'
 import MainMenu from 'modules/GhostTown/components/MainMenu'
 import ChallengeMenu from '../ChallengeMenu'
+import { CHARACTER } from 'modules/GhostTown/const'
 
 export interface MenusWrapperProps {
     guiState: GameGuiState
+    onOpenMenu: (menuProps: MenusProps) => void
     onCloseMenu(menu: MENUS): void
 }
 
-export default function MenusWrapper({ guiState, onCloseMenu }: MenusWrapperProps) {
+export default function MenusWrapper({ guiState, onCloseMenu, onOpenMenu }: MenusWrapperProps) {
     return (
         <>
-            <ChallengeMenu isChallengeMenuOpen={false} />
+            <ChallengeMenu
+                isChallengeMenuOpen={guiState.isChallengeMenuOpen}
+                onClose={() => onCloseMenu(MENUS.CHALLENGE_MENU)}
+            />
             <ChapterTitle
                 isChapterTitleOpen={guiState.isChapterTitleOpen}
                 mainTitle={guiState.chapterTitle.mainTitle}
@@ -27,8 +32,11 @@ export default function MenusWrapper({ guiState, onCloseMenu }: MenusWrapperProp
                 character={guiState.infoMenu.character}
                 avatar={guiState.infoMenu.avatar}
                 title={guiState.infoMenu.title}
-                onTalk={guiState.infoMenu.onTalk}
                 gameKeysInputs={guiState.gameKeysInputs}
+                onTalk={guiState.infoMenu.onTalk}
+                onChallenge={(character: CHARACTER) =>
+                    onOpenMenu({ menu: MENUS.CHALLENGE_MENU, value: { character } })
+                }
             />
             <DialogMenu
                 isDialogMenuOpen={guiState.isDialogMenuOpen}

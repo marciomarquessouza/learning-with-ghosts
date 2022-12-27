@@ -12,5 +12,7 @@ export default function getActionByMenu({ menu, value }: MenusProps): GameGuiAct
             return { type: ACTIONS.OPEN_LIVE_MENU, value }
         case MENUS.MAIN_MENU:
             return { type: ACTIONS.OPEN_MAIN_MENU }
+        case MENUS.CHALLENGE_MENU:
+            return { type: ACTIONS.OPEN_CHALLENGE_MENU, value }
     }
 }

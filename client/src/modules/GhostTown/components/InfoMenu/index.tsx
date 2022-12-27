@@ -14,6 +14,7 @@ export interface InfoMenuProps {
     title: string
     gameKeysInputs?: GameKeysInputs
     onTalk?: (character: CHARACTER) => void
+    onChallenge?: (character: CHARACTER) => void
 }
 
 export default function InfoMenu({
@@ -23,21 +24,11 @@ export default function InfoMenu({
     title,
     gameKeysInputs,
     onTalk,
+    onChallenge,
 }: InfoMenuProps) {
     const [currentCharacter, setCurrentCharacter] = useState(character)
     const [selectedIndex, setSelectedIndex] = useState(0)
     const styles = useMemo(() => getInfoMenuStylesByCharacter(currentCharacter), [currentCharacter])
-    const ctaList = [
-        { name: 'talk', label: 'TALK [SPACE]' },
-        { name: 'missions', label: 'MISSIONS [M]' },
-        { name: 'info', label: 'INFO [I]' },
-    ]
-
-    const handleTalk = useCallback(() => {
-        if (character && onTalk) {
-            onTalk(character)
-        }
-    }, [onTalk, character])
 
     const handleOnMouseOver = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
@@ -57,6 +48,24 @@ export default function InfoMenu({
                 break
         }
     }, [])
+
+    const handleTalk = useCallback(() => {
+        if (character && onTalk) {
+            onTalk(character)
+        }
+    }, [onTalk, character])
+
+    const handleMission = useCallback(() => {
+        if (character && onChallenge) {
+            onChallenge(character)
+        }
+    }, [onChallenge, character])
+
+    const ctaList = [
+        { name: 'talk', label: 'TALK [SPACE]', action: handleTalk },
+        { name: 'missions', label: 'MISSIONS [M]', action: handleMission },
+        { name: 'info', label: 'INFO [I]', action: handleMission },
+    ]
 
     useEffect(() => {
         if (character) {
@@ -107,12 +116,12 @@ export default function InfoMenu({
                                     {title}
                                 </p>
                                 <div className="flex flex-row mt-1">
-                                    {ctaList.map(({ name, label }, index) => (
+                                    {ctaList.map(({ name, label, action }, index) => (
                                         <button
                                             key={`${index}`}
                                             name={name}
                                             onMouseOver={handleOnMouseOver}
-                                            onClick={handleTalk}
+                                            onClick={action}
                                             className={`ml-1 mt-1 bg-transparent hover:${styles.textColor} focus:outline-none active:outline-none`}
                                         >
                                             <div className="flex flex-row items-center justify-center mr-4">

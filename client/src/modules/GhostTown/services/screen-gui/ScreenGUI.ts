@@ -67,6 +67,14 @@ export class ScreenGUI {
         this.context.closeMenu(MENUS.DIALOG_MENU)
     }
 
+    public showChallengeMenu(character: CHARACTER) {
+        this.context.openMenu({ menu: MENUS.CHALLENGE_MENU, value: { character } })
+    }
+
+    public closeChallengeMenu() {
+        this.context.closeMenu(MENUS.CHALLENGE_MENU)
+    }
+
     public callChallenge(character?: CHARACTER) {
         this.context.callChallenge(character)
     }

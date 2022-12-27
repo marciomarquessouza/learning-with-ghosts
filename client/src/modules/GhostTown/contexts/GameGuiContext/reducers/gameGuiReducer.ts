@@ -1,6 +1,6 @@
 import { ACTIONS, GameGuiActions, GameGuiState } from 'types/GameGui'
-import getStateKeyByMenu from '../utils/getStateKeyByMenu'
 import { gameKeysInputsDefault } from './gameGuiInitialState'
+import getStateKeyByMenu from '../utils/getStateKeyByMenu'
 
 export function gameGuiReducer(state: GameGuiState, action: GameGuiActions): GameGuiState {
     switch (action.type) {
@@ -27,6 +27,9 @@ export function gameGuiReducer(state: GameGuiState, action: GameGuiActions): Gam
         }
         case ACTIONS.OPEN_MAIN_MENU: {
             return { ...state, isMainMenuOpen: true }
+        }
+        case ACTIONS.OPEN_CHALLENGE_MENU: {
+            return { ...state, isChallengeMenuOpen: true }
         }
         case ACTIONS.CLOSE_MENU: {
             const menu = action.menu

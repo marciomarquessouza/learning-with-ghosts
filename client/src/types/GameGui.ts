@@ -4,6 +4,7 @@ import {
     InfoMenuProps,
     LiveMenuProps,
 } from 'modules/GhostTown/components'
+import { CHARACTER } from 'modules/GhostTown/const'
 import { GameKeysInputs, GAME_KEYS } from 'modules/GhostTown/player/controls'
 
 export interface GameGuiState {
@@ -25,6 +26,7 @@ export enum ACTIONS {
     OPEN_INFO_MENU = 'openInfoMenu',
     OPEN_DIALOG_MENU = 'openDialogMenu',
     OPEN_MAIN_MENU = 'openMainMenu',
+    OPEN_CHALLENGE_MENU = 'openChallengeMenu',
     CLOSE_MENU = 'closeMenu',
     GET_MENU_STATE = 'getMenuState',
     SET_LIVES = 'setLives',
@@ -37,12 +39,14 @@ export enum MENUS {
     INFO_MENU = 'infoMenu',
     DIALOG_MENU = 'dialogMenu',
     MAIN_MENU = 'mainMenu',
+    CHALLENGE_MENU = 'challengeMenu',
 }
 export type GameGuiActions =
     | { type: ACTIONS.OPEN_DIALOG_MENU; value: DialogMenuProps }
     | { type: ACTIONS.OPEN_CHAPTER_TITLE; value: ChapterTitleProps }
     | { type: ACTIONS.OPEN_INFO_MENU; value: InfoMenuProps }
     | { type: ACTIONS.OPEN_LIVE_MENU; value: LiveMenuProps }
+    | { type: ACTIONS.OPEN_CHALLENGE_MENU; value: { character: CHARACTER } }
     | { type: ACTIONS.OPEN_MAIN_MENU }
     | { type: ACTIONS.CLOSE_MENU; menu: MENUS }
     | { type: ACTIONS.GET_MENU_STATE; menu: MENUS }
@@ -54,4 +58,5 @@ export type MenusProps =
     | { menu: MENUS.LIVE_MENU; value: LiveMenuProps }
     | { menu: MENUS.INFO_MENU; value: InfoMenuProps }
     | { menu: MENUS.DIALOG_MENU; value: DialogMenuProps }
+    | { menu: MENUS.CHALLENGE_MENU; value: { character: CHARACTER } }
     | { menu: MENUS.MAIN_MENU; value?: null }

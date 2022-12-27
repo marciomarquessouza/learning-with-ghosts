@@ -91,9 +91,9 @@ export class PlayerControls extends KeyboardInputs {
 
         if (this.gameKeysInputs.mPressed && !this._pressed) {
             const infoMenu = this.services.screenGUI.isInfoMenuOpenWith()
-            if (infoMenu.isOpen) {
+            if (infoMenu.isOpen && infoMenu.openedWith) {
                 this.services.screenGUI.onKeyDown(GAME_KEYS.M_KEY)
-                // this.services.screenGUI.callChallenge(infoMenu.openedWith)
+                this.services.screenGUI.showChallengeMenu(infoMenu.openedWith)
                 this._pressed = true
             }
         }

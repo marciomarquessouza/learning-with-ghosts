@@ -12,6 +12,8 @@ export default function getStateKeyByMenu(menu: MENUS): string {
             return 'isLiveMenuOpen'
         case MENUS.MAIN_MENU:
             return 'isMainMenuOpen'
+        case MENUS.CHALLENGE_MENU:
+            return 'isChallengeMenuOpen'
         default:
             return ''
     }
