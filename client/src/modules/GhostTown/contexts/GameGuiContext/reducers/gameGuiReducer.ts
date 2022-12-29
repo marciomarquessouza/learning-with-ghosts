@@ -9,8 +9,7 @@ export function gameGuiReducer(state: GameGuiState, action: GameGuiActions): Gam
             return { ...state, isDialogMenuOpen: true, dialogMenu: props }
         }
         case ACTIONS.OPEN_CHAPTER_TITLE: {
-            const props = action.value
-            return { ...state, isChapterTitleOpen: true, chapterTitle: props }
+            return { ...state, isChapterTitleOpen: true }
         }
         case ACTIONS.OPEN_INFO_MENU: {
             const props = action.value
@@ -22,8 +21,7 @@ export function gameGuiReducer(state: GameGuiState, action: GameGuiActions): Gam
             }
         }
         case ACTIONS.OPEN_LIVE_MENU: {
-            const props = action.value
-            return { ...state, isLiveMenuOpen: true, liveMenu: props }
+            return { ...state, isLiveMenuOpen: true }
         }
         case ACTIONS.OPEN_MAIN_MENU: {
             return { ...state, isMainMenuOpen: true }
@@ -35,11 +33,6 @@ export function gameGuiReducer(state: GameGuiState, action: GameGuiActions): Gam
             const menu = action.menu
             const key = getStateKeyByMenu(menu)
             return { ...state, [key]: false }
-        }
-        case ACTIONS.SET_LIVES: {
-            const lives = action.lives
-            const liveMenuState = state.liveMenu
-            return { ...state, liveMenu: { ...liveMenuState, lives } }
         }
         case ACTIONS.UPDATE_KEYS_INPUTS: {
             const newKeyInput = action.value

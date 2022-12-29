@@ -14,8 +14,6 @@ export interface GameGuiState {
     isDialogMenuOpen: boolean
     isMainMenuOpen: boolean
     isChallengeMenuOpen: boolean
-    chapterTitle: ChapterTitleProps
-    liveMenu: LiveMenuProps
     infoMenu: InfoMenuProps
     dialogMenu: DialogMenuProps
     gameKeysInputs: GameKeysInputs
@@ -43,19 +41,18 @@ export enum MENUS {
 }
 export type GameGuiActions =
     | { type: ACTIONS.OPEN_DIALOG_MENU; value: DialogMenuProps }
-    | { type: ACTIONS.OPEN_CHAPTER_TITLE; value: ChapterTitleProps }
+    | { type: ACTIONS.OPEN_CHAPTER_TITLE }
     | { type: ACTIONS.OPEN_INFO_MENU; value: InfoMenuProps }
-    | { type: ACTIONS.OPEN_LIVE_MENU; value: LiveMenuProps }
+    | { type: ACTIONS.OPEN_LIVE_MENU }
     | { type: ACTIONS.OPEN_CHALLENGE_MENU; value: { character: CHARACTER } }
     | { type: ACTIONS.OPEN_MAIN_MENU }
     | { type: ACTIONS.CLOSE_MENU; menu: MENUS }
     | { type: ACTIONS.GET_MENU_STATE; menu: MENUS }
-    | { type: ACTIONS.SET_LIVES; lives: number }
     | { type: ACTIONS.UPDATE_KEYS_INPUTS; value: GAME_KEYS }
 
 export type MenusProps =
-    | { menu: MENUS.CHAPTER_TITLE; value: ChapterTitleProps }
-    | { menu: MENUS.LIVE_MENU; value: LiveMenuProps }
+    | { menu: MENUS.CHAPTER_TITLE; value?: null }
+    | { menu: MENUS.LIVE_MENU; value?: null }
     | { menu: MENUS.INFO_MENU; value: InfoMenuProps }
     | { menu: MENUS.DIALOG_MENU; value: DialogMenuProps }
     | { menu: MENUS.CHALLENGE_MENU; value: { character: CHARACTER } }

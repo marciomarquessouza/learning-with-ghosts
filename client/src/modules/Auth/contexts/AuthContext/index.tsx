@@ -4,12 +4,13 @@ import { User } from 'types'
 import { useDocument } from 'common/hooks/useDocument'
 import { COLLECTIONS } from 'const'
 import { useAuth } from 'modules/Auth/hooks/useAuth'
+import { LANGUAGES } from 'modules/GhostTown/const'
 
 export interface AuthContextType {
     user?: User | null
     loading: boolean
     error?: Error | null
-    setChapter(chapter: number): Promise<null | undefined>
+    setLanguage: (language: LANGUAGES) => void
 }
 
 interface AuthProviderProps {
@@ -20,7 +21,7 @@ export const AuthContext = createContext<AuthContextType>({
     user: null,
     loading: false,
     error: null,
-    setChapter: async (chapter: number) => null,
+    setLanguage: (language: LANGUAGES) => {},
 })
 
 function AuthProvider({ children }: AuthProviderProps) {
@@ -30,11 +31,11 @@ function AuthProvider({ children }: AuthProviderProps) {
     const [error, setError] = useState(null)
     const { getDocument, setDocument } = useDocument()
 
-    const handleSetChapter = useCallback(
-        async (chapter: number) => {
+    const handleSetLanguage = useCallback(
+        async (language: LANGUAGES) => {
             if (!user) return null
             setLoading(true)
-            setDocument<User>(COLLECTIONS.USERS, user.uid, { chapter })
+            setDocument<User>({ language }, COLLECTIONS.USERS, user.uid)
                 .then((updatedUser) => {
                     setUser(updatedUser)
                 })
@@ -71,7 +72,7 @@ function AuthProvider({ children }: AuthProviderProps) {
                 user,
                 loading,
                 error,
-                setChapter: handleSetChapter,
+                setLanguage: handleSetLanguage,
             }}
         >
             {children}

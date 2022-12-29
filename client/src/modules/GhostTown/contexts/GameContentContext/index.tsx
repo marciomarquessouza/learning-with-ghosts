@@ -1,9 +1,9 @@
-import React, { createContext } from 'react'
+import React, { createContext, useCallback } from 'react'
 import { useQuery } from 'react-query'
 
 import { Chapter } from 'types'
-import { useUser } from 'modules/Auth/hooks/useUser'
 import { fetchGameContent } from './fetchGameContent'
+import { useGameProgress } from 'modules/GhostTown/hooks/useGameProgress'
 
 export interface GameContentContextType {
     chapter?: Chapter | null
@@ -22,11 +22,11 @@ export const GameContentContext = createContext<GameContentContextType>({
 })
 
 function GameContentProvider({ children }: GameContentProviderProps) {
-    const { user } = useUser()
+    const { gameProgress, isReady: isGameProgressReady } = useGameProgress()
     const { data, status, isError } = useQuery({
-        queryKey: ['interactions', user?.chapter],
-        queryFn: () => fetchGameContent(user?.chapter),
-        enabled: !!user?.chapter,
+        queryKey: ['interactions', gameProgress.chapter],
+        queryFn: () => fetchGameContent(gameProgress.chapter),
+        enabled: isGameProgressReady,
     })
 
     return (

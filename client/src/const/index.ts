@@ -2,8 +2,11 @@ export const GITHUB_URL = 'https://github.com/marciomarquessouza/learning-with-g
 export const GITHUB_ABOUT = 'https://github.com/marciomarquessouza/learning-with-ghosts#motivations'
 export const GITHUB_HELP = 'https://github.com/marciomarquessouza/learning-with-ghosts#demo'
 export const MESSAGE_TIMEOUT = 5000
+export const DEFAULT_LIVES = 5
 export enum COLLECTIONS {
     USERS = 'users',
+    PROGRESS = 'progress',
+    CHALLENGES = 'challenges',
 }
 export enum PAGES_ROUTERS {
     HOME = '/',

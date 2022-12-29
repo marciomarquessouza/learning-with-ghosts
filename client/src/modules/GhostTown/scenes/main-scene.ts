@@ -1,5 +1,4 @@
 import * as THREE from 'three'
-import { Chapter, PlayerData, User } from 'types'
 
 import { loadScene } from './helpers/loaders'
 import { createModels } from '../models'
@@ -12,15 +11,22 @@ import { createPlayer, PlayerDependencies } from '../player'
 import { PARAMS } from '../const'
 import { GameGuiContextType } from '../contexts/GameGuiContext'
 import { createRenderer } from './renderer'
+import { GameProgressContextType } from '../contexts/GameProgressContext'
+import { GameContentContextType } from '../contexts'
 
 interface CreateMainSceneProps {
     container: HTMLDivElement
-    gameGui: GameGuiContextType
-    user: User
-    chapter: Chapter
+    gameGuiContext: GameGuiContextType
+    gameProgressContext: GameProgressContextType
+    gameContentContext: GameContentContextType
 }
 
-export async function createMainScene({ container, gameGui, user, chapter }: CreateMainSceneProps) {
+export async function createMainScene({
+    container,
+    gameGuiContext,
+    gameProgressContext,
+    gameContentContext,
+}: CreateMainSceneProps) {
     if (container.childNodes.length > 0) return
 
     let mixer: THREE.AnimationMixer
@@ -32,21 +38,15 @@ export async function createMainScene({ container, gameGui, user, chapter }: Cre
 
     const utils = createUtils()
     const models = createModels()
-    const services = createServices(utils, gameGui)
+    const services = createServices(utils, gameGuiContext)
     const sceneComponents = createSceneComponents(renderer)
-    const playerData: PlayerData = {
-        chapter: user.chapter,
-        day: user.day,
-        lives: user.lives,
-        name: user.name,
-    }
     const playerDependencies: PlayerDependencies = {
         scene,
         services,
         sceneComponents,
         models,
     }
-    const player = createPlayer(playerDependencies, playerData)
+    const player = createPlayer(playerDependencies, gameProgressContext.gameProgress)
 
     function render() {
         renderer.render(scene, sceneComponents.camera.perspectiveCamera)
@@ -98,13 +98,13 @@ export async function createMainScene({ container, gameGui, user, chapter }: Cre
 
     const animationMixer = await loadScene(scene, models)
 
-    if (animationMixer) {
+    if (animationMixer && gameContentContext.chapter) {
         mixer = animationMixer
         mixer.addEventListener('finished', createEndAnimationsTrigger(models))
         window.addEventListener('keydown', handleKeyDown, false)
         window.addEventListener('keyup', handleKeyUp, false)
         window.addEventListener('resize', onWindowResize, false)
-        await sceneInitiation({ models, services, user, chapter })
+        await sceneInitiation({ models, services, chapter: gameContentContext.chapter })
         animateScene()
     }
 

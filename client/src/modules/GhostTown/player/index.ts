@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { PlayerData } from 'types'
+import { GameProgressState } from '../contexts/GameProgressContext'
 import { Models } from '../models/types'
 import { SceneComponents } from '../scenes/types'
 import { Services } from '../services/types'
@@ -12,13 +12,8 @@ export interface PlayerDependencies {
     models: Models
 }
 
-export interface PlayerProps {
-    dependencies: PlayerDependencies
-    playerData: PlayerData
-}
-
-function createPlayer(dependencies: PlayerDependencies, playerData: PlayerData) {
-    return new Player(dependencies, playerData)
+function createPlayer(dependencies: PlayerDependencies, gameProgress: GameProgressState) {
+    return new Player(dependencies, gameProgress)
 }
 
 export { Player, createPlayer }

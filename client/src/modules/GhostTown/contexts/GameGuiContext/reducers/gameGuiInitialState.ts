@@ -1,30 +1,12 @@
-import {
-    ChapterTitleProps,
-    DialogMenuProps,
-    InfoMenuProps,
-    LiveMenuProps,
-} from 'modules/GhostTown/components'
+import { DialogMenuProps, InfoMenuProps } from 'modules/GhostTown/components'
 import { GameKeysInputs, GAME_KEYS } from 'modules/GhostTown/player/controls'
 import { GameGuiState } from 'types/GameGui'
-
-export const chapterTitleDefault: ChapterTitleProps = {
-    mainTitle: '',
-    subtitle: '',
-    chapterNumber: 0,
-}
 
 export const infoMenuDefault: InfoMenuProps = {
     character: undefined,
     avatar: '',
     title: '',
     onTalk: () => {},
-}
-
-export const liveMenuDefault: LiveMenuProps = {
-    lives: 5,
-    chapterNumber: 1,
-    chapterName: '',
-    day: 1,
 }
 
 export const dialogMenuDefault: DialogMenuProps = {
@@ -52,8 +34,6 @@ export const gameGuiInitialState: GameGuiState = {
     isDialogMenuOpen: false,
     isMainMenuOpen: false,
     isChallengeMenuOpen: false,
-    chapterTitle: chapterTitleDefault,
-    liveMenu: liveMenuDefault,
     infoMenu: infoMenuDefault,
     dialogMenu: dialogMenuDefault,
     gameKeysInputs: gameKeysInputsDefault,

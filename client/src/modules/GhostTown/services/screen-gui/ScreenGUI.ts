@@ -11,8 +11,8 @@ import { GameGuiContextType } from 'modules/GhostTown/contexts/GameGuiContext'
 export class ScreenGUI {
     constructor(private context: GameGuiContextType) {}
 
-    public showChapterTitle(props: ChapterTitleProps) {
-        this.context.openMenu({ menu: MENUS.CHAPTER_TITLE, value: props })
+    public showChapterTitle() {
+        this.context.openMenu({ menu: MENUS.CHAPTER_TITLE })
         setTimeout(() => this.closeChapterTitle(), PARAMS.CHAPTER_TITLE_FADE_OUT)
     }
 
@@ -39,12 +39,8 @@ export class ScreenGUI {
         return { isOpen, openedWith }
     }
 
-    public showLiveMenu(props: LiveMenuProps) {
-        this.context.openMenu({ menu: MENUS.LIVE_MENU, value: props })
-    }
-
-    public setLives(lives: number) {
-        this.context.setLives(lives)
+    public showLiveMenu() {
+        this.context.openMenu({ menu: MENUS.LIVE_MENU })
     }
 
     public showDialogMenu(props: DialogMenuProps) {

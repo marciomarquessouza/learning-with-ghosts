@@ -1,24 +1,26 @@
+import { DEFAULT_LIVES } from 'const'
 import * as THREE from 'three'
-import { Dialog, PlayerData } from 'types'
+import { Dialog } from 'types'
 import { PlayerDependencies } from '.'
 
 import { CHARACTER, PARAMS } from '../const'
+import { GameProgressState } from '../contexts/GameProgressContext'
 import { PlayerControls } from './controls'
 import { checkContact, toggleInfoMenu } from './helpers'
 
 export class Player extends PlayerControls {
-    public lives = 5
+    public lives = DEFAULT_LIVES
     public chapter = 1
     public day = 1
     private _interactionGenerator: Generator<Dialog, void, unknown> | null = null
 
-    constructor(private dependencies: PlayerDependencies, playerData: PlayerData) {
+    constructor(private dependencies: PlayerDependencies, gameProgress: GameProgressState) {
         const { models, services, sceneComponents } = dependencies
         const playerMesh = models.ghost
         super(services, sceneComponents, models, playerMesh)
-        this.lives = playerData.lives
-        this.chapter = playerData.chapter
-        this.day = playerData.day
+        this.lives = gameProgress.lives
+        this.chapter = gameProgress.chapter
+        this.day = gameProgress.day
     }
 
     reset() {

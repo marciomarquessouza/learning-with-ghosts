@@ -21,12 +21,7 @@ export default function MenusWrapper({ guiState, onCloseMenu, onOpenMenu }: Menu
                 isChallengeMenuOpen={guiState.isChallengeMenuOpen}
                 onClose={() => onCloseMenu(MENUS.CHALLENGE_MENU)}
             />
-            <ChapterTitle
-                isChapterTitleOpen={guiState.isChapterTitleOpen}
-                mainTitle={guiState.chapterTitle.mainTitle}
-                subtitle={guiState.chapterTitle.subtitle}
-                chapterNumber={guiState.chapterTitle.chapterNumber}
-            />
+            <ChapterTitle isChapterTitleOpen={guiState.isChapterTitleOpen} />
             <InfoMenu
                 isInfoMenuOpen={guiState.isInfoMenuOpen}
                 character={guiState.infoMenu.character}
@@ -47,13 +42,7 @@ export default function MenusWrapper({ guiState, onCloseMenu, onOpenMenu }: Menu
                 onClose={guiState.dialogMenu.onClose}
                 onNext={guiState.dialogMenu.onNext}
             />
-            <LiveMenu
-                isLiveMenuOpen={guiState.isLiveMenuOpen}
-                lives={guiState.liveMenu.lives}
-                chapterNumber={guiState.liveMenu.chapterNumber}
-                chapterName={guiState.liveMenu.chapterName}
-                day={guiState.liveMenu.day}
-            />
+            <LiveMenu isLiveMenuOpen={guiState.isLiveMenuOpen} />
             <MainMenu isMainMenuOpen={guiState.isMainMenuOpen} />
         </>
     )

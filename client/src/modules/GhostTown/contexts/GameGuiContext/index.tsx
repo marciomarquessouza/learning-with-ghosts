@@ -18,7 +18,6 @@ export interface GameGuiProviderProps {
 export interface GameGuiContextType {
     openMenu: (menuProps: MenusProps) => void
     closeMenu: (menu: MENUS) => void
-    setLives: (lives: number) => void
     callChallenge: (character?: CHARACTER) => void
     onKeyDown: (gameKeyInput: GAME_KEYS) => void
 }
@@ -26,7 +25,6 @@ export interface GameGuiContextType {
 export const GameGuiContext = createContext({
     openMenu: (menuProps: MenusProps) => {},
     closeMenu: (menu: MENUS) => {},
-    setLives: (lives: number) => {},
     callChallenge: (character?: CHARACTER) => {},
     onKeyDown: (gameKeyInput: GAME_KEYS) => {},
 })
@@ -34,10 +32,6 @@ export const GameGuiContext = createContext({
 function GameGuiProvider({ children }: GameGuiProviderProps) {
     const router = useRouter()
     const [state, dispatch] = useReducer(gameGuiReducer, gameGuiInitialState)
-
-    const setLives = (lives: number) => {
-        dispatch({ type: ACTIONS.SET_LIVES, lives })
-    }
 
     const handleOpenMenu = (menuProps: MenusProps) => {
         const action = getActionByMenu(menuProps)
@@ -64,7 +58,6 @@ function GameGuiProvider({ children }: GameGuiProviderProps) {
     return (
         <GameGuiContext.Provider
             value={{
-                setLives,
                 openMenu: handleOpenMenu,
                 closeMenu: handleCloseMenu,
                 callChallenge: handleCallChallenge,
