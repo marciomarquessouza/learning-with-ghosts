@@ -102,13 +102,11 @@ function GameProgressProvider({ children }: GameProgressProviderProps) {
                     COLLECTIONS.USERS,
                     user.uid,
                     COLLECTIONS.PROGRESS,
-                    user.gameLanguage,
-                    COLLECTIONS.CHALLENGES,
-                    `${gameProgress.day}`
+                    user.gameLanguage
                 )
             }
         },
-        [user, setDocument, setGameProgress, gameProgress]
+        [user, setDocument, setGameProgress]
     )
 
     const updateChallengesProgress = useCallback(
@@ -161,6 +159,7 @@ function GameProgressProvider({ children }: GameProgressProviderProps) {
         const currentDay = gameProgress.day
         const updatedGameProgress = { ...gameProgress, day: currentDay + 1 }
         updateGameProgress(updatedGameProgress)
+        setChallengesProgress([])
     }, [updateGameProgress, gameProgress])
 
     const handleUpdateLives = useCallback(

@@ -15,9 +15,6 @@
     "title": {
       "type": "string"
     },
-    "order": {
-      "type": "integer"
-    },
     "dialogs": {
       "type": "relation",
       "relation": "oneToMany",
@@ -30,14 +27,17 @@
       "target": "api::chapter.chapter",
       "inversedBy": "days"
     },
-    "day": {
-      "type": "integer"
-    },
     "challenges": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::challenge.challenge",
       "mappedBy": "day"
+    },
+    "dayReference": {
+      "type": "integer",
+      "min": 1,
+      "unique": true,
+      "required": true
     }
   }
 }

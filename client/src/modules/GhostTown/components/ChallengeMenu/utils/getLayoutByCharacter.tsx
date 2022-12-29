@@ -16,7 +16,7 @@ export interface MenuLayout {
     textColor: string
 }
 
-export function getLayoutByCharacter(character: CHARACTER): MenuLayout {
+export function getLayoutByCharacter(character?: CHARACTER): MenuLayout {
     switch (character) {
         case CHARACTER.PRINCESS:
         default:

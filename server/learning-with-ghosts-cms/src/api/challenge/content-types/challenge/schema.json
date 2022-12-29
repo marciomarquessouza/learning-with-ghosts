@@ -72,6 +72,19 @@
       },
       "type": "uid",
       "required": true
+    },
+    "character": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "enumeration",
+      "enum": [
+        "princess",
+        "death",
+        "krampus"
+      ]
     }
   }
 }

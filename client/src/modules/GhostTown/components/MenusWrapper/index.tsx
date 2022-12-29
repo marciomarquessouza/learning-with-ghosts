@@ -18,6 +18,7 @@ export default function MenusWrapper({ guiState, onCloseMenu, onOpenMenu }: Menu
     return (
         <>
             <ChallengeMenu
+                character={guiState.infoMenu.character}
                 isChallengeMenuOpen={guiState.isChallengeMenuOpen}
                 onClose={() => onCloseMenu(MENUS.CHALLENGE_MENU)}
             />

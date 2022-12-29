@@ -1,9 +1,8 @@
 import { Challenge, Dialog } from './'
 
 interface Day {
-    day?: number
+    dayReference: number
     title: string
-    order: number
     dialogs: Dialog[]
     challenges: Challenge[]
 }

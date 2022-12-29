@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { Transition } from '@headlessui/react'
 import classNames from 'classnames'
 
@@ -10,6 +10,7 @@ import { getLayoutByCharacter } from './utils/getLayoutByCharacter'
 import ChallengeHeader from './components/ChallengeHeader'
 import ChallengeItems from './components/ChallengeItems'
 import ChallengeMenuCloseButton from './components/ChallengeMenuCloseButton'
+import { useGameContent } from 'modules/GhostTown/hooks/useGameContent'
 
 export interface ChallengeMenuProps {
     isChallengeMenuOpen?: boolean
@@ -24,60 +25,21 @@ function ChallengeMenu({
     gameKeysInputs,
     onClose,
     onClickChallenge,
+    character,
 }: ChallengeMenuProps) {
-    const character = CHARACTER.PRINCESS
-    const MOCK_CHALLENGES: Challenge[] = useMemo(
-        () => [
-            {
-                uid: 'first',
-                title: 'ONE',
-                description: 'learn to say good morning, good afternoon and good night.',
-                level: 1,
-                reward: 10,
-                completed: true,
-                blocked: false,
-            },
-            {
-                uid: 'second',
-                title: 'TWO',
-                description: 'good work Marcio, vou can go to your bed now.',
-                level: 1,
-                reward: 20,
-                completed: false,
-                blocked: false,
-            },
-            {
-                uid: 'third',
-                title: 'THREE',
-                description: 'yes, your are allowed to dream today.',
-                level: 1,
-                reward: 30,
-                completed: false,
-                blocked: true,
-            },
-            {
-                uid: 'four',
-                title: 'FOUR',
-                description: 'So much.',
-                level: 1,
-                reward: 50,
-                completed: false,
-                blocked: true,
-            },
-        ],
-        []
-    )
-    const [challenge, setChallenge] = useState(MOCK_CHALLENGES[0])
+    const { getCurrentChallengesByCharacter } = useGameContent()
+    const [challenges, setChallenges] = useState<Challenge[]>([])
+    const [selectedChallenge, setSelectedChallenge] = useState<Challenge | null>(null)
     const { containerColor } = useMemo(() => getLayoutByCharacter(character), [character])
 
     const handleOnSelectCard = useCallback(
         (uid: string) => {
-            const selectedChallenge = MOCK_CHALLENGES.find((challenge) => challenge.uid === uid)
-            if (selectedChallenge) {
-                setChallenge(selectedChallenge)
+            const selected = challenges.find((challenge) => challenge.uid === uid)
+            if (selected) {
+                setSelectedChallenge(selected)
             }
         },
-        [MOCK_CHALLENGES]
+        [challenges]
     )
 
     const handleOnCallChallenge = useCallback((id: string) => {
@@ -87,6 +49,18 @@ function ChallengeMenu({
     const handleOnClose = useCallback(() => {
         onClose && onClose()
     }, [onClose])
+
+    useEffect(() => {
+        if (character) {
+            const currentChallenges = getCurrentChallengesByCharacter(character)
+            setChallenges(currentChallenges)
+            setSelectedChallenge(currentChallenges[0])
+        }
+    }, [character, getCurrentChallengesByCharacter])
+
+    if (challenges.length < 1 || !selectedChallenge || !character) {
+        return null
+    }
 
     return (
         <div id="challenge-menu" className="fixed top-0 right-0 left-0 z-60">
@@ -103,11 +77,11 @@ function ChallengeMenu({
                 >
                     <div className={classNames(containerColor, 'p-4 mt-10 relative')}>
                         <ChallengeMenuCloseButton onClick={handleOnClose} />
-                        <ChallengeHeader character={character} challenge={challenge} />
+                        <ChallengeHeader character={character} challenge={selectedChallenge} />
                         <ChallengeItems
                             character={character}
-                            challenges={MOCK_CHALLENGES}
-                            defaultSelectedId={MOCK_CHALLENGES[0].uid}
+                            challenges={challenges}
+                            defaultSelectedId={selectedChallenge.uid}
                             onSelectCard={handleOnSelectCard}
                             onCallChallenge={handleOnCallChallenge}
                         />

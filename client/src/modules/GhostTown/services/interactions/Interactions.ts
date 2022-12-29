@@ -13,11 +13,11 @@ export class Interactions {
             throw new Error('error to load the Current Chapter Data')
         }
 
-        const dayInteractions = this.chapter.days.find(
-            ({ day: interactionDay }) => interactionDay === day
-        )
+        const dayInteractions = this.chapter.days.find(({ dayReference }) => dayReference === day)
         if (!dayInteractions) {
-            throw new Error(`error to load DAY in chapter_${this.chapter.chapterNumber}-day-${day}`)
+            throw new Error(
+                `error to load DAY in chapter: ${this.chapter.chapterNumber} adn day; ${day}`
+            )
         }
         const dialogs = dayInteractions.dialogs.filter(
             ({ character: interactionCharacter }) => interactionCharacter === character
