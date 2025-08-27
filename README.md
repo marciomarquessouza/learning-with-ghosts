@@ -61,16 +61,13 @@ Open http://localhost:9090 to view your project.
 
 ##### New chapter:
 
-![NEW_CHAPTER](https://imgur.com/a/NGm7vdI)
+![NEW_CHAPTER](https://i.imgur.com/dWIJi24.png)
 
 ##### Ghost moviment:
 
-![GHOST_MOVIMENT](https://imgur.com/JVvuIKB)
+![GHOST_MOVIMENT](https://i.imgur.com/JVvuIKB.png)
 
 ##### Lighthouse Princess:
 
-![PRINCESS](https://imgur.com/g9A1SyE)
+![PRINCESS](https://i.imgur.com/g9A1SyE.png)
 
-##### Death:
-
-![DEATH](https://imgur.com/gjbJrHa)
