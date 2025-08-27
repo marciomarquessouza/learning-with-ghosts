@@ -19,13 +19,11 @@ In this game, the user will control a small ghost that arrives every day in a se
 
 **Trello:** https://trello.com/b/AEAcJDyJ/ghost-town
 
-**Figma:** https://www.figma.com/file/p883Ak5XqmfBgaeEjZZ539/Games?node-id=1078%3A160
-
 # Demo
 
-I'm constantly deploying my work-in-progress to the server, so a lot of pending work must be finalized. So far, you can access the main page, register and log into your account and start the demo by moving the ghost (using the arrows keys) and having a small interaction with the Lighthouse Princess.
+I'm constantly deploying my work-in-progress to the server, so a lot of pending work must be finalized. So far, you can access and start the demo by moving the ghost (using the arrows keys) and having a small interaction with the Lighthouse Princess.
 
-**Demo (WORKING IN PROGRESS):** https://learning-with-ghosts.herokuapp.com/
+**Demo (WORKING IN PROGRESS):** [https://learning-with-ghosts.herokuapp.com/](https://web-learning-with-ghosts-h4ru0dskx.vercel.app/c55dc669-7fa1-49da-a760-5c78f6fdcf38)
 
 ## Libs and Tools
 
@@ -63,20 +61,16 @@ Open http://localhost:9090 to view your project.
 
 ##### New chapter:
 
-![NEW_CHAPTER](https://i.imgur.com/PCNZadm.png)
+![NEW_CHAPTER](https://imgur.com/a/NGm7vdI)
 
 ##### Ghost moviment:
 
-![GHOST_MOVIMENT](https://i.imgur.com/S4cfdUD.png)
-
-##### Ghost interaction:
-
-![GHOST_INTERACTION](https://i.imgur.com/l2XvtMZ.png)
+![GHOST_MOVIMENT](https://imgur.com/JVvuIKB)
 
 ##### Lighthouse Princess:
 
-![LIGHTHOUSE_PRINCESS](https://i.imgur.com/BQLaM6j.png)
+![PRINCESS](https://imgur.com/g9A1SyE)
 
-##### Death and Chips Bar:
+##### Death:
 
-![DEATH_AND_CHIPS_BAR](https://i.imgur.com/oSyspKb.png)
+![DEATH](https://imgur.com/gjbJrHa)
